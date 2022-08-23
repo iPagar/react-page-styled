@@ -1,5 +1,4 @@
 import { Migration } from '@react-page/editor';
-
 import rename from 'deep-rename-keys';
 const migration = new Migration({
   toVersion: '0.0.2',
@@ -13,7 +12,7 @@ const migration = new Migration({
         : {}),
     };
     // rename keys
-    state = rename(state, (key: string) => {
+    state = rename(state, (key) => {
       switch (key) {
         case 'kind':
           return 'object';

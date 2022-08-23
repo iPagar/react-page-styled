@@ -1,4 +1,4 @@
-import type { SlatePlugin, SlatePluginCollection } from '../types/SlatePlugin';
+import type { SlatePluginCollection } from '../types/SlatePlugin';
 import flattenDeep from './flattenDeep';
 
 export default (plugins: SlatePluginCollection) => {
@@ -12,9 +12,9 @@ export default (plugins: SlatePluginCollection) => {
           (pluginOrFactory as any).toPlugin()
         : pluginOrFactory;
 
-      return [...innerAcc, ...flattenDeep(result)] as SlatePlugin[];
-    }, [] as SlatePlugin[]);
+      return [...innerAcc, ...flattenDeep(result)];
+    }, []);
 
     return [...acc, ...groupPlugins];
-  }, [] as SlatePlugin[]);
+  }, []);
 };

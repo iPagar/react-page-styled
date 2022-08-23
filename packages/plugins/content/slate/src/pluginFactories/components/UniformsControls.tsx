@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -24,7 +26,7 @@ function Controls<T extends Data>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formRef = useRef<any>();
 
-  const [text, setText] = useState<string | null>(null);
+  const [text, setText] = useState(null);
 
   const onCancel = () => {
     props.close();
@@ -80,10 +82,10 @@ function Controls<T extends Data>(
           </div>
         )}
 
-        {hasSchema && uniformsSchema ? (
+        {hasSchema ? (
           <AutoForm
             ref={formRef}
-            model={props.data as any}
+            model={props.data}
             schema={uniformsSchema}
             onSubmit={saveAndCloseWithData}
           >
@@ -91,28 +93,26 @@ function Controls<T extends Data>(
           </AutoForm>
         ) : null}
       </DialogContent>
-      {hasSchema ? (
-        <DialogActions>
-          <Button
-            variant="text"
-            onClick={onCancel}
-            style={{ marginRight: 'auto' }}
-          >
-            {props.cancelLabel || 'Cancel'}
+      <DialogActions>
+        <Button
+          variant="text"
+          onClick={onCancel}
+          style={{ marginRight: 'auto' }}
+        >
+          {props.cancelLabel || 'Cancel'}
+        </Button>
+        {props.isActive ? (
+          <Button variant="contained" color="secondary" onClick={onRemove}>
+            {props.removeLabel || 'Remove'}
+            <DeleteIcon style={{ marginLeft: 10 }} />
           </Button>
-          {props.isActive ? (
-            <Button variant="contained" color="secondary" onClick={onRemove}>
-              {props.removeLabel || 'Remove'}
-              <DeleteIcon style={{ marginLeft: 10 }} />
-            </Button>
-          ) : null}
+        ) : null}
 
-          <Button variant="contained" color="primary" onClick={onOkClick}>
-            {props.submitLabel || 'Ok'}
-            <DoneIcon style={{ marginLeft: 10 }} />
-          </Button>
-        </DialogActions>
-      ) : null}
+        <Button variant="contained" color="primary" onClick={onOkClick}>
+          {props.submitLabel || 'Ok'}
+          <DoneIcon style={{ marginLeft: 10 }} />
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }

@@ -6,7 +6,7 @@ const DialogContext = React.createContext<{
   setVisible?: Dispatch<SetStateAction<boolean>>;
 }>({});
 
-const DialogVisibleProvider: React.FC = ({ children }) => {
+const DialogVisibleProvider = ({ children }) => {
   const [visible, setVisible] = useState(false);
   const value = useMemo(() => ({ visible, setVisible }), [visible, setVisible]);
   return (

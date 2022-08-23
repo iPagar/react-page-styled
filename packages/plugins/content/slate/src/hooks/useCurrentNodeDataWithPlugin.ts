@@ -1,10 +1,9 @@
-import type { DataTType } from '@react-page/editor';
 import type { Editor } from 'slate';
 import { useSlate } from 'slate-react';
 import type { SlatePluginDefinition } from '../types/slatePluginDefinitions';
 import { getCurrentNodeWithPlugin } from './useCurrentNodeWithPlugin';
 
-export const getCurrentNodeDataWithPlugin = <T extends DataTType>(
+export const getCurrentNodeDataWithPlugin = <T>(
   editor: Editor,
   plugin: SlatePluginDefinition<T>
 ): T => {
@@ -13,7 +12,7 @@ export const getCurrentNodeDataWithPlugin = <T extends DataTType>(
   if (currentNodeEntry) {
     const currentNode = currentNodeEntry[0];
     if (plugin.pluginType === 'component' && plugin.object === 'mark') {
-      return (currentNode as Record<string, unknown>)[plugin.type] as T;
+      return currentNode[plugin.type] as T;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,7 +25,7 @@ export const getCurrentNodeDataWithPlugin = <T extends DataTType>(
   }
 };
 
-export default <T extends DataTType>(plugin: SlatePluginDefinition<T>): T => {
+export default <T>(plugin: SlatePluginDefinition<T>): T => {
   const editor = useSlate();
   return getCurrentNodeDataWithPlugin(editor, plugin);
 };

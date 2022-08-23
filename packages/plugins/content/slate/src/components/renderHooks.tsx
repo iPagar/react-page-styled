@@ -1,5 +1,4 @@
 import propisValid from '@emotion/is-prop-valid';
-import { lazyLoad } from '@react-page/editor';
 import isObject from 'lodash.isobject';
 import type { DependencyList } from 'react';
 import React, { useCallback } from 'react';
@@ -11,15 +10,13 @@ import {
   useComponentMarkPlugins,
   useComponentNodePlugins,
 } from './pluginHooks';
-
-// lazy load as it uses slate library. We don't want to bundle that in readonly mode
-const VoidEditableElement = lazyLoad(() => import('./VoidEditableElement'));
+import VoidElement from './VoidElement';
 
 type Data = {
   [key: string]: unknown;
 };
 const pickNativeProps = (data?: Data): Data => {
-  if (!data || !isObject(data)) {
+  if (!isObject(data)) {
     return {};
   }
   return Object.keys(data).reduce((acc, key) => {
@@ -106,16 +103,15 @@ export const useRenderElement = (
           matchingPlugin.isVoid;
 
         // if block is void, we still need to render children due to some quirks of slate
-
         if (isVoid && !injections.readOnly) {
           return (
-            <VoidEditableElement
+            <VoidElement
               component={component}
               element={element}
-              plugin={matchingPlugin as SlatePluginDefinition}
+              plugin={matchingPlugin as SlatePluginDefinition<unknown>}
             >
               {children}
-            </VoidEditableElement>
+            </VoidElement>
           );
         }
 
@@ -154,7 +150,7 @@ export const useRenderLeave = (
             );
             if (matchingPlugin) {
               const { Component, getStyle } = matchingPlugin;
-              const dataRaw = leaveTypes[type as keyof typeof leaveTypes]; // usually boolean
+              const dataRaw = leaveTypes[type]; // usually boolean
               const data = isObject(dataRaw) ? dataRaw : {};
 
               const style = getStyle ? getStyle(data) : undefined;
