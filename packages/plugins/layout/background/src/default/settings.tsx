@@ -1,10 +1,10 @@
-import React from 'react';
-import type { BackgroundSettings } from '../types/settings';
+import React from 'react'
+import type { BackgroundSettings } from '../types/settings'
 import {
   IMAGE_MODE_FLAG,
   COLOR_MODE_FLAG,
   GRADIENT_MODE_FLAG,
-} from './../const/mode';
+} from './../const/mode'
 // import { defaultTranslations as defaultImageUploadTranslations } from '@react-page/editor/lib/ui/ImageUpload/defaultTranslations';
 
 export const defaultTranslations = {
@@ -35,9 +35,15 @@ export const defaultTranslations = {
   srcPlaceholder: 'http://example.com/image.png',
   imageUrl: 'Image URL',
   isParallax: 'Use parallax effect',
-};
+  isBorderRadius: 'Add border radius',
+  borderRadiusColor: 'Border radius color',
+  backgroundSize: 'Background size, %',
+  zIndex: 'Z-index',
+  marginTop: 'Margin top',
+}
 
 export const defaultSettings: Partial<BackgroundSettings> = {
+  defaultBackgroundSize: 100,
   defaultBackgroundColor: { r: 245, g: 0, b: 87, a: 1 },
   defaultGradientColor: { r: 245, g: 0, b: 87, a: 1 },
   defaultGradientSecondaryColor: { r: 71, g: 245, b: 87, a: 1 },
@@ -54,4 +60,6 @@ export const defaultSettings: Partial<BackgroundSettings> = {
   cellStyle: {
     padding: 0,
   },
-};
+  defaultZIndex: 0,
+  defaultMarginTop: '0',
+}

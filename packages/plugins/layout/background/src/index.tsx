@@ -1,14 +1,14 @@
-import type { BackgroundSettings } from './types/settings';
-import createPlugin from './createPlugin';
+import type { BackgroundSettings } from './types/settings'
+import createPlugin from './createPlugin'
 
-import BackgroundHtmlRenderer from './Renderer/BackgroundHtmlRenderer';
-import type { MakeOptional } from './types/makeOptional';
-import { ModeEnum } from './types/ModeEnum';
+import BackgroundHtmlRenderer from './Renderer/BackgroundHtmlRenderer'
+import type { MakeOptional } from './types/makeOptional'
+import { ModeEnum } from './types/ModeEnum'
 
-export { ModeEnum };
-import { lazyLoad } from '@react-page/editor';
+export { ModeEnum }
+import { lazyLoad } from '@react-page/editor'
 
-const BackgroundDefaultControls = lazyLoad(() => import('./Controls/Controls'));
+const BackgroundDefaultControls = lazyLoad(() => import('./Controls/Controls'))
 
 export default (
   settings: MakeOptional<BackgroundSettings, 'Renderer' | 'Controls'>
@@ -17,6 +17,6 @@ export default (
     Controls: BackgroundDefaultControls,
     Renderer: BackgroundHtmlRenderer,
     ...settings,
-  });
-  return plugin;
-};
+  })
+  return plugin
+}

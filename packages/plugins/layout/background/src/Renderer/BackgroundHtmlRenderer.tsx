@@ -107,19 +107,50 @@ const BackgroundHtmlRenderer: React.SFC<BackgroundRendererProps> = (props) => {
   const lightenFinal =
     props.lightenPreview !== undefined ? props.lightenPreview : lighten;
   const containerStyles = getStyles(props);
+
   return (
     <div
-      className="react-page-plugins-layout-background"
-      style={{ ...containerStyles, ...(hasPadding ? {} : { padding: 0 }) }}
+      style={{
+        ...(props.data.isBorderRadius && {
+          marginLeft: '-20vw',
+          width: '120vw',
+          paddingLeft: '20vw',
+        }),
+        ...(props.data.zIndex && {
+          zIndex: props.data.zIndex,
+        }),
+        ...(props.data.marginTop && {
+          marginTop: props.data.marginTop,
+        }),
+        ...(props.data.isBorderRadius && {
+          background: colorToString(
+            props.data.borderRadiusColor ?? props.defaultBorderRadiusColor
+          ),
+        }),
+      }}
     >
       <div
-        className="react-page-plugins-layout-background__backstretch"
+        className="react-page-plugins-layout-background"
         style={{
-          // tslint:disable-next-line:max-line-length
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, ${darkenFinal}), rgba(0, 0, 0, ${darkenFinal})),linear-gradient(rgba(255, 255, 255, ${lightenFinal}), rgba(255, 255, 255, ${lightenFinal}))`,
+          ...containerStyles,
+          ...(hasPadding ? {} : { padding: 0 }),
+          ...{
+            borderRadius: props.data.isBorderRadius
+              ? '0 0 200vh 200vh/0 0 20vh 20vh'
+              : 0,
+          },
+          ...{ backgroundSize: `${props.data.backgroundSize}%` },
         }}
-      />
-      {children}
+      >
+        <div
+          className="react-page-plugins-layout-background__backstretch"
+          style={{
+            // tslint:disable-next-line:max-line-length
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, ${darkenFinal}), rgba(0, 0, 0, ${darkenFinal})),linear-gradient(rgba(255, 255, 255, ${lightenFinal}), rgba(255, 255, 255, ${lightenFinal}))`,
+          }}
+        />
+        {children}
+      </div>
     </div>
   );
 };

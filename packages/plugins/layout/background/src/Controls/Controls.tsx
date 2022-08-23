@@ -1,52 +1,53 @@
-import React from 'react';
+import React from 'react'
 
-import type { BackgroundProps } from '../types/component';
+import type { BackgroundProps } from '../types/component'
 
-import type { ImageLoaded, RGBColor } from '@react-page/editor';
-import type { ModeEnum } from '../types/ModeEnum';
+import type { ImageLoaded, RGBColor } from '@react-page/editor'
+import type { ModeEnum } from '../types/ModeEnum'
 
-import Inner from './Inner';
+import Inner from './Inner'
 
 export type BackgroundState = {
-  backgroundColorPreview?: RGBColor;
-  gradientDegPreview?: number;
-  gradientDegPreviewIndex?: number;
-  gradientOpacityPreview?: number;
-  gradientOpacityPreviewIndex?: number;
-  gradientColorPreview?: RGBColor;
-  gradientColorPreviewIndex?: number;
-  gradientColorPreviewColorIndex?: number;
-  darkenPreview?: number;
-  lightenPreview?: number;
-  imagePreview?: ImageLoaded;
-};
+  borderRadiusColorPreview?: RGBColor
+  backgroundColorPreview?: RGBColor
+  gradientDegPreview?: number
+  gradientDegPreviewIndex?: number
+  gradientOpacityPreview?: number
+  gradientOpacityPreviewIndex?: number
+  gradientColorPreview?: RGBColor
+  gradientColorPreviewIndex?: number
+  gradientColorPreviewColorIndex?: number
+  darkenPreview?: number
+  lightenPreview?: number
+  imagePreview?: ImageLoaded
+}
 
 class BackgroundDefaultControls extends React.Component<
   BackgroundProps,
   BackgroundState
 > {
   constructor(props: BackgroundProps) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   handleChangeDarken = () => {
-    this.props.onChange({ darken: this.state.darkenPreview });
-    this.setState({ darkenPreview: undefined });
-  };
+    this.props.onChange({ darken: this.state.darkenPreview })
+    this.setState({ darkenPreview: undefined })
+  }
 
   handleChangeDarkenPreview = (value: number) => {
-    this.setState({ darkenPreview: value });
-  };
+    this.setState({ darkenPreview: value })
+  }
 
   handleChangeLighten = () => {
-    this.props.onChange({ lighten: this.state.lightenPreview });
-    this.setState({ lightenPreview: undefined });
-  };
+    this.props.onChange({ lighten: this.state.lightenPreview })
+    this.setState({ lightenPreview: undefined })
+  }
 
   handleChangeLightenPreview = (value: number) => {
-    this.setState({ lightenPreview: value });
-  };
+    this.setState({ lightenPreview: value })
+  }
 
   handleChangeHasPadding = () => {
     this.props.onChange({
@@ -54,21 +55,21 @@ class BackgroundDefaultControls extends React.Component<
         this.props.data.hasPadding === undefined
           ? !this.props.defaultHasPadding
           : !this.props.data.hasPadding,
-    });
-  };
+    })
+  }
 
   handleChangeBackgroundColorPreview = (e?: RGBColor) =>
-    this.setState({ backgroundColorPreview: e });
+    this.setState({ backgroundColorPreview: e })
 
   handleChangeGradientDegPreview = (
     gradientDegPreview: number | undefined,
     gradientDegPreviewIndex?: number
-  ) => this.setState({ gradientDegPreview, gradientDegPreviewIndex });
+  ) => this.setState({ gradientDegPreview, gradientDegPreviewIndex })
 
   handleChangeGradientOpacityPreview = (
     gradientOpacityPreview: number | undefined,
     gradientOpacityPreviewIndex?: number
-  ) => this.setState({ gradientOpacityPreview, gradientOpacityPreviewIndex });
+  ) => this.setState({ gradientOpacityPreview, gradientOpacityPreviewIndex })
 
   handleChangeGradientColorPreview = (
     gradientColorPreview: RGBColor | undefined,
@@ -79,26 +80,30 @@ class BackgroundDefaultControls extends React.Component<
       gradientColorPreview,
       gradientColorPreviewIndex,
       gradientColorPreviewColorIndex,
-    });
+    })
 
   handleImageLoaded = (imagePreview: ImageLoaded) =>
-    this.setState({ imagePreview });
+    this.setState({ imagePreview })
 
-  handleImageUploaded = () => this.setState({ imagePreview: undefined });
+  handleImageUploaded = () => this.setState({ imagePreview: undefined })
 
   handleChangeModeSwitch =
     (mode: ModeEnum | undefined, modeFlag: ModeEnum | undefined) => () => {
       if (mode && modeFlag) {
-        modeFlag ^= mode;
-        this.props.onChange({ modeFlag });
+        modeFlag ^= mode
+        this.props.onChange({ modeFlag })
       } else {
-        this.props.onChange({ modeFlag });
+        this.props.onChange({ modeFlag: mode })
       }
-    };
+    }
+
+  onChangeBorderColorPreview = (e?: RGBColor) =>
+    this.setState({ borderRadiusColorPreview: e })
 
   render() {
     return (
       <Inner
+        onChangeBorderColorPreview={this.onChangeBorderColorPreview}
         {...this.props}
         handleChangeDarken={this.handleChangeDarken}
         handleChangeDarkenPreview={this.handleChangeDarkenPreview}
@@ -118,8 +123,8 @@ class BackgroundDefaultControls extends React.Component<
         handleImageUploaded={this.handleImageUploaded}
         {...this.state}
       />
-    );
+    )
   }
 }
 
-export default BackgroundDefaultControls;
+export default BackgroundDefaultControls

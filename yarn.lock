@@ -14761,7 +14761,7 @@ unicode-property-aliases-ecmascript@^2.0.0:
     tslib "^2.2.0"
     uniforms "^3.8.1"
 
-uniforms-material@^3.5.1:
+"uniforms-material@^2.6.0 || ^3.0.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/uniforms-material/-/uniforms-material-3.10.0.tgz#b6cd34fa887e1cbe64fdea546c59b7679a0020fc"
   integrity sha512-dYIAR6x+y0RvnUpWAoJb/lUkETsohk1uOK4IWztV6xrMFkEiYHX2XFsDq3XU4TURMkP9wBK6Qo/FYzgJdeNJTg==
@@ -14771,7 +14771,7 @@ uniforms-material@^3.5.1:
     tslib "^2.2.0"
     uniforms "^3.10.0"
 
-uniforms@^3.10.0, uniforms@^3.5.1:
+"uniforms@^2.6.0 || ^3.0.0", uniforms@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/uniforms/-/uniforms-3.10.0.tgz#c09d429904632b3952c7ba5e0f5f7509f8a30098"
   integrity sha512-wp8mnm5DqRzGUQwbEIG6sfpnu5H+gCncL5g3Cmohax9E1bmn4PattsBRI88gSMLckZNZdpA79LX1f8QdQFub/g==
