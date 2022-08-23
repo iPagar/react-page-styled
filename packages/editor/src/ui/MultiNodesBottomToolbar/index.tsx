@@ -1,17 +1,17 @@
-import { Avatar, Grid, Typography } from '@material-ui/core'
-import React from 'react'
+import { Avatar, Grid, Typography } from '@material-ui/core';
+import React from 'react';
 import {
   useAllFocusedNodeIds,
   useUiTranslator,
-} from '../../core/components/hooks'
-import { BottomToolbarDrawer } from '../BottomToolbar'
-import { ThemeProvider } from '../ThemeProvider'
-import DeleteAll from './DeleteAll'
-import DuplicateAll from './DuplicateAll'
+} from '../../core/components/hooks';
+import { BottomToolbarDrawer } from '../BottomToolbar';
+import { ThemeProvider } from '../ThemeProvider';
+import DeleteAll from './DeleteAll';
+import DuplicateAll from './DuplicateAll';
 
 export const MultiNodesBottomToolbar: React.FC = React.memo(() => {
-  const { t } = useUiTranslator()
-  const focusedNodeIds = useAllFocusedNodeIds()
+  const { t } = useUiTranslator();
+  const focusedNodeIds = useAllFocusedNodeIds();
   return (
     <BottomToolbarDrawer
       open={focusedNodeIds.length > 1}
@@ -39,6 +39,7 @@ export const MultiNodesBottomToolbar: React.FC = React.memo(() => {
             <DeleteAll />
           </Grid>
         </Grid>
-      }></BottomToolbarDrawer>
-  )
-})
+      }
+    ></BottomToolbarDrawer>
+  );
+});

@@ -1,5 +1,7 @@
-import React, { HTMLProps, Ref } from 'react';
-import { Override, filterDOMProps, useForm } from 'uniforms';
+import type { HTMLProps, Ref } from 'react';
+import React from 'react';
+import type { Override } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,

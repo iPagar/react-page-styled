@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Node, Text } from 'slate';
 import type { SlatePlugin } from '../types/SlatePlugin';
 

@@ -1,7 +1,7 @@
 import isHotkey from 'is-hotkey';
 import type { DependencyList } from 'react';
 import React from 'react';
-import { Transforms } from 'slate';
+import { BaseEditor, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { useSlate } from 'slate-react';
 import { addPlugin } from '../hooks/useAddPlugin';
@@ -41,7 +41,7 @@ export const useOnKeyDown = (
     }
 
     if (isHotkey(['esc'], event)) {
-      ReactEditor.blur(editor);
+      ReactEditor.blur(editor as ReactEditor);
 
       return true;
     }

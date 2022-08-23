@@ -1,7 +1,7 @@
-import classNames from 'classnames'
-import React, { useCallback } from 'react'
-import type { UseMeasureRef } from 'react-use/lib/useMeasure'
-import { getCellOuterDivClassName } from '../../utils/getCellStylingProps'
+import classNames from 'classnames';
+import React, { useCallback } from 'react';
+import type { UseMeasureRef } from 'react-use/lib/useMeasure';
+import { getCellOuterDivClassName } from '../../utils/getCellStylingProps';
 import {
   useAllFocusedNodeIds,
   useCellHasPlugin,
@@ -17,40 +17,40 @@ import {
   useOption,
   useScrollToViewEffect,
   useSetDisplayReferenceNodeId,
-} from '../hooks'
-import ErrorCell from './ErrorCell'
-import Handle from './Handle'
-import Inner from './Inner'
-import MoveActions from './MoveActions'
-import scrollIntoViewWithOffset from './utils/scrollIntoViewWithOffset'
+} from '../hooks';
+import ErrorCell from './ErrorCell';
+import Handle from './Handle';
+import Inner from './Inner';
+import MoveActions from './MoveActions';
+import scrollIntoViewWithOffset from './utils/scrollIntoViewWithOffset';
 
 const CellErrorGate = class extends React.Component<
   {
-    nodeId: string
+    nodeId: string;
   },
   { error: Error | null }
 > {
   state = {
     error: null,
-  }
+  };
   componentDidCatch(error: Error) {
-    this.setState({ error })
+    this.setState({ error });
   }
 
   render() {
     if (this.state.error) {
-      return <ErrorCell nodeId={this.props.nodeId} error={this.state.error} />
+      return <ErrorCell nodeId={this.props.nodeId} error={this.state.error} />;
     }
-    return this.props.children
+    return this.props.children;
   }
-}
+};
 
 type Props = {
-  nodeId: string
-  measureRef?: UseMeasureRef
-}
+  nodeId: string;
+  measureRef?: UseMeasureRef;
+};
 const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
-  const focused = useIsFocused(nodeId)
+  const focused = useIsFocused(nodeId);
 
   const { inline, hasInlineNeighbour, isDraft, isDraftI18n, size } =
     useCellProps(nodeId, (node) => {
@@ -60,44 +60,44 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
         isDraft: node?.isDraft,
         isDraftI18n: node?.isDraftI18n,
         size: node?.size ?? 12,
-      }
-    })
+      };
+    });
 
-  const lang = useLang()
-  const isPreviewMode = useIsPreviewMode()
-  const isResizeMode = useIsResizeMode()
+  const lang = useLang();
+  const isPreviewMode = useIsPreviewMode();
+  const isResizeMode = useIsResizeMode();
 
-  const isLayoutMode = useIsLayoutMode()
-  const isInsertMode = useIsInsertMode()
-  const multiNodesSelected = useAllFocusedNodeIds().length > 1
-  const hasChildren = useNodeHasChildren(nodeId)
-  const showMoveButtons = useOption('showMoveButtonsInLayoutMode')
-  const hasPlugin = useCellHasPlugin(nodeId)
-  const cellSpacing = useCellSpacing()
-  const needVerticalPadding = !hasChildren || hasPlugin
+  const isLayoutMode = useIsLayoutMode();
+  const isInsertMode = useIsInsertMode();
+  const multiNodesSelected = useAllFocusedNodeIds().length > 1;
+  const hasChildren = useNodeHasChildren(nodeId);
+  const showMoveButtons = useOption('showMoveButtonsInLayoutMode');
+  const hasPlugin = useCellHasPlugin(nodeId);
+  const cellSpacing = useCellSpacing();
+  const needVerticalPadding = !hasChildren || hasPlugin;
 
-  const isDraftInLang = isDraftI18n?.[lang] ?? isDraft
-  const ref = React.useRef<HTMLDivElement>(null)
+  const isDraftInLang = isDraftI18n?.[lang] ?? isDraft;
+  const ref = React.useRef<HTMLDivElement>(null);
 
-  const setReferenceNodeId = useSetDisplayReferenceNodeId()
+  const setReferenceNodeId = useSetDisplayReferenceNodeId();
   const onClick = useCallback(
     (e) => {
       if (isInsertMode) {
-        e.stopPropagation()
-        setReferenceNodeId(nodeId)
+        e.stopPropagation();
+        setReferenceNodeId(nodeId);
       }
     },
     [nodeId, isInsertMode, setReferenceNodeId]
-  )
+  );
   useScrollToViewEffect(
     nodeId,
     () => {
-      if (ref.current) scrollIntoViewWithOffset(ref.current, 120) // 120 is just a sane default, we might make int configurable in the future
+      if (ref.current) scrollIntoViewWithOffset(ref.current, 120); // 120 is just a sane default, we might make int configurable in the future
     },
     [ref.current]
-  )
+  );
   if (isDraftInLang && isPreviewMode) {
-    return null
+    return null;
   }
 
   const cellOuterStlye =
@@ -107,7 +107,7 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
             cellSpacing.x / 2
           }px`,
         }
-      : undefined
+      : undefined;
 
   return (
     <div
@@ -129,7 +129,8 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
             !isResizeMode && !isLayoutMode && inline, // inline must not be active for resize/layout
         })
       }
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <Handle nodeId={nodeId} />
       {showMoveButtons &&
       isLayoutMode &&
@@ -143,13 +144,14 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
         style={{
           height: '100%',
           boxSizing: 'border-box',
-        }}>
+        }}
+      >
         <CellErrorGate nodeId={nodeId}>
           <Inner nodeId={nodeId} />
         </CellErrorGate>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(Cell)
+export default React.memo(Cell);

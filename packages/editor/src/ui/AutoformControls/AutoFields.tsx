@@ -1,3 +1,3 @@
-import { AutoFields } from './Autoforms'
+import { AutoFields } from './Autoforms';
 
-export default AutoFields
+export default AutoFields;

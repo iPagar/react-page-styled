@@ -1,25 +1,25 @@
-import { Avatar } from '@mui/material'
-import { Card, Grid, User } from '@nextui-org/react'
-import React from 'react'
+import { Avatar } from '@mui/material';
+import { Card, Grid, User } from '@nextui-org/react';
+import React from 'react';
 import {
   useFocusCell,
   useOption,
   usePluginOfCell,
   useUiTranslator,
-} from '../../core/components/hooks'
-import MoveActions from './MoveActions'
-import { BottomToolbarTools } from './Tools'
+} from '../../core/components/hooks';
+import MoveActions from './MoveActions';
+import { BottomToolbarTools } from './Tools';
 
 export type BottomToolbarMainBarProps = {
-  nodeId: string
-  actionsLeft?: React.ReactNode
-}
+  nodeId: string;
+  actionsLeft?: React.ReactNode;
+};
 export const BottomToolbarMainBar: React.FC<BottomToolbarMainBarProps> =
   React.memo(({ nodeId, actionsLeft }) => {
-    const { title, icon } = usePluginOfCell(nodeId) ?? {}
-    const { t } = useUiTranslator()
-    const focus = useFocusCell(nodeId)
-    const showMoveButtons = useOption('showMoveButtonsInBottomToolbar')
+    const { title, icon } = usePluginOfCell(nodeId) ?? {};
+    const { t } = useUiTranslator();
+    const focus = useFocusCell(nodeId);
+    const showMoveButtons = useOption('showMoveButtonsInBottomToolbar');
     return (
       <Grid.Container direction="row" alignItems="center" gap={1}>
         {icon || title ? (
@@ -37,7 +37,8 @@ export const BottomToolbarMainBar: React.FC<BottomToolbarMainBarProps> =
           <Grid
             css={{
               marginRight: 8,
-            }}>
+            }}
+          >
             {title}
           </Grid>
         }
@@ -56,5 +57,5 @@ export const BottomToolbarMainBar: React.FC<BottomToolbarMainBarProps> =
           <BottomToolbarTools nodeId={nodeId} />
         </Grid>
       </Grid.Container>
-    )
-  })
+    );
+  });

@@ -1,14 +1,14 @@
-import { Button, Card, Text } from '@nextui-org/react'
-import React from 'react'
-import { useIsEditMode, useRemoveCell, useUiTranslator } from '../../hooks'
+import { Button, Card, Text } from '@nextui-org/react';
+import React from 'react';
+import { useIsEditMode, useRemoveCell, useUiTranslator } from '../../hooks';
 
 const ErrorCell: React.FC<{ nodeId: string; error: Error }> = ({
   nodeId,
   error,
 }) => {
-  const isEditMode = useIsEditMode()
-  const removeCell = useRemoveCell(nodeId)
-  const { t } = useUiTranslator()
+  const isEditMode = useIsEditMode();
+  const removeCell = useRemoveCell(nodeId);
+  const { t } = useUiTranslator();
   return (
     <Card>
       <Card.Header>
@@ -34,7 +34,7 @@ const ErrorCell: React.FC<{ nodeId: string; error: Error }> = ({
         ) : null}
       </Card.Footer>
     </Card>
-  )
-}
+  );
+};
 
-export default ErrorCell
+export default ErrorCell;

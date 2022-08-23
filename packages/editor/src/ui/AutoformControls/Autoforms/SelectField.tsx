@@ -1,10 +1,12 @@
 import xor from 'lodash/xor';
-import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import type { Ref } from 'react';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'
-    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
+    ? /* istanbul ignore next */ (x) => Buffer.from(x).toString('base64')
     : btoa;
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
@@ -43,7 +45,7 @@ function Select({
     <div {...filterDOMProps(props)}>
       {label && <label htmlFor={id}>{label}</label>}
       {checkboxes ? (
-        allowedValues!.map(item => (
+        allowedValues!.map((item) => (
           <div key={item}>
             <input
               checked={
@@ -71,7 +73,7 @@ function Select({
           id={id}
           multiple={multiple}
           name={name}
-          onChange={event => {
+          onChange={(event) => {
             if (!readOnly) {
               const item = event.target.value;
               if (multiple) {
@@ -91,7 +93,7 @@ function Select({
             </option>
           )}
 
-          {allowedValues?.map(value => (
+          {allowedValues?.map((value) => (
             <option disabled={disableItem?.(value)} key={value} value={value}>
               {transform ? transform(value) : value}
             </option>

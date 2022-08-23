@@ -6,7 +6,11 @@ const Controls = (props: Pick<SlateProps, 'translations' | 'plugins'>) => {
   const { plugins, translations } = props;
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+      }}
+    >
       {plugins &&
         plugins.map((plugin, i: number) =>
           plugin.addToolbarButton ? (

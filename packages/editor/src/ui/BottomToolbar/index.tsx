@@ -1,13 +1,13 @@
-import React from 'react'
-import { darkTheme, ThemeProvider } from '../ThemeProvider'
-import { BottomToolbarDrawer } from './Drawer'
-import { BottomToolbarMainBar } from './NodeTools'
-import { ScaleButton } from './ScaleButton'
-import type { BottomToolbarProps } from './types'
-export * from './types'
-export * from './Drawer'
-export * from './NodeTools'
-export * from './Tools'
+import React from 'react';
+import { darkTheme, ThemeProvider } from '../ThemeProvider';
+import { BottomToolbarDrawer } from './Drawer';
+import { BottomToolbarMainBar } from './NodeTools';
+import { ScaleButton } from './ScaleButton';
+import type { BottomToolbarProps } from './types';
+export * from './types';
+export * from './Drawer';
+export * from './NodeTools';
+export * from './Tools';
 
 export const BottomToolbar: React.FC<BottomToolbarProps> = React.memo(
   ({
@@ -22,7 +22,7 @@ export const BottomToolbar: React.FC<BottomToolbarProps> = React.memo(
     style,
     children,
   }) => {
-    const [scale, setScale] = React.useState(1)
+    const [scale, setScale] = React.useState(1);
     return (
       <ThemeProvider theme={theme ? theme : dark ? darkTheme : null}>
         <BottomToolbarDrawer
@@ -44,11 +44,12 @@ export const BottomToolbar: React.FC<BottomToolbarProps> = React.memo(
                 ...React.Children.toArray(actionsLeft),
               ]}
             />
-          }>
+          }
+        >
           {children}
           {pluginControls}
         </BottomToolbarDrawer>
       </ThemeProvider>
-    )
+    );
   }
-)
+);

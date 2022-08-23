@@ -1,15 +1,16 @@
-import { Grid, Spacer, Table } from '@nextui-org/react'
-import React, { Children, cloneElement, isValidElement } from 'react'
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms'
+import { Grid, Spacer, Table } from '@nextui-org/react';
+import React, { Children, cloneElement, isValidElement } from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
-import ListAddField from './ListAddField'
-import ListItemField from './ListItemField'
+import ListAddField from './ListAddField';
+import ListItemField from './ListItemField';
 
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
   HTMLUListElement,
   { initialCount?: number; itemProps?: object }
->
+>;
 
 function List({
   children = <ListItemField name="$" />,
@@ -27,7 +28,8 @@ function List({
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
+          }}
+        >
           {label}
           <Spacer x={1} />
           <ListAddField initialCount={initialCount} name="$" />
@@ -49,7 +51,7 @@ function List({
         )}
       </Grid.Container>
     </ul>
-  )
+  );
 }
 
-export default connectField<ListFieldProps>(List)
+export default connectField<ListFieldProps>(List);

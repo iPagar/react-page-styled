@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { objIsNode } from '@react-page/editor';
 import type { Editor } from 'slate';
 import { Transforms } from 'slate';

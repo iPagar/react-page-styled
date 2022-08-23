@@ -1,5 +1,7 @@
-import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import type { Ref } from 'react';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
@@ -43,7 +45,7 @@ function Date({
         max={dateFormat(max)}
         min={dateFormat(min)}
         name={name}
-        onChange={event => {
+        onChange={(event) => {
           const date = new DateConstructor(event.target.valueAsNumber);
           if (date.getFullYear() < 10000) {
             onChange(date);

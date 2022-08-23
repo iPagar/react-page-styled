@@ -1,3 +1,4 @@
+// @ts-nocheck
 import propisValid from '@emotion/is-prop-valid';
 import isObject from 'lodash.isobject';
 import type { DependencyList } from 'react';

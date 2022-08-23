@@ -1,20 +1,20 @@
-import type { BackendFactory } from 'dnd-core'
-import React from 'react'
-import Editable from '../core/components/Editable'
-import GlobalHotKeys from '../core/components/HotKey/GlobalHotKeys'
-import { createEmptyState } from '../core/EditorStore'
-import type { ProviderProps } from '../core/Provider'
-import Provider from '../core/Provider'
-import type { ValueWithLegacy } from '../core/types'
-import EditorUI from '../ui/EditorUI'
-import StickyWrapper from './StickyWrapper'
+import type { BackendFactory } from 'dnd-core';
+import React from 'react';
+import Editable from '../core/components/Editable';
+import GlobalHotKeys from '../core/components/HotKey/GlobalHotKeys';
+import { createEmptyState } from '../core/EditorStore';
+import type { ProviderProps } from '../core/Provider';
+import Provider from '../core/Provider';
+import type { ValueWithLegacy } from '../core/types';
+import EditorUI from '../ui/EditorUI';
+import StickyWrapper from './StickyWrapper';
 
-export type DndBackend = BackendFactory
+export type DndBackend = BackendFactory;
 export type EditableEditorProps = {
-  value?: ValueWithLegacy | null
+  value?: ValueWithLegacy | null;
 
-  lang?: string
-} & ProviderProps
+  lang?: string;
+} & ProviderProps;
 
 const EditableEditor: React.FC<EditableEditorProps> = ({
   value,
@@ -24,7 +24,7 @@ const EditableEditor: React.FC<EditableEditorProps> = ({
   renderOptions,
   callbacks,
 }) => {
-  const theValue = value || createEmptyState()
+  const theValue = value || createEmptyState();
 
   return (
     <Provider
@@ -32,7 +32,8 @@ const EditableEditor: React.FC<EditableEditorProps> = ({
       callbacks={callbacks}
       value={theValue}
       renderOptions={renderOptions}
-      options={options}>
+      options={options}
+    >
       {children}
       <StickyWrapper>
         {(stickyNess) => (
@@ -44,7 +45,7 @@ const EditableEditor: React.FC<EditableEditorProps> = ({
         )}
       </StickyWrapper>
     </Provider>
-  )
-}
+  );
+};
 
-export default EditableEditor
+export default EditableEditor;

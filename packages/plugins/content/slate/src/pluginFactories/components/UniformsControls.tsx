@@ -1,14 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import { Button, Modal, Tooltip } from '@nextui-org/react';
 import type { JsonSchema } from '@react-page/editor';
 import { makeUniformsSchema, AutoForm, AutoFields } from '@react-page/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import type { Data } from '../../types';
+import TextField from '@material-ui/core';
 
 import type { SlatePluginControls } from '../../types/slatePluginDefinitions';
 
@@ -63,14 +62,8 @@ function Controls<T extends Data>(
   };
 
   return (
-    <Dialog
-      disableEnforceFocus={true}
-      PaperProps={{
-        style: { minWidth: 300 },
-      }}
-      open={props.open}
-    >
-      <DialogContent>
+    <Modal open={props.open}>
+      <Modal.Body>
         {!props.shouldInsertWithText ? null : (
           <div>
             <TextField
@@ -78,6 +71,7 @@ function Controls<T extends Data>(
               placeholder={'Text'}
               onChange={(e) => setText(e.target.value)}
               value={text}
+              name={''}
             />
           </div>
         )}
@@ -92,28 +86,29 @@ function Controls<T extends Data>(
             <AutoFields />
           </AutoForm>
         ) : null}
-      </DialogContent>
-      <DialogActions>
-        <Button
-          variant="text"
-          onClick={onCancel}
-          style={{ marginRight: 'auto' }}
-        >
+      </Modal.Body>
+      <Modal.Footer>
+        {props.isActive ? (
+          <Tooltip content={props.removeLabel || 'Remove'}>
+            <Button
+              flat
+              auto
+              color="error"
+              onClick={onRemove}
+              icon={<DeleteIcon />}
+            ></Button>
+          </Tooltip>
+        ) : null}
+        <Button auto flat color="error" onClick={onCancel}>
           {props.cancelLabel || 'Cancel'}
         </Button>
-        {props.isActive ? (
-          <Button variant="contained" color="secondary" onClick={onRemove}>
-            {props.removeLabel || 'Remove'}
-            <DeleteIcon style={{ marginLeft: 10 }} />
-          </Button>
-        ) : null}
 
-        <Button variant="contained" color="primary" onClick={onOkClick}>
+        <Button auto color="primary" onClick={onOkClick}>
           {props.submitLabel || 'Ok'}
           <DoneIcon style={{ marginLeft: 10 }} />
         </Button>
-      </DialogActions>
-    </Dialog>
+      </Modal.Footer>
+    </Modal>
   );
 }
 

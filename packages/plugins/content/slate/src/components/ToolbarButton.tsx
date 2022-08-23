@@ -1,9 +1,7 @@
+import { Button, Tooltip, useTheme } from '@nextui-org/react';
 import { lazyLoad } from '@react-page/editor';
 import React from 'react';
 import { ConditionalWrapper } from './ConditionalWrapper';
-
-const IconButton = lazyLoad(() => import('@material-ui/core/IconButton'));
-const Tooltip = lazyLoad(() => import('@material-ui/core/Tooltip'));
 
 const ToolbarButton: React.SFC<{
   icon: JSX.Element | string;
@@ -11,25 +9,31 @@ const ToolbarButton: React.SFC<{
   disabled?: boolean;
   onClick: React.MouseEventHandler;
   toolTip?: string;
-}> = ({ icon, isActive, onClick, disabled = false, toolTip = '' }) => (
-  <ConditionalWrapper
-    condition={!disabled}
-    wrapper={(children) => <Tooltip title={toolTip}>{children}</Tooltip>}
-  >
-    <IconButton
-      onMouseDown={onClick}
-      style={
-        isActive
-          ? { color: 'rgb(0, 188, 212)' }
-          : disabled
-          ? { color: 'gray' }
-          : { color: 'white' }
-      }
-      disabled={disabled}
+}> = ({ icon, isActive, onClick, disabled = false, toolTip = '' }) => {
+  const { theme } = useTheme();
+
+  return (
+    <ConditionalWrapper
+      condition={!disabled}
+      wrapper={(children) => <Tooltip content={toolTip}>{children}</Tooltip>}
     >
-      {icon}
-    </IconButton>
-  </ConditionalWrapper>
-);
+      <Button
+        ripple={false}
+        light
+        auto
+        onClick={onClick}
+        style={
+          isActive
+            ? { color: theme.colors.primary.value }
+            : disabled
+            ? { color: 'gray' }
+            : { color: 'black' }
+        }
+        disabled={disabled}
+        icon={icon}
+      ></Button>
+    </ConditionalWrapper>
+  );
+};
 
 export default React.memo(ToolbarButton);

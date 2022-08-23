@@ -1,21 +1,22 @@
-import React from 'react'
-import { AutoField } from './Autoforms'
+import React from 'react';
+import { AutoField } from './Autoforms';
 
 const AutofieldContextProvider: React.FC = ({ children }) => (
   <AutoField.componentDetectorContext.Provider
     value={(props, uniforms) => {
-      const show = props.showIf?.(uniforms.model) ?? true
-      if (!show) return () => null
+      const show = props.showIf?.(uniforms.model) ?? true;
+      if (!show) return () => null;
 
       // see https://github.com/react-page/react-page/issues/1187
       // we remap props.component to props._customComponent to avoid the underlying issue in uniforms
       if (props._customComponent) {
-        return props._customComponent
+        return props._customComponent;
       }
-      return AutoField.defaultComponentDetector(props, uniforms)
-    }}>
+      return AutoField.defaultComponentDetector(props, uniforms);
+    }}
+  >
     {children}
   </AutoField.componentDetectorContext.Provider>
-)
+);
 
-export default AutofieldContextProvider
+export default AutofieldContextProvider;

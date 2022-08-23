@@ -1,4 +1,5 @@
-import { ComponentType, createElement } from 'react';
+import type { ComponentType } from 'react';
+import { createElement } from 'react';
 import { useForm } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -23,7 +24,7 @@ export default function AutoFields({
     element,
     props,
     (fields ?? schema.getSubfields())
-      .filter(field => !omitFields.includes(field))
-      .map(field => createElement(autoField, { key: field, name: field })),
+      .filter((field) => !omitFields.includes(field))
+      .map((field) => createElement(autoField, { key: field, name: field }))
   );
 }

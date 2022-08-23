@@ -1,5 +1,7 @@
-import React, { HTMLProps } from 'react';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import type { HTMLProps } from 'react';
+import React from 'react';
+import type { Override } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 export type ErrorFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,

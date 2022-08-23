@@ -1,22 +1,22 @@
-import type { DrawerProps } from '@material-ui/core'
-import { Divider, Drawer, Portal } from '@material-ui/core'
-import { Card } from '@nextui-org/react'
-import React, { Fragment } from 'react'
-import { useIsSmallScreen } from '../../core/components/hooks'
+import type { DrawerProps } from '@material-ui/core';
+import { Divider, Drawer, Portal } from '@material-ui/core';
+import { Card } from '@nextui-org/react';
+import React, { Fragment } from 'react';
+import { useIsSmallScreen } from '../../core/components/hooks';
 
-const darkBlack = 'rgba(0, 0, 0, 0.87)'
-const bright = 'rgba(255,255,255, 0.98)'
-const brightBorder = 'rgba(0, 0, 0, 0.12)'
+const darkBlack = 'rgba(0, 0, 0, 0.87)';
+const bright = 'rgba(255,255,255, 0.98)';
+const brightBorder = 'rgba(0, 0, 0, 0.12)';
 
 export type BottomToolbarDrawerProps = {
-  open: boolean
-  style?: React.CSSProperties
-  className?: string
-  anchor?: DrawerProps['anchor']
-  dark?: boolean
-  scale?: number
-  bottom: React.ReactNode
-}
+  open: boolean;
+  style?: React.CSSProperties;
+  className?: string;
+  anchor?: DrawerProps['anchor'];
+  dark?: boolean;
+  scale?: number;
+  bottom: React.ReactNode;
+};
 
 export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
   className,
@@ -37,10 +37,10 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
         marginBottom: 12,
       }}
     />
-  )
+  );
 
-  const theChildren = React.Children.toArray(children).filter(Boolean)
-  const isSmall = useIsSmallScreen()
+  const theChildren = React.Children.toArray(children).filter(Boolean);
+  const isSmall = useIsSmallScreen();
   return (
     <Portal>
       <Drawer
@@ -60,7 +60,8 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
             overflow: 'visible',
             pointerEvents: 'none',
           },
-        }}>
+        }}
+      >
         <div
           style={{
             pointerEvents: 'all',
@@ -84,7 +85,8 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
             transform: `scale(${scale})`,
             transition: 'scale 0.3s',
             ...style,
-          }}>
+          }}
+        >
           <Card>
             {theChildren.length > 0 && (
               <>
@@ -101,5 +103,5 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
         </div>
       </Drawer>
     </Portal>
-  )
-}
+  );
+};

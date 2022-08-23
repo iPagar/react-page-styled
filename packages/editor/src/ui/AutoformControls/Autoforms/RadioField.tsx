@@ -1,22 +1,23 @@
-import omit from 'lodash/omit'
-import React from 'react'
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms'
+import omit from 'lodash/omit';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'
     ? /* istanbul ignore next */ (x) => Buffer.from(x).toString('base64')
-    : btoa
-const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '')
+    : btoa;
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 export type RadioFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   {
-    allowedValues?: string[]
-    checkboxes?: boolean
-    transform?: (value: string) => string
+    allowedValues?: string[];
+    checkboxes?: boolean;
+    transform?: (value: string) => string;
   }
->
+>;
 
 function Radio({
   allowedValues,
@@ -43,7 +44,7 @@ function Radio({
             name={name}
             onChange={() => {
               if (!readOnly) {
-                onChange(item)
+                onChange(item);
               }
             }}
             type="radio"
@@ -55,7 +56,7 @@ function Radio({
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default connectField<RadioFieldProps>(Radio, { kind: 'leaf' })
+export default connectField<RadioFieldProps>(Radio, { kind: 'leaf' });

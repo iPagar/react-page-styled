@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useCallback } from 'react';
 import type { Editor } from 'slate';
 import { Transforms } from 'slate';

@@ -1,22 +1,22 @@
-import { Dialog } from '@material-ui/core'
-import Translate from '@material-ui/icons/Translate'
+import { Dialog } from '@material-ui/core';
+import Translate from '@material-ui/icons/Translate';
 
-import React, { useState } from 'react'
-import SelectLang from './SelectLang'
-import I18nDialog from './I18nDialog'
-import { useOption } from '../../core/components/hooks'
-import { Button } from '@nextui-org/react'
+import React, { useState } from 'react';
+import SelectLang from './SelectLang';
+import I18nDialog from './I18nDialog';
+import { useOption } from '../../core/components/hooks';
+import { Button } from '@nextui-org/react';
 
 export const I18nTools: React.FC<{
-  nodeId: string
+  nodeId: string;
 }> = React.memo(({ nodeId }) => {
-  const languages = useOption('languages')
+  const languages = useOption('languages');
 
-  const [showI18nDialog, setShowI18nDialog] = useState(false)
-  const hasI18n = languages && languages?.length > 0
-  const onClose = () => setShowI18nDialog(false)
+  const [showI18nDialog, setShowI18nDialog] = useState(false);
+  const hasI18n = languages && languages?.length > 0;
+  const onClose = () => setShowI18nDialog(false);
   if (!hasI18n) {
-    return null
+    return null;
   }
 
   return (
@@ -37,5 +37,5 @@ export const I18nTools: React.FC<{
         <SelectLang />
       </div>
     </>
-  )
-})
+  );
+});

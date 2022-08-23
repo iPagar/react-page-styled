@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Editor, Path, Text, Transforms } from 'slate';
 import { LI, LISTS_TYPE_PREFIX } from '../../plugins/lists/constants';
 

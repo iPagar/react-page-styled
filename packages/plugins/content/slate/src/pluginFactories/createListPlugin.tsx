@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CSSProperties } from 'react';
 import { LI, LISTS_TYPE_PREFIX } from '../plugins/lists/constants';
 import type { SlatePlugin } from '../types/SlatePlugin';

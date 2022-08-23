@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { deepEquals } from '@react-page/editor';
 import debounce from 'lodash.debounce';
 import React, {

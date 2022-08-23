@@ -1,23 +1,23 @@
-import { Card, Grid } from '@nextui-org/react'
-import React, { Fragment, useEffect, useMemo } from 'react'
-import type JSONSchemaBridge from 'uniforms-bridge-json-schema'
-import { useIsSmallScreen } from '../../core/components/hooks'
-import lazyLoad from '../../core/helper/lazyLoad'
+import { Card, Grid } from '@nextui-org/react';
+import React, { Fragment, useEffect, useMemo } from 'react';
+import type JSONSchemaBridge from 'uniforms-bridge-json-schema';
+import { useIsSmallScreen } from '../../core/components/hooks';
+import lazyLoad from '../../core/helper/lazyLoad';
 
 import type {
   AutoformControlsDef,
   CellPluginComponentProps,
   DataTType,
   JsonSchema,
-} from '../../core/types'
-import makeUniformsSchema from './makeUniformsSchema'
+} from '../../core/types';
+import makeUniformsSchema from './makeUniformsSchema';
 
-export const AutoForm = lazyLoad(() => import('./AutoForm'))
-export const AutoField = lazyLoad(() => import('./AutoField'))
-export const AutoFields = lazyLoad(() => import('./AutoFields'))
+export const AutoForm = lazyLoad(() => import('./AutoForm'));
+export const AutoField = lazyLoad(() => import('./AutoField'));
+export const AutoFields = lazyLoad(() => import('./AutoFields'));
 
 const getDefaultValue = function (bridge: JSONSchemaBridge): {
-  [key: string]: unknown
+  [key: string]: unknown;
 } {
   return bridge.getSubfields().reduce(
     (acc, fieldName) => ({
@@ -25,11 +25,11 @@ const getDefaultValue = function (bridge: JSONSchemaBridge): {
       [fieldName]: bridge.getInitialValue(fieldName),
     }),
     {}
-  )
-}
+  );
+};
 
 type Props<T extends DataTType> = CellPluginComponentProps<T> &
-  AutoformControlsDef<T>
+  AutoformControlsDef<T>;
 export function AutoformControls<T extends DataTType>({
   onChange,
   data,
@@ -40,15 +40,15 @@ export function AutoformControls<T extends DataTType>({
   const bridge = useMemo(
     () => makeUniformsSchema<T>(schema as JsonSchema<T>),
     [schema]
-  )
+  );
   useEffect(() => {
     const newDefaultData = {
       ...getDefaultValue(bridge),
       ...(data ?? {}),
-    } as Partial<T>
-    onChange(newDefaultData)
-  }, [bridge])
-  const isSmall = useIsSmallScreen()
+    } as Partial<T>;
+    onChange(newDefaultData);
+  }, [bridge]);
+  const isSmall = useIsSmallScreen();
 
   return (
     <AutoForm
@@ -56,7 +56,8 @@ export function AutoformControls<T extends DataTType>({
       model={data as any}
       autosave={true}
       schema={bridge}
-      onSubmit={onChange}>
+      onSubmit={onChange}
+    >
       {Content ? (
         <Content data={data} columnCount={columnCount} />
       ) : (
@@ -65,10 +66,11 @@ export function AutoformControls<T extends DataTType>({
             columnCount: isSmall ? 1 : columnCount,
             columnGap: 48,
             columnRule: '1px solid #E0E0E0',
-          }}>
+          }}
+        >
           <AutoFields element={Fragment} />
         </div>
       )}
     </AutoForm>
-  )
+  );
 }

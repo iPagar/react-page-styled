@@ -1,26 +1,26 @@
-import IconRedo from '@material-ui/icons/Redo'
-import IconUndo from '@material-ui/icons/Undo'
-import React from 'react'
+import IconRedo from '@material-ui/icons/Redo';
+import IconUndo from '@material-ui/icons/Undo';
+import React from 'react';
 import {
   useCanRedo,
   useCanUndo,
   useIsSmallScreen,
   useRedo,
   useUndo,
-} from '../../../core/components/hooks'
-import Button from '../Button/index'
-import { Button as DefaultButton } from '@nextui-org/react'
+} from '../../../core/components/hooks';
+import Button from '../Button/index';
+import { Button as DefaultButton } from '@nextui-org/react';
 
 type Props = {
-  labelUndo: string
-  labelRedo: string
-}
+  labelUndo: string;
+  labelRedo: string;
+};
 const UndoRedo: React.FC<Props> = ({ labelUndo, labelRedo }) => {
-  const undo = useUndo()
-  const canUndo = useCanUndo()
-  const canRedo = useCanRedo()
-  const redo = useRedo()
-  const isSmall = useIsSmallScreen()
+  const undo = useUndo();
+  const canUndo = useCanUndo();
+  const canRedo = useCanRedo();
+  const redo = useRedo();
+  const isSmall = useIsSmallScreen();
   return (
     <DefaultButton.Group>
       <Button
@@ -50,7 +50,7 @@ const UndoRedo: React.FC<Props> = ({ labelUndo, labelRedo }) => {
         }}
       />
     </DefaultButton.Group>
-  )
-}
+  );
+};
 
-export default React.memo(UndoRedo)
+export default React.memo(UndoRedo);

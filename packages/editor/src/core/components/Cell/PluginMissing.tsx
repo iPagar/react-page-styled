@@ -1,13 +1,13 @@
-import React from 'react'
-import { Button, Card, Grid, Modal, Text, useModal } from '@nextui-org/react'
+import React from 'react';
+import { Button, Card, Grid, Modal, Text, useModal } from '@nextui-org/react';
 
-import type { CellPluginMissingProps } from '../../types/plugins'
+import type { CellPluginMissingProps } from '../../types/plugins';
 
 const PluginMissing: React.FC<CellPluginMissingProps> = ({
   children,
   ...props
 }) => {
-  const { setVisible, bindings } = useModal()
+  const { setVisible, bindings } = useModal();
 
   return (
     <div>
@@ -15,7 +15,8 @@ const PluginMissing: React.FC<CellPluginMissingProps> = ({
         <Card.Header
           css={{
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           <Text>
             The requested plugin `{props.pluginId}` could not be found.
           </Text>
@@ -31,8 +32,9 @@ const PluginMissing: React.FC<CellPluginMissingProps> = ({
               <Button
                 auto
                 onClick={() => {
-                  setVisible(true)
-                }}>
+                  setVisible(true);
+                }}
+              >
                 Open logs
               </Button>
             </Grid>
@@ -45,11 +47,12 @@ const PluginMissing: React.FC<CellPluginMissingProps> = ({
         scroll
         closeButton
         open={bindings.open}
-        onClose={bindings.onClose}>
+        onClose={bindings.onClose}
+      >
         <pre>{JSON.stringify(props, null, 2)}</pre>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default PluginMissing
+export default PluginMissing;

@@ -1,24 +1,24 @@
-import React from 'react'
-import DndProvider from './DndProvider'
-import BlurGate from '../components/BlurGate'
+import React from 'react';
+import DndProvider from './DndProvider';
+import BlurGate from '../components/BlurGate';
 import type {
   Callbacks,
   Options,
   RenderOptions,
   ValueWithLegacy,
-} from '../types'
-import CallbacksProvider from './CallbacksProvider'
-import EditorStoreProvider from './EditorStoreProvider'
-import OptionsProvider from './OptionsProvider'
-import RenderOptionsProvider from './RenderOptionsProvider'
+} from '../types';
+import CallbacksProvider from './CallbacksProvider';
+import EditorStoreProvider from './EditorStoreProvider';
+import OptionsProvider from './OptionsProvider';
+import RenderOptionsProvider from './RenderOptionsProvider';
 
 export type ProviderProps = {
-  lang?: string
-  value: ValueWithLegacy | null
-  options: Options
-  callbacks: Callbacks
-  renderOptions: RenderOptions
-}
+  lang?: string;
+  value: ValueWithLegacy | null;
+  options: Options;
+  callbacks: Callbacks;
+  renderOptions: RenderOptions;
+};
 
 const Provider: React.FC<ProviderProps> = ({
   lang = 'default',
@@ -40,7 +40,7 @@ const Provider: React.FC<ProviderProps> = ({
         </CallbacksProvider>
       </RenderOptionsProvider>
     </OptionsProvider>
-  )
-}
+  );
+};
 
-export default Provider
+export default Provider;

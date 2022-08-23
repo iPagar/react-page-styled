@@ -1,5 +1,7 @@
-import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import type { Ref } from 'react';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 export type LongTextFieldProps = HTMLFieldProps<
   string,
@@ -27,7 +29,7 @@ function LongText({
         disabled={disabled}
         id={id}
         name={name}
-        onChange={event => onChange(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         readOnly={readOnly}
         ref={inputRef}

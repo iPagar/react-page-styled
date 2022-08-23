@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Migration } from '@react-page/editor';
 import isEmpty from 'lodash.isempty';
 import type { Element, Node, Text } from 'slate';

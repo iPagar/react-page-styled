@@ -1,6 +1,6 @@
-import type { Action } from 'redux'
-import { cloneWithNewIds } from '../../utils/cloneWithNewIds'
-import type { HoverTarget } from '../../service/hover/computeHover'
+import type { Action } from 'redux';
+import { cloneWithNewIds } from '../../utils/cloneWithNewIds';
+import type { HoverTarget } from '../../service/hover/computeHover';
 import type {
   Cell,
   I18nField,
@@ -10,25 +10,25 @@ import type {
   PartialRow,
   RenderOptions,
   Row,
-} from '../../types'
-import { isRow } from '../../types'
-import { createId } from '../../utils/createId'
-import { getChildCellPlugins } from '../../utils/getAvailablePlugins'
-import { getCellData } from '../../utils/getCellData'
-import { removeUndefinedProps } from '../../utils/removeUndefinedProps'
-import { editMode } from '../display'
-import { generateIds } from '../helpers'
-import { focusCell } from './core'
+} from '../../types';
+import { isRow } from '../../types';
+import { createId } from '../../utils/createId';
+import { getChildCellPlugins } from '../../utils/getAvailablePlugins';
+import { getCellData } from '../../utils/getCellData';
+import { removeUndefinedProps } from '../../utils/removeUndefinedProps';
+import { editMode } from '../display';
+import { generateIds } from '../helpers';
+import { focusCell } from './core';
 
-export const CELL_INSERT_ABOVE = 'CELL_INSERT_ABOVE'
-export const CELL_INSERT_BELOW = 'CELL_INSERT_BELOW'
-export const CELL_INSERT_LEFT_OF = 'CELL_INSERT_LEFT_OF'
-export const CELL_INSERT_RIGHT_OF = 'CELL_INSERT_RIGHT_OF'
-export const CELL_INSERT_INLINE_LEFT = 'CELL_INSERT_INLINE_LEFT'
-export const CELL_INSERT_INLINE_RIGHT = 'CELL_INSERT_INLINE_RIGHT'
+export const CELL_INSERT_ABOVE = 'CELL_INSERT_ABOVE';
+export const CELL_INSERT_BELOW = 'CELL_INSERT_BELOW';
+export const CELL_INSERT_LEFT_OF = 'CELL_INSERT_LEFT_OF';
+export const CELL_INSERT_RIGHT_OF = 'CELL_INSERT_RIGHT_OF';
+export const CELL_INSERT_INLINE_LEFT = 'CELL_INSERT_INLINE_LEFT';
+export const CELL_INSERT_INLINE_RIGHT = 'CELL_INSERT_INLINE_RIGHT';
 
-export const CELL_INSERT_AT_END = 'CELL_INSERT_AT_END'
-export const CELL_INSERT_AS_NEW_ROW = 'CELL_INSERT_AS_NEW_ROW'
+export const CELL_INSERT_AT_END = 'CELL_INSERT_AT_END';
+export const CELL_INSERT_AS_NEW_ROW = 'CELL_INSERT_AS_NEW_ROW';
 
 type InsertType =
   | typeof CELL_INSERT_ABOVE
@@ -38,25 +38,25 @@ type InsertType =
   | typeof CELL_INSERT_INLINE_LEFT
   | typeof CELL_INSERT_INLINE_RIGHT
   | typeof CELL_INSERT_AT_END
-  | typeof CELL_INSERT_AS_NEW_ROW
+  | typeof CELL_INSERT_AS_NEW_ROW;
 export interface InsertAction extends Action {
-  ts: Date
-  item: Cell
-  hoverId: string
-  options: InsertOptions
-  ids: NewIds
-  type: InsertType
+  ts: Date;
+  item: Cell;
+  hoverId: string;
+  options: InsertOptions;
+  ids: NewIds;
+  type: InsertType;
 }
 
 export type InsertOptions = {
-  level?: number
-  focusAfter?: boolean
-  notUndoable?: boolean
-}
+  level?: number;
+  focusAfter?: boolean;
+  notUndoable?: boolean;
+};
 
 export type PluginsAndLang = {
-  lang: string
-} & Pick<RenderOptions, 'cellPlugins'>
+  lang: string;
+} & Pick<RenderOptions, 'cellPlugins'>;
 
 export const createRow = (
   partialRow: PartialRow,
@@ -66,30 +66,30 @@ export const createRow = (
     return {
       id: createId(),
       cells: partialRow.map((c) => createCell(c, options)),
-    }
+    };
   }
   return removeUndefinedProps({
     id: createId(),
     ...partialRow,
     cells: partialRow.cells?.map((c) => createCell(c, options)) ?? [],
-  })
-}
+  });
+};
 
 export const createCell = (
   partialCell: PartialCell,
   options: PluginsAndLang
 ): Cell => {
-  const { cellPlugins, lang } = options
+  const { cellPlugins, lang } = options;
   const pluginId =
     partialCell.plugin &&
     (typeof partialCell.plugin == 'string'
       ? partialCell.plugin
-      : partialCell.plugin.id)
-  const plugin = pluginId ? cellPlugins.find((p) => p.id === pluginId) : null
+      : partialCell.plugin.id);
+  const plugin = pluginId ? cellPlugins.find((p) => p.id === pluginId) : null;
 
   const partialRows = partialCell.rows?.length
     ? partialCell.rows
-    : plugin?.createInitialChildren?.() ?? []
+    : plugin?.createInitialChildren?.() ?? [];
   const dataI18n = {
     [lang]:
       partialCell?.data ??
@@ -97,7 +97,7 @@ export const createCell = (
       plugin?.createInitialState?.(partialCell) ??
       null,
     ...(partialCell.dataI18n ?? {}),
-  } as I18nField<Record<string, unknown>>
+  } as I18nField<Record<string, unknown>>;
   return removeUndefinedProps({
     id: partialCell.id ?? createId(),
     isDraft: partialCell.isDraft,
@@ -127,8 +127,8 @@ export const createCell = (
       })
     ),
     dataI18n: dataI18n,
-  })
-}
+  });
+};
 
 const insert =
   <T extends InsertType>(type: T) =>
@@ -139,8 +139,8 @@ const insert =
     insertOptions?: InsertOptions,
     ids: NewIds = generateIds()
   ) => {
-    const cell = createCell(partialCell, options)
-    const isNew = !partialCell.id
+    const cell = createCell(partialCell, options);
+    const isNew = !partialCell.id;
     return insertFullCell(type)(
       cell,
       target,
@@ -149,8 +149,8 @@ const insert =
         focusAfter: insertOptions?.focusAfter || isNew,
       },
       ids
-    )
-  }
+    );
+  };
 
 const insertFullCell =
   <T extends InsertType>(type: T) =>
@@ -160,23 +160,23 @@ const insertFullCell =
     insertOptions?: InsertOptions,
     ids: NewIds = generateIds()
   ) => {
-    const level = insertOptions?.level ?? 0
-    let l = level
+    const level = insertOptions?.level ?? 0;
+    let l = level;
     switch (type) {
       case CELL_INSERT_ABOVE:
       case CELL_INSERT_BELOW: {
         if ((inline || hasInlineNeighbour) && level < 1) {
-          l = 1
+          l = 1;
         }
-        break
+        break;
       }
 
       case CELL_INSERT_LEFT_OF:
       case CELL_INSERT_RIGHT_OF: {
         if ((inline || hasInlineNeighbour) && level < 1) {
-          l = 1
+          l = 1;
         }
-        break
+        break;
       }
       default:
     }
@@ -193,14 +193,14 @@ const insertFullCell =
       // but the purpose of the others is unclear
       ids,
       notUndoable: insertOptions?.notUndoable,
-    }
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (dispatch: any) => {
-      dispatch(insertAction)
+      dispatch(insertAction);
 
       if (insertOptions?.focusAfter) {
-        dispatch(editMode())
+        dispatch(editMode());
         setTimeout(() => {
           dispatch(
             focusCell(
@@ -208,60 +208,60 @@ const insertFullCell =
               cell.rows?.[0]?.cells?.[0]?.id ?? insertAction.ids.item,
               true
             )
-          )
-        }, 0)
+          );
+        }, 0);
       }
-    }
-  }
+    };
+  };
 
 /**
  * Insert a cell below of the hovering cell.
  */
-export const insertCellBelow = insert(CELL_INSERT_BELOW)
+export const insertCellBelow = insert(CELL_INSERT_BELOW);
 
 /**
  * Insert a cell above of the hovering cell.
  */
-export const insertCellAbove = insert(CELL_INSERT_ABOVE)
+export const insertCellAbove = insert(CELL_INSERT_ABOVE);
 
 /**
  * Insert a cell right of the hovering cell.
  */
-export const insertCellRightOf = insert(CELL_INSERT_RIGHT_OF)
+export const insertCellRightOf = insert(CELL_INSERT_RIGHT_OF);
 
 /**
  * Insert a cell left of the hovering cell.
  */
-export const insertCellLeftOf = insert(CELL_INSERT_LEFT_OF)
+export const insertCellLeftOf = insert(CELL_INSERT_LEFT_OF);
 
 /**
  * Insert a cell inside the hovering cell, on the left.
  */
-export const insertCellLeftInline = insert(CELL_INSERT_INLINE_LEFT)
+export const insertCellLeftInline = insert(CELL_INSERT_INLINE_LEFT);
 
 /**
  * Insert a cell inside the hovering cell, on the right.
  */
-export const insertCellRightInline = insert(CELL_INSERT_INLINE_RIGHT)
+export const insertCellRightInline = insert(CELL_INSERT_INLINE_RIGHT);
 
-export const insertCellAtTheEnd = insert(CELL_INSERT_AT_END)
+export const insertCellAtTheEnd = insert(CELL_INSERT_AT_END);
 
-export const insertCellNewAsNewRow = insert(CELL_INSERT_AS_NEW_ROW)
+export const insertCellNewAsNewRow = insert(CELL_INSERT_AS_NEW_ROW);
 
 export type DuplicateNodeOptions = {
-  insertAfterNodeId?: string
-}
+  insertAfterNodeId?: string;
+};
 export const duplicateNode = (node: Node, options?: DuplicateNodeOptions) => {
   const cell = isRow(node)
     ? {
         id: createId(),
         rows: [node],
       }
-    : node
-  return duplicateCell(cell, options)
-}
+    : node;
+  return duplicateCell(cell, options);
+};
 export const duplicateCell = (item: Cell, options?: DuplicateNodeOptions) => {
-  const cellWithNewIds = cloneWithNewIds(item)
+  const cellWithNewIds = cloneWithNewIds(item);
 
   const action = insertFullCell(CELL_INSERT_BELOW)(
     cellWithNewIds,
@@ -277,10 +277,10 @@ export const duplicateCell = (item: Cell, options?: DuplicateNodeOptions) => {
       level: 0,
       focusAfter: true,
     }
-  )
+  );
 
-  return action
-}
+  return action;
+};
 
 export const insertActions = {
   insertCellRightInline,
@@ -292,4 +292,4 @@ export const insertActions = {
   duplicateCell,
   insertCellAtTheEnd,
   insert,
-}
+};

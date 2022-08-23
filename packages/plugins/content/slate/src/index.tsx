@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CellPlugin } from '@react-page/editor';
 import { lazyLoad } from '@react-page/editor';
 import React, { useState } from 'react';

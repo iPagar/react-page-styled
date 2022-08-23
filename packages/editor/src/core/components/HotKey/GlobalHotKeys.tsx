@@ -1,13 +1,13 @@
-import isHotkey from 'is-hotkey'
-import type React from 'react'
-import type { RefObject } from 'react'
-import { useCallback, useEffect, useMemo } from 'react'
-import { objIsNode } from '../../utils/objIsNode'
-import type { PluginHandler } from '../../types'
-import type { Cell } from '../../types/node'
-import { isRow } from '../../types/node'
-import { getCommonAncestorTree } from '../../utils/ancestorTree'
-import { cloneAsCell } from '../../utils/cloneWithNewIds'
+import isHotkey from 'is-hotkey';
+import type React from 'react';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { objIsNode } from '../../utils/objIsNode';
+import type { PluginHandler } from '../../types';
+import type { Cell } from '../../types/node';
+import { isRow } from '../../types/node';
+import { getCommonAncestorTree } from '../../utils/ancestorTree';
+import { cloneAsCell } from '../../utils/cloneWithNewIds';
 import {
   useAllCellPluginsForNode,
   useAllFocusedNodeIds,
@@ -24,40 +24,40 @@ import {
   useSetEditMode,
   useSetInsertMode,
   useUndo,
-} from '../hooks'
+} from '../hooks';
 
 type HotkeyHandlers = {
-  hotkeys: string[]
-  handler: (e: Event) => void
-}[]
+  hotkeys: string[];
+  handler: (e: Event) => void;
+}[];
 
 type PluginHandlerName =
   | 'handleRemoveHotKey'
   | 'handleFocusNextHotKey'
-  | 'handleFocusPreviousHotKey'
+  | 'handleFocusPreviousHotKey';
 
-let lastFocused: HTMLDivElement | null = null
+let lastFocused: HTMLDivElement | null = null;
 const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
   focusRef,
 }) => {
-  const editor = useEditorStore()
+  const editor = useEditorStore();
 
-  const undo = useUndo()
-  const redo = useRedo()
-  const setInsertMode = useSetInsertMode()
-  const isEditMode = useIsEditMode()
-  const blurAllCells = useBlurAllCells()
+  const undo = useUndo();
+  const redo = useRedo();
+  const setInsertMode = useSetInsertMode();
+  const isEditMode = useIsEditMode();
+  const blurAllCells = useBlurAllCells();
 
-  const focusedNodeIds = useAllFocusedNodeIds()
-  const someCellIsFocused = focusedNodeIds.length > 0
-  const focusedNodeId = useFocusedNodeId()
-  const focusParentId = useParentCellId(focusedNodeId)
-  const plugins = useAllCellPluginsForNode(focusParentId)
-  const focusCell = useFocusCellById()
-  const removeCells = useRemoveMultipleNodeIds()
-  const insertAfter = useInsertAfter()
-  const isInsertMode = useIsInsertMode()
-  const setEditMode = useSetEditMode()
+  const focusedNodeIds = useAllFocusedNodeIds();
+  const someCellIsFocused = focusedNodeIds.length > 0;
+  const focusedNodeId = useFocusedNodeId();
+  const focusParentId = useParentCellId(focusedNodeId);
+  const plugins = useAllCellPluginsForNode(focusParentId);
+  const focusCell = useFocusCellById();
+  const removeCells = useRemoveMultipleNodeIds();
+  const insertAfter = useInsertAfter();
+  const isInsertMode = useIsInsertMode();
+  const setEditMode = useSetEditMode();
   const delegateToFoundPlugin = useCallback(
     async (
       event: Event,
@@ -65,25 +65,25 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
       handlerName: PluginHandlerName,
       defaultHandler: PluginHandler
     ) => {
-      const node = nodeId ? editor?.getNode(nodeId) : null
-      const plugin = plugins.find((p) => p.id === (node as Cell)?.plugin?.id)
+      const node = nodeId ? editor?.getNode(nodeId) : null;
+      const plugin = plugins.find((p) => p.id === (node as Cell)?.plugin?.id);
 
       try {
         if (isEditMode && node && plugin?.[handlerName]) {
-          await plugin[handlerName]?.(event, node)
+          await plugin[handlerName]?.(event, node);
         }
 
         // if the plugin handler resolve or there is no, they do not handle it, so do the default
-        await defaultHandler(event, node)
+        await defaultHandler(event, node);
       } catch (e) {
         if (e) {
           // tslint:disable-next-line:no-console
-          console.error(e)
+          console.error(e);
         }
       }
     },
     [editor, isEditMode]
-  )
+  );
 
   const handlers = useMemo<HotkeyHandlers>(() => {
     const handleCopy = (deleteAfter = false) => {
@@ -93,56 +93,56 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
         focusedNodeIds?.length > 0
       ) {
         if (!editor) {
-          return
+          return;
         }
-        const node = getCommonAncestorTree(editor, focusedNodeIds)
+        const node = getCommonAncestorTree(editor, focusedNodeIds);
         if (!node) {
-          return
+          return;
         }
-        const cell = cloneAsCell(node)
+        const cell = cloneAsCell(node);
 
-        const type = 'text/plain' // json is not supported
-        const blob = new Blob([JSON.stringify(cell)], { type })
+        const type = 'text/plain'; // json is not supported
+        const blob = new Blob([JSON.stringify(cell)], { type });
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const data = [new ClipboardItem({ [type]: blob as any })]
+        const data = [new ClipboardItem({ [type]: blob as any })];
 
-        navigator.clipboard.write(data)
+        navigator.clipboard.write(data);
         if (deleteAfter) {
-          removeCells(focusedNodeIds)
+          removeCells(focusedNodeIds);
         }
       }
-    }
+    };
 
     return [
       {
         hotkeys: ['Escape'],
         handler: () => {
           if (someCellIsFocused) {
-            blurAllCells()
+            blurAllCells();
           }
           if (isInsertMode) {
-            setEditMode()
+            setEditMode();
           }
         },
       },
       {
         hotkeys: ['mod+z'],
         handler: () => {
-          undo()
+          undo();
         },
       },
       {
         hotkeys: ['mod+c'],
         handler: () => {
-          handleCopy(false)
+          handleCopy(false);
         },
       },
 
       {
         hotkeys: ['mod+x'],
         handler: () => {
-          handleCopy(true)
+          handleCopy(true);
         },
       },
       {
@@ -150,16 +150,16 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
         handler: async () => {
           // is this something we can use?
           try {
-            const node = JSON.parse(await navigator.clipboard.readText())
+            const node = JSON.parse(await navigator.clipboard.readText());
             if (!editor) {
-              return
+              return;
             }
             if (objIsNode(node)) {
               // insert after common ancestors of selected nodes
               const commonAncestorNode =
                 focusedNodeIds.length > 0
                   ? getCommonAncestorTree(editor, focusedNodeIds)
-                  : null
+                  : null;
 
               const insertAfterNodeId = commonAncestorNode
                 ? isRow(commonAncestorNode)
@@ -169,8 +169,8 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
                   : commonAncestorNode.rows?.[
                       commonAncestorNode.rows.length - 1
                     ].id // if common ancestor is a cell (usually the root cell, add below last row)
-                : null
-              insertAfter(node, insertAfterNodeId)
+                : null;
+              insertAfter(node, insertAfterNodeId);
             }
           } catch (e) {
             // ignore
@@ -181,7 +181,7 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
       {
         hotkeys: ['ctrl+shift+z', 'ctrl+y', 'command+shift+z', 'command+y'],
         handler: () => {
-          redo()
+          redo();
         },
       },
 
@@ -193,12 +193,12 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
             focusedNodeId,
             'handleRemoveHotKey',
             () => {
-              removeCells(focusedNodeIds)
+              removeCells(focusedNodeIds);
             }
-          )
+          );
         },
       },
-    ]
+    ];
   }, [
     editor,
     focusedNodeId,
@@ -209,38 +209,38 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
     removeCells,
     setEditMode,
     setInsertMode,
-  ])
+  ]);
 
   useEffect(() => {
     // when we have multiple instances, we try to send the event only to the right one
     // we do a little trick with a global variable (instead of requiring a wrapping context)
 
-    lastFocused = focusRef.current
+    lastFocused = focusRef.current;
     const keyHandler = (event: KeyboardEvent) => {
-      if (lastFocused !== focusRef.current) return
+      if (lastFocused !== focusRef.current) return;
       const matchingHandler = handlers.find((handler) =>
         handler.hotkeys.some((hotkey) => isHotkey(hotkey, event))
-      )
-      matchingHandler?.handler(event)
-    }
-    document.addEventListener('keydown', keyHandler)
+      );
+      matchingHandler?.handler(event);
+    };
+    document.addEventListener('keydown', keyHandler);
 
     const focusHandler = () => {
-      lastFocused = focusRef.current
-    }
-    focusRef.current?.addEventListener('click', focusHandler)
-    focusRef.current?.addEventListener('mouseenter', focusHandler)
+      lastFocused = focusRef.current;
+    };
+    focusRef.current?.addEventListener('click', focusHandler);
+    focusRef.current?.addEventListener('mouseenter', focusHandler);
     return () => {
-      document.removeEventListener('keydown', keyHandler)
-      focusRef.current?.removeEventListener('mouseenter', focusHandler)
-      focusRef.current?.removeEventListener('click', focusHandler)
+      document.removeEventListener('keydown', keyHandler);
+      focusRef.current?.removeEventListener('mouseenter', focusHandler);
+      focusRef.current?.removeEventListener('click', focusHandler);
       if (lastFocused === focusRef.current) {
-        lastFocused = null
+        lastFocused = null;
       }
-    }
-  }, [handlers, someCellIsFocused, isEditMode, focusRef])
+    };
+  }, [handlers, someCellIsFocused, isEditMode, focusRef]);
 
-  return null
-}
+  return null;
+};
 
-export default GlobalHotKeys
+export default GlobalHotKeys;

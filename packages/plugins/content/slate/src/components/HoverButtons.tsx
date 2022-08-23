@@ -1,3 +1,4 @@
+import { Card, Grid } from '@nextui-org/react';
 import React, { useEffect, useRef } from 'react';
 import { Portal } from 'react-portal';
 import { useSlate } from 'slate-react';
@@ -49,16 +50,22 @@ const HoverButtons = ({
         style={{ padding: 0 }}
         ref={toolbarRef}
       >
-        {plugins &&
-          plugins.map((plugin, i: number) =>
-            plugin.addHoverButton ? (
-              <PluginButton
-                translations={translations}
-                key={i}
-                plugin={plugin}
-              />
-            ) : null
-          )}
+        <Card>
+          <Grid.Container>
+            {plugins &&
+              plugins.map((plugin, i: number) =>
+                plugin.addHoverButton ? (
+                  <Grid>
+                    <PluginButton
+                      translations={translations}
+                      key={i}
+                      plugin={plugin}
+                    />
+                  </Grid>
+                ) : null
+              )}
+          </Grid.Container>
+        </Card>
       </div>
     </Portal>
   );

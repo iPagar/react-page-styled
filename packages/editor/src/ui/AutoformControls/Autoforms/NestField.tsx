@@ -1,5 +1,6 @@
 import React from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
 
@@ -20,7 +21,7 @@ function Nest({
     <div {...filterDOMProps(props)}>
       {label && <label>{label}</label>}
       {children ||
-        fields.map(field => (
+        fields.map((field) => (
           <AutoField key={field} name={field} {...itemProps} />
         ))}
     </div>

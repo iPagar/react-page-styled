@@ -1,12 +1,14 @@
-import { Input } from '@nextui-org/react'
-import React, { Ref } from 'react'
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms'
+import { Input } from '@nextui-org/react';
+import type { Ref } from 'react';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 export type TextFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   { inputRef?: Ref<HTMLInputElement> }
->
+>;
 
 function Text({
   autoComplete,
@@ -39,9 +41,9 @@ function Text({
         value={value ?? ''}
       />
     </div>
-  )
+  );
 }
 
-Text.defaultProps = { type: 'text' }
+Text.defaultProps = { type: 'text' };
 
-export default connectField<TextFieldProps>(Text, { kind: 'leaf' })
+export default connectField<TextFieldProps>(Text, { kind: 'leaf' });

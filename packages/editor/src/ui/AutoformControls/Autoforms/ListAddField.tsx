@@ -1,19 +1,14 @@
-import { Button } from '@nextui-org/react'
-import cloneDeep from 'lodash/cloneDeep'
-import React from 'react'
-import {
-  HTMLFieldProps,
-  connectField,
-  filterDOMProps,
-  joinName,
-  useField,
-} from 'uniforms'
+import { Button } from '@nextui-org/react';
+import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps, joinName, useField } from 'uniforms';
 
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
   HTMLSpanElement,
   { initialCount?: number }
->
+>;
 
 function ListAdd({
   disabled,
@@ -23,15 +18,15 @@ function ListAdd({
   value,
   ...props
 }: ListAddFieldProps) {
-  const nameParts = joinName(null, name)
-  const parentName = joinName(nameParts.slice(0, -1))
+  const nameParts = joinName(null, name);
+  const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<
     { initialCount?: number; maxCount?: number },
     unknown[]
-  >(parentName, { initialCount }, { absoluteName: true })[0]
+  >(parentName, { initialCount }, { absoluteName: true })[0];
 
   const limitNotReached =
-    !disabled && !(parent.maxCount! <= parent.value!.length)
+    !disabled && !(parent.maxCount! <= parent.value!.length);
 
   function onAction(event: React.KeyboardEvent | React.MouseEvent) {
     if (
@@ -39,7 +34,7 @@ function ListAdd({
       !readOnly &&
       (!('key' in event) || event.key === 'Enter')
     ) {
-      parent.onChange(parent.value!.concat([cloneDeep(value)]))
+      parent.onChange(parent.value!.concat([cloneDeep(value)]));
     }
   }
 
@@ -50,14 +45,15 @@ function ListAdd({
         onClick={onAction}
         onKeyDown={onAction}
         role="button"
-        tabIndex={0}>
+        tabIndex={0}
+      >
         Добавить
       </Button>
     </span>
-  )
+  );
 }
 
 export default connectField<ListAddFieldProps>(ListAdd, {
   initialValue: false,
   kind: 'leaf',
-})
+});

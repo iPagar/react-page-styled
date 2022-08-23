@@ -1,12 +1,12 @@
-import Icon from '@material-ui/icons/FileCopy'
-import { Button, Tooltip } from '@nextui-org/react'
-import React from 'react'
-import { useDuplicateCell, useUiTranslator } from '../../core/components/hooks'
+import Icon from '@material-ui/icons/FileCopy';
+import { Button, Tooltip } from '@nextui-org/react';
+import React from 'react';
+import { useDuplicateCell, useUiTranslator } from '../../core/components/hooks';
 
 export const DuplicateButton: React.FC<{ nodeId: string }> = React.memo(
   ({ nodeId }) => {
-    const duplicateCell = useDuplicateCell(nodeId)
-    const { t } = useUiTranslator()
+    const duplicateCell = useDuplicateCell(nodeId);
+    const { t } = useUiTranslator();
     return (
       <Tooltip content={t('Duplicate Plugin') ?? ''}>
         <Button
@@ -18,6 +18,6 @@ export const DuplicateButton: React.FC<{ nodeId: string }> = React.memo(
           icon={<Icon />}
         />
       </Tooltip>
-    )
+    );
   }
-)
+);

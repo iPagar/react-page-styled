@@ -1,39 +1,39 @@
-import invariant from 'invariant'
-import { createAutoField } from 'uniforms'
-export type { AutoFieldProps } from 'uniforms'
+import invariant from 'invariant';
+import { createAutoField } from 'uniforms';
+export type { AutoFieldProps } from 'uniforms';
 
-import BoolField from './BoolField'
-import DateField from './DateField'
-import ListField from './ListField'
-import NestField from './NestField'
-import NumField from './NumField'
-import RadioField from './RadioField'
-import SelectField from './SelectField'
-import TextField from './TextField'
+import BoolField from './BoolField';
+import DateField from './DateField';
+import ListField from './ListField';
+import NestField from './NestField';
+import NumField from './NumField';
+import RadioField from './RadioField';
+import SelectField from './SelectField';
+import TextField from './TextField';
 
 const AutoField = createAutoField((props) => {
   if (props.allowedValues) {
     return props.checkboxes && props.fieldType !== Array
       ? RadioField
-      : SelectField
+      : SelectField;
   }
 
   switch (props.fieldType) {
     case Array:
-      return ListField
+      return ListField;
     case Boolean:
-      return BoolField
+      return BoolField;
     case Date:
-      return DateField
+      return DateField;
     case Number:
-      return NumField
+      return NumField;
     case Object:
-      return NestField
+      return NestField;
     case String:
-      return TextField
+      return TextField;
   }
 
-  return invariant(false, 'Unsupported field type: %s', props.fieldType)
-})
+  return invariant(false, 'Unsupported field type: %s', props.fieldType);
+});
 
-export default AutoField
+export default AutoField;

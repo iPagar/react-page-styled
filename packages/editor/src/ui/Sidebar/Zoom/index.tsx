@@ -1,35 +1,36 @@
-import IconZoomOut from '@material-ui/icons/ZoomOut'
-import IconZoomIn from '@material-ui/icons/ZoomIn'
-import React from 'react'
+import IconZoomOut from '@material-ui/icons/ZoomOut';
+import IconZoomIn from '@material-ui/icons/ZoomIn';
+import React from 'react';
 import {
   useCanZoomIn,
   useCanZoomOut,
   useIsSmallScreen,
   useZoomIn,
   useZoomOut,
-} from '../../../core/components/hooks'
-import Button from '../Button/index'
-import { Button as DefaultButton } from '@nextui-org/react'
+} from '../../../core/components/hooks';
+import Button from '../Button/index';
+import { Button as DefaultButton } from '@nextui-org/react';
 
 type Props = {
-  labelZoomIn: string
-  labelZoomOut: string
-}
+  labelZoomIn: string;
+  labelZoomOut: string;
+};
 
 const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
-  const canZoomIn = useCanZoomIn()
-  const canZoomOut = useCanZoomOut()
+  const canZoomIn = useCanZoomIn();
+  const canZoomOut = useCanZoomOut();
 
-  const zoomOut = useZoomOut()
-  const zoomIn = useZoomIn()
+  const zoomOut = useZoomOut();
+  const zoomIn = useZoomIn();
 
-  const isSmall = useIsSmallScreen()
+  const isSmall = useIsSmallScreen();
 
   return (
     <DefaultButton.Group
       css={{
         margin: 0,
-      }}>
+      }}
+    >
       <Button
         placement="top"
         disabled={!canZoomIn}
@@ -55,7 +56,7 @@ const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
         }}
       />
     </DefaultButton.Group>
-  )
-}
+  );
+};
 
-export default React.memo(Zoom)
+export default React.memo(Zoom);

@@ -1,12 +1,14 @@
-import { Checkbox, Text } from '@nextui-org/react'
-import React, { Ref } from 'react'
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms'
+import { Checkbox, Text } from '@nextui-org/react';
+import type { Ref } from 'react';
+import React from 'react';
+import type { HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 export type BoolFieldProps = HTMLFieldProps<
   boolean,
   HTMLDivElement,
   { inputRef?: Ref<HTMLInputElement> }
->
+>;
 
 function Bool({
   disabled,
@@ -26,11 +28,12 @@ function Bool({
         isDisabled={disabled}
         id={id}
         name={name}
-        onChange={() => !disabled && !readOnly && onChange(!value)}>
+        onChange={() => !disabled && !readOnly && onChange(!value)}
+      >
         {label && <Text>{label}</Text>}
       </Checkbox>
     </div>
-  )
+  );
 }
 
-export default connectField<BoolFieldProps>(Bool, { kind: 'leaf' })
+export default connectField<BoolFieldProps>(Bool, { kind: 'leaf' });
