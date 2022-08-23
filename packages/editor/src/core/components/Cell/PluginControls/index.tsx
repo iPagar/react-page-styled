@@ -1,21 +1,21 @@
-import type { Theme } from '@material-ui/core';
-import { Tab, Tabs } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
-import React, { useState } from 'react';
+import type { Theme } from '@material-ui/core'
+import { Tab, Tabs } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import React, { useState } from 'react'
 
-import { AutoformControls } from '../../../../ui';
+import { AutoformControls } from '../../../../ui'
 import type {
   CellPluginComponentProps,
   ControlsDef,
   ControlsDefList,
   DataTType,
-} from '../../../types';
+} from '../../../types'
 
 const StyledTab = withStyles(() => ({
   wrapper: {
     alignItems: 'flex-start',
   },
-}))(Tab);
+}))(Tab)
 
 const StyledTabs = withStyles((theme: Theme) => ({
   root: {
@@ -25,27 +25,25 @@ const StyledTabs = withStyles((theme: Theme) => ({
     alignItems: 'flex-start',
     backgroundColor: theme.palette.background.default,
   },
-}))(Tabs);
+}))(Tabs)
 const ControlsList: React.FC<{
-  controls: ControlsDefList;
-  componentProps: CellPluginComponentProps<DataTType>;
+  controls: ControlsDefList
+  componentProps: CellPluginComponentProps<DataTType>
 }> = React.memo(({ controls, componentProps }) => {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(0)
 
-  const activeControls = controls[tab]?.controls;
+  const activeControls = controls[tab]?.controls
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'row',
-      }}
-    >
+      }}>
       <StyledTabs
         value={tab}
         onChange={(e, v) => setTab(v)}
         orientation="vertical"
-        variant="scrollable"
-      >
+        variant="scrollable">
         {controls.map((t, index) => (
           <StyledTab label={t.title} key={index} />
         ))}
@@ -57,36 +55,35 @@ const ControlsList: React.FC<{
             flex: 1,
             marginLeft: 24,
             display: 'flex',
-          }}
-        >
+          }}>
           <Controls controls={activeControls} componentProps={componentProps} />
         </div>
       ) : null}
     </div>
-  );
-});
+  )
+})
 
 const Controls: React.FC<{
-  controls: ControlsDef;
-  componentProps: CellPluginComponentProps;
+  controls: ControlsDef
+  componentProps: CellPluginComponentProps
 }> = React.memo(({ controls, componentProps }) => {
-  let pluginControls = null;
+  let pluginControls = null
   if (Array.isArray(controls)) {
-    return <ControlsList componentProps={componentProps} controls={controls} />;
+    return <ControlsList componentProps={componentProps} controls={controls} />
   }
 
   if (controls?.type === 'custom') {
-    const { Component } = controls;
-    pluginControls = <Component {...componentProps} {...controls} />;
+    const { Component } = controls
+    pluginControls = <Component {...componentProps} {...controls} />
   } else if (controls?.type === 'autoform') {
-    pluginControls = <AutoformControls {...componentProps} {...controls} />;
+    pluginControls = <AutoformControls {...componentProps} {...controls} />
   }
-  return <div style={{ overflow: 'auto', flex: 1 }}>{pluginControls}</div>;
-});
+  return <div style={{ overflow: 'auto', flex: 1 }}>{pluginControls}</div>
+})
 
 const PluginControls: React.FC<{
-  controls: ControlsDef;
-  componentProps: CellPluginComponentProps;
+  controls: ControlsDef
+  componentProps: CellPluginComponentProps
 }> = ({ controls, componentProps }) => {
   return (
     <div
@@ -96,11 +93,10 @@ const PluginControls: React.FC<{
         width: Array.isArray(controls) ? '100vw' : undefined,
         maxWidth: '100%',
         display: 'flex',
-      }}
-    >
+      }}>
       <Controls controls={controls} componentProps={componentProps} />
     </div>
-  );
-};
+  )
+}
 
-export default React.memo(PluginControls);
+export default React.memo(PluginControls)

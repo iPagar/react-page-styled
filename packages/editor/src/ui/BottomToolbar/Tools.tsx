@@ -1,36 +1,45 @@
-import { IconButton, Tooltip } from '@material-ui/core';
-import Delete from '@material-ui/icons/Delete';
-import React from 'react';
-import { useRemoveCell, useUiTranslator } from '../../core/components/hooks';
-import DraftSwitch from '../DraftSwitch';
-import { DuplicateButton } from '../DuplicateButton';
-import { I18nTools } from '../I18nTools';
-import { SelectParentButton } from '../SelectParentButton';
-import { BottomToolbarToolsProps } from './types';
+import Delete from '@material-ui/icons/Delete'
+import { Button, Grid, Tooltip } from '@nextui-org/react'
+import React from 'react'
+import { useRemoveCell, useUiTranslator } from '../../core/components/hooks'
+import DraftSwitch from '../DraftSwitch'
+import { DuplicateButton } from '../DuplicateButton'
+import { I18nTools } from '../I18nTools'
+import { SelectParentButton } from '../SelectParentButton'
+import { BottomToolbarToolsProps } from './types'
 
-export { BottomToolbarToolsProps };
+export type { BottomToolbarToolsProps }
 export const BottomToolbarTools: React.FC<BottomToolbarToolsProps> = React.memo(
   ({ nodeId }) => {
-    const { t } = useUiTranslator();
-    const removeCell = useRemoveCell(nodeId);
+    const { t } = useUiTranslator()
+    const removeCell = useRemoveCell(nodeId)
 
     return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <I18nTools nodeId={nodeId} />
-        <DraftSwitch nodeId={nodeId} />
-        <SelectParentButton nodeId={nodeId} />
-        <DuplicateButton nodeId={nodeId} />
+      <Grid.Container style={{ display: 'flex', alignItems: 'center' }} gap={1}>
+        <Grid>
+          <I18nTools nodeId={nodeId} />
+        </Grid>
+        <Grid>
+          <DraftSwitch nodeId={nodeId} />
+        </Grid>
+        <Grid>
+          <SelectParentButton nodeId={nodeId} />
+        </Grid>
+        <Grid>
+          <DuplicateButton nodeId={nodeId} />
+        </Grid>
 
-        <Tooltip title={t('Remove Plugin') ?? ''}>
-          <IconButton
+        <Tooltip content={t('Remove Plugin') ?? ''}>
+          <Button
+            flat
+            auto
             onClick={() => removeCell()}
             aria-label="delete"
-            color="secondary"
-          >
-            <Delete />
-          </IconButton>
+            color="error"
+            icon={<Delete />}
+          />
         </Tooltip>
-      </div>
-    );
+      </Grid.Container>
+    )
   }
-);
+)

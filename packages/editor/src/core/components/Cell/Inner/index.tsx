@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import {
   getPluginCellSpacing,
   normalizeCellSpacing,
-} from '../../../utils/getCellSpacing';
+} from '../../../utils/getCellSpacing'
 import {
   useCellData,
   useCellHasPlugin,
@@ -17,40 +17,40 @@ import {
   useOption,
   usePluginOfCell,
   useSetEditMode,
-} from '../../hooks';
-import Row from '../../Row';
-import Draggable from '../Draggable';
-import Droppable from '../Droppable';
-import InsertNew from '../InsertNew';
-import PluginComponent from '../PluginComponent';
+} from '../../hooks'
+import Row from '../../Row'
+import Draggable from '../Draggable'
+import Droppable from '../Droppable'
+import InsertNew from '../InsertNew'
+import PluginComponent from '../PluginComponent'
 
 const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
-  const isPreviewMode = useIsPreviewMode();
-  const isEditMode = useIsEditMode();
-  const cellShouldHavePlugin = useCellHasPlugin(nodeId);
-  const plugin = usePluginOfCell(nodeId);
-  const setEditMode = useSetEditMode();
-  const focus = useFocusCell(nodeId);
-  const focused = useIsFocused(nodeId);
-  const childrenIds = useNodeChildrenIds(nodeId);
-  const cellSpacing = useCellSpacing();
-  const ref = React.useRef<HTMLDivElement>(null);
+  const isPreviewMode = useIsPreviewMode()
+  const isEditMode = useIsEditMode()
+  const cellShouldHavePlugin = useCellHasPlugin(nodeId)
+  const plugin = usePluginOfCell(nodeId)
+  const setEditMode = useSetEditMode()
+  const focus = useFocusCell(nodeId)
+  const focused = useIsFocused(nodeId)
+  const childrenIds = useNodeChildrenIds(nodeId)
+  const cellSpacing = useCellSpacing()
+  const ref = React.useRef<HTMLDivElement>(null)
 
-  const hasChildren = childrenIds.length > 0;
+  const hasChildren = childrenIds.length > 0
 
-  const data = useCellData(nodeId);
-  const pluginCellSpacing = getPluginCellSpacing(plugin, data);
-  const [Provider, providerValue] = useCellSpacingProvider(pluginCellSpacing);
-  let cellSpacingY = 0;
+  const data = useCellData(nodeId)
+  const pluginCellSpacing = getPluginCellSpacing(plugin, data)
+  const [Provider, providerValue] = useCellSpacingProvider(pluginCellSpacing)
+  let cellSpacingY = 0
   if (typeof pluginCellSpacing !== 'undefined' && pluginCellSpacing != null) {
-    cellSpacingY = normalizeCellSpacing(pluginCellSpacing)?.y ?? 0;
+    cellSpacingY = normalizeCellSpacing(pluginCellSpacing)?.y ?? 0
   } else {
-    cellSpacingY = cellSpacing?.y ?? 0;
+    cellSpacingY = cellSpacing?.y ?? 0
   }
 
   const onClick = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      const target = e.target as HTMLDivElement;
+      const target = e.target as HTMLDivElement
 
       // check whether the click was inside cell-inner, but not inside a nested cell
       if (
@@ -63,27 +63,27 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         target.closest('.react-page-cell.react-page-cell-has-plugin') ===
           ref.current?.closest('.react-page-cell')
       ) {
-        const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace';
+        const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace'
 
-        focus(false, mode);
-        setEditMode();
+        focus(false, mode)
+        setEditMode()
       }
     },
     [focus, focused, isEditMode, setEditMode]
-  );
+  )
   const insertAllowed = plugin?.childConstraints?.maxChildren
     ? plugin?.childConstraints?.maxChildren > childrenIds.length
-    : true;
-  const innerDivProps = useCellInnerDivStylingProps(nodeId);
+    : true
+  const innerDivProps = useCellInnerDivStylingProps(nodeId)
 
-  const children = childrenIds.map((id) => <Row nodeId={id} key={id} />);
+  const children = childrenIds.map((id) => <Row nodeId={id} key={id} />)
 
-  const components = useOption('components');
+  const components = useOption('components')
 
-  const InsertNewWithDefault = components?.InsertNew ?? InsertNew;
+  const InsertNewWithDefault = components?.InsertNew ?? InsertNew
 
   if (!cellShouldHavePlugin) {
-    return <Droppable nodeId={nodeId}>{children}</Droppable>;
+    return <Droppable nodeId={nodeId}>{children}</Droppable>
   }
 
   return (
@@ -93,8 +93,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
           onClick={!isPreviewMode ? onClick : undefined}
           tabIndex={-1}
           ref={ref}
-          {...innerDivProps}
-        >
+          {...innerDivProps}>
           <PluginComponent nodeId={nodeId} hasChildren={hasChildren}>
             {hasChildren ? (
               <Provider value={providerValue}>
@@ -103,8 +102,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
                     cellSpacingY !== 0
                       ? { margin: `${-cellSpacingY / 2}px 0` }
                       : undefined
-                  }
-                >
+                  }>
                   {children}
                 </div>
               </Provider>
@@ -121,7 +119,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         </div>
       </Draggable>
     </Droppable>
-  );
-};
+  )
+}
 
-export default React.memo(Inner);
+export default React.memo(Inner)

@@ -1,27 +1,27 @@
-import classNames from 'classnames';
-import React from 'react';
+import classNames from 'classnames'
+import React from 'react'
 import {
   useFocusCell,
   useIsLayoutMode,
   useOption,
   usePluginOfCell,
   useUiTranslator,
-} from '../../hooks';
-import { useDragHandle } from '../Draggable/useDragHandle';
+} from '../../hooks'
+import { useDragHandle } from '../Draggable/useDragHandle'
 const Handle: React.FC<{ nodeId: string }> = ({ nodeId }) => {
-  const allowMoveInEditMode = useOption('allowMoveInEditMode');
-  const isLayoutMode = useIsLayoutMode();
-  const dragEnabled = allowMoveInEditMode || isLayoutMode;
+  const allowMoveInEditMode = useOption('allowMoveInEditMode')
+  const isLayoutMode = useIsLayoutMode()
+  const dragEnabled = allowMoveInEditMode || isLayoutMode
 
   const [isDragging, dragRef, previewElement] = useDragHandle(
     nodeId,
     dragEnabled
-  );
-  const focus = useFocusCell(nodeId);
-  const plugin = usePluginOfCell(nodeId);
-  const { t } = useUiTranslator();
+  )
+  const focus = useFocusCell(nodeId)
+  const plugin = usePluginOfCell(nodeId)
+  const { t } = useUiTranslator()
   if (!plugin) {
-    return null;
+    return null
   }
   return (
     <>
@@ -33,14 +33,13 @@ const Handle: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         })}
         ref={dragRef}
         onClick={(e) => {
-          const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace';
-          focus(false, mode);
-        }}
-      >
+          const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace'
+          focus(false, mode)
+        }}>
         {t(plugin?.title || plugin?.text)}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default React.memo(Handle);
+export default React.memo(Handle)

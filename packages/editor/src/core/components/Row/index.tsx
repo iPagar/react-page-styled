@@ -1,11 +1,11 @@
-import classNames from 'classnames';
-import React from 'react';
-import { useMeasure } from 'react-use';
-import type { Node } from '../../types/node';
-import { isRow, Row } from '../../types/node';
-import { useCellSpacing, useNodeHoverPosition, useNodeProps } from '../hooks';
-import Droppable from './Droppable';
-import ResizableRowCell from './ResizableRowCell';
+import classNames from 'classnames'
+import React from 'react'
+import { useMeasure } from 'react-use'
+import type { Node } from '../../types/node'
+import { isRow } from '../../types/node'
+import { useCellSpacing, useNodeHoverPosition, useNodeProps } from '../hooks'
+import Droppable from './Droppable'
+import ResizableRowCell from './ResizableRowCell'
 
 const reduceToIdAndSizeArray = (
   acc: { offset: number; id: string; size: number; maxSize: number }[],
@@ -13,11 +13,11 @@ const reduceToIdAndSizeArray = (
   index: number,
   array: Node[]
 ) => {
-  const nextNode = array[index + 1];
+  const nextNode = array[index + 1]
 
-  const size = isRow(node) ? 12 : node.size ?? 12;
-  const nextSize = !nextNode || isRow(nextNode) ? 0 : nextNode.size ?? 12;
-  const offset = size + (acc[index - 1]?.offset ?? 0);
+  const size = isRow(node) ? 12 : node.size ?? 12
+  const nextSize = !nextNode || isRow(nextNode) ? 0 : nextNode.size ?? 12
+  const offset = size + (acc[index - 1]?.offset ?? 0)
   return [
     ...acc,
     {
@@ -26,26 +26,26 @@ const reduceToIdAndSizeArray = (
       maxSize: size + nextSize - 1,
       offset,
     },
-  ];
-};
+  ]
+}
 const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
-  const [ref, { width: rowWidth }] = useMeasure();
+  const [ref, { width: rowWidth }] = useMeasure()
 
-  const hoverPosition = useNodeHoverPosition(nodeId);
+  const hoverPosition = useNodeHoverPosition(nodeId)
 
   const childrenWithOffsets = useNodeProps(nodeId, (node) =>
     isRow(node)
       ? node.cells?.reduce(reduceToIdAndSizeArray, []) ?? []
       : node?.rows?.reduce(reduceToIdAndSizeArray, []) ?? []
-  );
+  )
 
   const rowHasInlineChildrenPosition = useNodeProps(
     nodeId,
     (node) =>
       (isRow(node) && node.cells.length === 2 && node.cells[0]?.inline) || null
-  );
+  )
 
-  const cellSpacing = useCellSpacing();
+  const cellSpacing = useCellSpacing()
 
   return (
     <Droppable nodeId={nodeId}>
@@ -63,8 +63,7 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
             cellSpacing && cellSpacing.x !== 0
               ? `0 ${-cellSpacing.x / 2}px`
               : undefined,
-        }}
-      >
+        }}>
         <div
           style={{
             position: 'absolute',
@@ -98,7 +97,7 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         ))}
       </div>
     </Droppable>
-  );
-};
+  )
+}
 
-export default React.memo(Row);
+export default React.memo(Row)

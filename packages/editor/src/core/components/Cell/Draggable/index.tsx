@@ -1,29 +1,29 @@
-import classNames from 'classnames';
-import React from 'react';
-import { useCell, useFocusCell, useIsLayoutMode, useOption } from '../../hooks';
-import { useDragHandle } from './useDragHandle';
+import classNames from 'classnames'
+import React from 'react'
+import { useCell, useFocusCell, useIsLayoutMode, useOption } from '../../hooks'
+import { useDragHandle } from './useDragHandle'
 
 const DefaultSmallHandle = ({ onClick }: { onClick: () => void }) => (
   <div className="react-page-cell-draggable-overlay-handle" onClick={onClick}>
     <div className="react-page-cell-draggable-overlay-handle-icon" />
   </div>
-);
+)
 
 type Props = {
-  isLeaf?: boolean;
-  nodeId: string;
-};
+  isLeaf?: boolean
+  nodeId: string
+}
 const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
-  const cell = useCell(nodeId);
+  const cell = useCell(nodeId)
 
-  const [isDragging, dragRef, previewElement] = useDragHandle(nodeId);
+  const [isDragging, dragRef, previewElement] = useDragHandle(nodeId)
 
-  const focus = useFocusCell(nodeId);
-  const isLayoutMode = useIsLayoutMode();
-  const allowMoveInEditMode = useOption('allowMoveInEditMode');
-  const components = useOption('components');
+  const focus = useFocusCell(nodeId)
+  const isLayoutMode = useIsLayoutMode()
+  const allowMoveInEditMode = useOption('allowMoveInEditMode')
+  const components = useOption('components')
 
-  const ResizeHandle = components?.EditModeResizeHandle ?? DefaultSmallHandle;
+  const ResizeHandle = components?.EditModeResizeHandle ?? DefaultSmallHandle
 
   return (
     <>
@@ -45,16 +45,15 @@ const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
         {isLayoutMode ? (
           <div
             onClick={(e) => {
-              const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace';
-              focus(false, mode);
+              const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace'
+              focus(false, mode)
             }}
             className={classNames({
               'react-page-cell-draggable-overlay': isLayoutMode,
               [`react-page-cell-draggable-inline-${cell?.inline}`]:
                 cell?.inline,
               'react-page-cell-draggable-leaf': isLeaf,
-            })}
-          ></div>
+            })}></div>
         ) : allowMoveInEditMode ? (
           <div ref={dragRef}>
             <ResizeHandle onClick={focus} />
@@ -64,7 +63,7 @@ const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
         {children}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Draggable;
+export default Draggable

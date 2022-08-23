@@ -1,3 +1,3 @@
-import { AutoField } from 'uniforms-material';
+import { AutoField } from './Autoforms'
 
-export default AutoField;
+export default AutoField

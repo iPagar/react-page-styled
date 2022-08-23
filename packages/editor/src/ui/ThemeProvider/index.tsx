@@ -10,6 +10,10 @@ import { createGenerateClassName } from '@material-ui/styles';
 import darkTheme from './DarkTheme/index';
 import { themeOptions } from './themeOptions';
 export { darkTheme };
+import {
+  NextUIProvider,
+  createTheme as nextCreateTheme,
+} from '@nextui-org/react';
 
 const generateClassName = createGenerateClassName({
   disableGlobal: true,
@@ -22,12 +26,33 @@ export type ThemeProviderProps = {
   theme?: Theme;
 };
 
+const nextTheme = nextCreateTheme({
+  type: 'light',
+  theme: {
+    colors: {
+      errorLight: '#fce5de',
+      primaryLight: '#def5fc',
+      secondaryLight: '#bbd9d3',
+      secondaryLightHover: '#b3d1c9',
+      secondaryLightContrast: '#0D698E',
+      primaryLightContrast: '#0D698E',
+      error: '#862a0d',
+      secondary: '#579D90',
+      primary: '#0D698E',
+      gradient:
+        'linear-gradient(90deg, rgba(87,157,144,1) 0%, rgba(13,105,134,1) 100%)',
+    },
+  },
+});
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   return (
-    <StylesProvider injectFirst={true} generateClassName={generateClassName}>
-      <MaterialUiThemeProvider theme={props.theme || theme}>
-        {props.children}
-      </MaterialUiThemeProvider>
-    </StylesProvider>
+    <NextUIProvider theme={nextTheme}>
+      <StylesProvider injectFirst={true} generateClassName={generateClassName}>
+        <MaterialUiThemeProvider theme={props.theme || theme}>
+          {props.children}
+        </MaterialUiThemeProvider>
+      </StylesProvider>
+    </NextUIProvider>
   );
 };

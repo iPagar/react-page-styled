@@ -1,88 +1,61 @@
-import IconZoomOut from '@material-ui/icons/ZoomOut';
-import IconZoomIn from '@material-ui/icons/ZoomIn';
-import React from 'react';
+import IconZoomOut from '@material-ui/icons/ZoomOut'
+import IconZoomIn from '@material-ui/icons/ZoomIn'
+import React from 'react'
 import {
   useCanZoomIn,
   useCanZoomOut,
   useIsSmallScreen,
   useZoomIn,
   useZoomOut,
-} from '../../../core/components/hooks';
-import Button from '../Button/index';
+} from '../../../core/components/hooks'
+import Button from '../Button/index'
+import { Button as DefaultButton } from '@nextui-org/react'
 
 type Props = {
-  labelZoomIn: string;
-  labelZoomOut: string;
-};
+  labelZoomIn: string
+  labelZoomOut: string
+}
 
 const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
-  const canZoomIn = useCanZoomIn();
-  const canZoomOut = useCanZoomOut();
+  const canZoomIn = useCanZoomIn()
+  const canZoomOut = useCanZoomOut()
 
-  const zoomOut = useZoomOut();
-  const zoomIn = useZoomIn();
+  const zoomOut = useZoomOut()
+  const zoomIn = useZoomIn()
 
-  const isSmall = useIsSmallScreen();
+  const isSmall = useIsSmallScreen()
 
   return (
-    <div
-      style={{
-        height: isSmall ? 56 : 80,
-        float: 'right',
-        display: 'flex',
-        direction: 'ltr',
-        transform: 'scale(1.2)',
-      }}
-    >
-      <div
+    <DefaultButton.Group
+      css={{
+        margin: 0,
+      }}>
+      <Button
+        placement="top"
+        disabled={!canZoomIn}
+        icon={<IconZoomIn />}
+        description={labelZoomIn}
+        onClick={zoomIn}
+        activeColor="default"
         style={{
-          width: isSmall ? 29 : 36,
-          overflow: 'hidden',
-          marginRight: isSmall ? 1 : 2,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
         }}
-      >
-        <Button
-          active
-          disabled={!canZoomIn}
-          style={{
-            transform: `translateX(${isSmall ? 27 : 35}px)`,
-          }}
-          icon={
-            <IconZoomIn
-              style={{ transform: `translateX(-${isSmall ? 6 : 12}px)` }}
-            />
-          }
-          description={labelZoomIn}
-          onClick={zoomIn}
-          activeColor="default"
-        />
-      </div>
-      <div
+      />
+      <Button
+        placement="top"
+        disabled={!canZoomOut}
+        icon={<IconZoomOut />}
+        description={labelZoomOut}
+        onClick={zoomOut}
+        activeColor="default"
         style={{
-          width: isSmall ? 28 : 36,
-          overflow: 'hidden',
-          marginLeft: 1,
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0,
         }}
-      >
-        <Button
-          style={{
-            position: 'relative',
-            transform: 'translateX(1px)',
-          }}
-          active
-          disabled={!canZoomOut}
-          icon={
-            <IconZoomOut
-              style={{ transform: `translateX(${isSmall ? 6 : 12}px)` }}
-            />
-          }
-          description={labelZoomOut}
-          onClick={zoomOut}
-          activeColor="default"
-        />
-      </div>
-    </div>
-  );
-};
+      />
+    </DefaultButton.Group>
+  )
+}
 
-export default React.memo(Zoom);
+export default React.memo(Zoom)

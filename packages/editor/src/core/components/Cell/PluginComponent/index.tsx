@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { BottomToolbar } from '../../../../ui';
-import type { CellPluginComponentProps, DataTType } from '../../../types';
+import React, { useMemo } from 'react'
+import { BottomToolbar } from '../../../../ui'
+import type { CellPluginComponentProps, DataTType } from '../../../types'
 import {
   usePluginOfCell,
   useDebouncedCellData,
@@ -11,34 +11,34 @@ import {
   useCellProps,
   useOption,
   useIsExclusivlyFocused,
-} from '../../hooks';
-import PluginControls from '../PluginControls';
-import PluginMissing from '../PluginMissing';
-import NoopProvider from '../NoopProvider';
+} from '../../hooks'
+import PluginControls from '../PluginControls'
+import PluginMissing from '../PluginMissing'
+import NoopProvider from '../NoopProvider'
 
 const PluginComponent: React.FC<{ nodeId: string; hasChildren: boolean }> = ({
   nodeId,
   children,
   hasChildren,
 }) => {
-  const lang = useLang();
-  const components = useOption('components');
-  const CustomPluginMissing = components?.CellPluginMissing;
-  const isPreviewMode = useIsPreviewMode();
-  const isEditMode = useIsEditMode();
+  const lang = useLang()
+  const components = useOption('components')
+  const CustomPluginMissing = components?.CellPluginMissing
+  const isPreviewMode = useIsPreviewMode()
+  const isEditMode = useIsEditMode()
 
-  const [data, onChange] = useDebouncedCellData(nodeId);
-  const pluginId = useCellProps(nodeId, (c) => c?.plugin?.id);
-  const plugin = usePluginOfCell(nodeId);
-  const focused = useIsExclusivlyFocused(nodeId);
-  const hasInlineNeighbour = useCellProps(nodeId, (c) => c?.hasInlineNeighbour);
+  const [data, onChange] = useDebouncedCellData(nodeId)
+  const pluginId = useCellProps(nodeId, (c) => c?.plugin?.id)
+  const plugin = usePluginOfCell(nodeId)
+  const focused = useIsExclusivlyFocused(nodeId)
+  const hasInlineNeighbour = useCellProps(nodeId, (c) => c?.hasInlineNeighbour)
 
-  const Renderer = plugin?.Renderer;
-  const Missing = CustomPluginMissing ?? PluginMissing;
-  const Provider = plugin?.Provider ?? NoopProvider;
-  const remove = useRemoveCell(nodeId);
+  const Renderer = plugin?.Renderer
+  const Missing = CustomPluginMissing ?? PluginMissing
+  const Provider = plugin?.Provider ?? NoopProvider
+  const remove = useRemoveCell(nodeId)
 
-  const Toolbar = components?.BottomToolbar ?? BottomToolbar;
+  const Toolbar = components?.BottomToolbar ?? BottomToolbar
 
   const componentProps = useMemo<CellPluginComponentProps>(
     () => ({
@@ -65,7 +65,7 @@ const PluginComponent: React.FC<{ nodeId: string; hasChildren: boolean }> = ({
       isPreviewMode,
       remove,
     ]
-  );
+  )
 
   // In case of non-zero cell spacing, nested layouts (layout plugins with children) should have their
   // margin collapsing functionality off. The simplest solution is to use display:flex for the below wrapping <div>.
@@ -77,7 +77,7 @@ const PluginComponent: React.FC<{ nodeId: string; hasChildren: boolean }> = ({
     : {
         display: 'flex' as const,
         flexDirection: 'column' as const,
-      };
+      }
 
   return (
     <Provider {...componentProps}>
@@ -93,8 +93,7 @@ const PluginComponent: React.FC<{ nodeId: string; hasChildren: boolean }> = ({
               !hasChildren
                 ? 'none'
                 : undefined,
-          }}
-        >
+          }}>
           {Renderer ? (
             <Renderer {...componentProps}>{children}</Renderer>
           ) : pluginId ? (
@@ -118,7 +117,7 @@ const PluginComponent: React.FC<{ nodeId: string; hasChildren: boolean }> = ({
         />
       </>
     </Provider>
-  );
-};
+  )
+}
 
-export default PluginComponent;
+export default PluginComponent
