@@ -14761,17 +14761,26 @@ unicode-property-aliases-ecmascript@^2.0.0:
     tslib "^2.2.0"
     uniforms "^3.8.1"
 
-"uniforms-material@^2.6.0 || ^3.0.0":
-  version "3.8.1"
-  resolved "https://registry.npmjs.org/uniforms-material/-/uniforms-material-3.8.1.tgz#77df5eb42e579b9f3ea491067306b46d7eb3189e"
-  integrity sha512-dOopYA9wA/VwfjAq5WE25bR9QktCboMJsN0+UFwy4K3489oII4HjmLeb3ZFrRNxcIriyKS0aYmXXTy/rGvNvUA==
+uniforms-material@^3.5.1:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/uniforms-material/-/uniforms-material-3.10.0.tgz#b6cd34fa887e1cbe64fdea546c59b7679a0020fc"
+  integrity sha512-dYIAR6x+y0RvnUpWAoJb/lUkETsohk1uOK4IWztV6xrMFkEiYHX2XFsDq3XU4TURMkP9wBK6Qo/FYzgJdeNJTg==
   dependencies:
     invariant "^2.0.0"
     lodash "^4.0.0"
     tslib "^2.2.0"
-    uniforms "^3.8.1"
+    uniforms "^3.10.0"
 
-"uniforms@^2.6.0 || ^3.0.0", uniforms@^3.2.0, uniforms@^3.8.1:
+uniforms@^3.10.0, uniforms@^3.5.1:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/uniforms/-/uniforms-3.10.0.tgz#c09d429904632b3952c7ba5e0f5f7509f8a30098"
+  integrity sha512-wp8mnm5DqRzGUQwbEIG6sfpnu5H+gCncL5g3Cmohax9E1bmn4PattsBRI88gSMLckZNZdpA79LX1f8QdQFub/g==
+  dependencies:
+    invariant "^2.0.0"
+    lodash "^4.0.0"
+    tslib "^2.2.0"
+
+uniforms@^3.2.0, uniforms@^3.8.1:
   version "3.8.1"
   resolved "https://registry.npmjs.org/uniforms/-/uniforms-3.8.1.tgz#d1d63c0bf986fbb059877a44ce746fa1ebf54750"
   integrity sha512-Ko7BNXrCHNHZMYn3qi+1HOHEhGtEbHac1OI1gJdip+ix70TvHATRDp6Ueua5LNI+Y+iuLGM+sobd72S4jkOoHg==
