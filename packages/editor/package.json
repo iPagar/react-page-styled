@@ -1,6 +1,6 @@
 {
   "name": "@react-page-styled/editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Marco Wettstein",
   "license": "MIT",
   "main": "./lib/index.js",
