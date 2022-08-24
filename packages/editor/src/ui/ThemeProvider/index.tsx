@@ -10,6 +10,7 @@ import { createGenerateClassName } from '@material-ui/styles';
 import darkTheme from './DarkTheme/index';
 import { themeOptions } from './themeOptions';
 export { darkTheme };
+import type { Theme as NextuiTheme } from '@nextui-org/react';
 import {
   NextUIProvider,
   createTheme as nextCreateTheme,
@@ -24,6 +25,7 @@ const theme = createMuiTheme(themeOptions);
 
 export type ThemeProviderProps = {
   theme?: Theme;
+  nextuiTheme?: NextuiTheme;
 };
 
 const nextTheme = nextCreateTheme({
@@ -47,7 +49,9 @@ const nextTheme = nextCreateTheme({
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   return (
-    <NextUIProvider theme={nextTheme}>
+    <NextUIProvider
+      theme={props.nextuiTheme ? nextCreateTheme(props.nextuiTheme) : nextTheme}
+    >
       <StylesProvider injectFirst={true} generateClassName={generateClassName}>
         <MaterialUiThemeProvider theme={props.theme || theme}>
           {props.children}
