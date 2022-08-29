@@ -4,38 +4,22 @@ import { defaultSlate, customizedSlate } from './slate';
 
 const customLayoutPlugin: CellPlugin<{
   backgroundColor: string;
+  text: string;
 }> = {
-  Renderer: ({ children, data }) => (
-    <div
-      style={{
-        border: '1px solid black',
-        backgroundColor: data.backgroundColor,
-      }}
-    >
-      {children}
-    </div>
-  ),
-  createInitialChildren: () => {
-    return [
-      [
-        {
-          plugin: defaultSlate,
-        },
-        {
-          plugin: defaultSlate,
-        },
-      ],
-      [
-        {
-          plugin: customizedSlate,
-        },
-        {
-          plugin: customizedSlate,
-        },
-      ],
-    ];
+  Renderer: ({ data }) => {
+    console.log(data);
+    return (
+      <div
+        style={{
+          border: '1px solid black',
+          backgroundColor: data.backgroundColor,
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {data.text}
+      </div>
+    );
   },
-
   id: 'custom-layout-plugin',
   title: 'Custom layout plugin',
   description: 'Some custom layout plugin',
@@ -46,6 +30,13 @@ const customLayoutPlugin: CellPlugin<{
       required: ['backgroundColor'],
       properties: {
         backgroundColor: { type: 'string' },
+        text: {
+          type: 'string',
+          uniforms: {
+            multiline: true,
+            rows: 10,
+          },
+        },
       },
     },
   },
