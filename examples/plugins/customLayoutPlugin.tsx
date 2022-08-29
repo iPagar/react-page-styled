@@ -7,7 +7,6 @@ const customLayoutPlugin: CellPlugin<{
   text: string;
 }> = {
   Renderer: ({ data }) => {
-    console.log(data);
     return (
       <div
         style={{
