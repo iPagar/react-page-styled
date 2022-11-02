@@ -1,7 +1,7 @@
 {
   "private": true,
   "author": "ORY GmbH",
-  "name": "react-page",
+  "name": "react-page-styled",
   "license": "MIT",
   "workspaces": [
     "packages/editor",

@@ -1,6 +1,6 @@
 {
   "name": "@react-page-styled/plugins-background",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "./lib/index.js",
   "module": "./lib-es/index.js",
   "sideEffects": false,

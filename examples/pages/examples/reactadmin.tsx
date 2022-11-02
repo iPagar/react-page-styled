@@ -8,15 +8,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import type { Record as RecordType } from 'ra-core';
-import type { CellPlugin } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
 import slate, {
   DEFAULT_SLATE_PLUGIN_ID,
   pluginFactories,
-} from '@react-page/plugins-slate';
+} from '@react-page-styled/plugins-slate';
 import {
   RaReactPageInput,
   RaSelectReferenceInputField,
-} from '@react-page/react-admin';
+} from '@react-page-styled/react-admin';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import fakeDataProvider from 'ra-data-fakerest';

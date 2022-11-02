@@ -3,17 +3,17 @@
 To install the react-page editor, use:
 
 ```bash
-$ yarn add @react-page/editor
+$ yarn add @react-page-styled/editor
 # OR
-$ npm i --save @react-page/editor
+$ npm i --save @react-page-styled/editor
 ```
 
 usually you'll also want to have the default rich text editor (slate):
 
 ```bash
-$ yarn add @react-page/plugins-slate
+$ yarn add @react-page-styled/plugins-slate
 # OR
-$ npm i --save @react-page/plugins-slate
+$ npm i --save @react-page-styled/plugins-slate
 ```
 
 ## Dependencies
@@ -35,7 +35,7 @@ $ npm i --save @material-ui/core @material-ui/styles @material-ui/icons
 Make sure to import the css file as well somewhere in your app:
 
 ```
-import '@react-page/editor/lib/index.css';
+import '@react-page-styled/editor/lib/index.css';
 ```
 
 ## Simple example

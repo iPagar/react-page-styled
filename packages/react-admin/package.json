@@ -1,5 +1,5 @@
 {
-  "name": "@react-page/react-admin",
+  "name": "@react-page-styled/react-admin",
   "version": "0.0.0",
   "main": "./lib/index.js",
   "module": "./lib-es/index.js",

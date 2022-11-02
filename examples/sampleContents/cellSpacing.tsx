@@ -1,4 +1,4 @@
-import type { Value } from '@react-page/editor';
+import type { Value } from '@react-page-styled/editor';
 
 export const cellSpacingDemo: Value = {
   id: 'c1uxgo',

@@ -8,7 +8,7 @@ import { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import { VERSION } from '@react-page/editor';
+import { VERSION } from '@react-page-styled/editor';
 import React from 'react';
 import Navigation from './Navigation';
 

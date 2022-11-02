@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 // The editor core
-import type { CellPlugin, Value } from '@react-page/editor';
+import type { CellPlugin, Value } from '@react-page-styled/editor';
 
-import Editor from '@react-page/editor';
+import Editor from '@react-page-styled/editor';
 
 import PageLayout from '../../components/PageLayout';
 

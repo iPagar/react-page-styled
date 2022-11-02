@@ -3,16 +3,16 @@
 The `<Editor />` component is the 1st component to be instantiated. It is used both for editing and displaying content (with `readOnly` set to true). At its simplest it needs a rich text editor - react-page comes preconfigured with Slate as a 'cellPlugin' to be used as the rich text editor. Optionally an image plugin can be added for uploading images or loading images from an existing source (URL).
 
 ```tsx
-import Editor, { Value } from '@react-page/editor';
-import '@react-page/editor/lib/index.css';
+import Editor, { Value } from '@react-page-styled/editor';
+import '@react-page-styled/editor/lib/index.css';
 
 // The rich text area plugin (Slate)
-import slate from '@react-page/plugins-slate';
-import '@react-page/plugins-slate/lib/index.css';
+import slate from '@react-page-styled/plugins-slate';
+import '@react-page-styled/plugins-slate/lib/index.css';
 
 // The image display plugin
-import image from '@react-page/plugins-image';
-import '@react-page/plugins-image/lib/index.css';
+import image from '@react-page-styled/plugins-image';
+import '@react-page-styled/plugins-image/lib/index.css';
 
 // Define which plugins we want to use.
 const cellPlugins = [slate(), image];
@@ -29,15 +29,17 @@ export default function SimpleExample() {
   <Editor cellPlugins={cellPlugins} value={value} readOnly />;
 
   // ....
-};
+}
 ```
 
 ### Editing
+
 [Link to editing example](examples/pages/examples/simple.tsx)
 
 [Live demo of the editing example](//demo/examples/simple)
 
 ### Viewing
+
 [Link to viewing example](examples/pages/examples/readonly.tsx)
 
 [Live demo of the viewing example](//demo/examples/readonly)
@@ -117,7 +119,7 @@ cellSpacing = {
 
 ### `uiTranslator`
 
-Takes a function `(label:string) => string`.  
+Takes a function `(label:string) => string`.
 
 This prop enables i18n support. All interface labels are wrapped with this function.
 
@@ -132,12 +134,12 @@ const TRANSLATIONS: { [key: string]: string } = {
   'Preview blocks': '预览模式',
 };
 
- const uiTranslator = useCallback((label?: string) => {
-    if (TRANSLATIONS[label] !== undefined) {
-      return TRANSLATIONS[label];
-    }
-    return `${label}(to translate)`;
-  }, []);
+const uiTranslator = useCallback((label?: string) => {
+  if (TRANSLATIONS[label] !== undefined) {
+    return TRANSLATIONS[label];
+  }
+  return `${label}(to translate)`;
+}, []);
 ```
 
 ### `childConstraints` (experimental)

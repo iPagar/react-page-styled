@@ -1,7 +1,7 @@
 // The editor core
-import type { Value } from '@react-page/editor';
-import Editor from '@react-page/editor';
-import slate, { pluginFactories } from '@react-page/plugins-slate';
+import type { Value } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
+import slate, { pluginFactories } from '@react-page-styled/plugins-slate';
 import React, { useState } from 'react';
 import PageLayout from '../../components/PageLayout';
 
