@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import type { Options, Value } from '@react-page/editor';
-import Editor from '@react-page/editor';
-import slate from '@react-page/plugins-slate';
-import image from '@react-page/plugins-image';
+import type { Options, Value } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
+import slate from '@react-page-styled/plugins-slate';
+import image from '@react-page-styled/plugins-image';
 import { demo } from '../../sampleContents/demo';
 import { Button } from '@material-ui/core';
 

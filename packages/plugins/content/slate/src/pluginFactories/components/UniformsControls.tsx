@@ -3,8 +3,12 @@
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoneIcon from '@mui/icons-material/Done';
-import type { JsonSchema } from '@react-page/editor';
-import { makeUniformsSchema, AutoForm, AutoFields } from '@react-page/editor';
+import type { JsonSchema } from '@react-page-styled/editor';
+import {
+  makeUniformsSchema,
+  AutoForm,
+  AutoFields,
+} from '@react-page-styled/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import type { Data } from '../../types';
 import { Button, Modal, Input, Tooltip } from '@nextui-org/react';

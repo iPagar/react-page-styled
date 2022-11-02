@@ -7,7 +7,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 export type TextFieldProps = HTMLFieldProps<
   string,
   HTMLInputElement,
-  { inputRef?: Ref<HTMLInputElement> }
+  { inputRef?: Ref<HTMLInputElement>; textareaRef?: Ref<HTMLTextAreaElement> }
 >;
 
 function Text({
@@ -22,6 +22,7 @@ function Text({
   readOnly,
   type,
   value,
+  textareaRef,
   ...props
 }: TextFieldProps) {
   const multiline = 'multiline' in props;
@@ -54,8 +55,7 @@ function Text({
           onChange={(event) => onChange(event.target.value)}
           placeholder={placeholder}
           readOnly={readOnly}
-          ref={inputRef}
-          type={type}
+          ref={textareaRef}
           value={value ?? ''}
           rows={props.rows}
         />

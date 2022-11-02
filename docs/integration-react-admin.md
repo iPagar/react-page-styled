@@ -6,7 +6,7 @@ as it uses MaterialUI as well.
 
 We provide a small helper package to integrate ReactPage in ReactAdmin:
 
-`yarn add @react-page/react-admin`
+`yarn add @react-page-styled/react-admin`
 
 ### Usage
 
@@ -15,7 +15,7 @@ so make sure that your data-provider handles it properly. In the following examp
 we assume you have some kind of Blog. One BlogPost would have a `title` as a string and `content` for rich ReactPage content:
 
 ```tsx
-import { RaReactPageInput } from '@react-page/react-admin';
+import { RaReactPageInput } from '@react-page-styled/react-admin';
 
 // in your edit or create component:
 
@@ -53,7 +53,7 @@ This Component will be used for the Frontend as well.
 Now we create a `CellPlugin` that allows the author to select products from ReactAdmin:
 
 ```tsx
-import { RaSelectReferenceInputField } from '@react-page/react-admin';
+import { RaSelectReferenceInputField } from '@react-page-styled/react-admin';
 
 const ProductIdSelector = (props) => (
   <RaSelectReferenceInputField

@@ -1,5 +1,5 @@
 import { Button, Tooltip, useTheme } from '@nextui-org/react';
-import { lazyLoad } from '@react-page/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 import React from 'react';
 import { ConditionalWrapper } from './ConditionalWrapper';
 

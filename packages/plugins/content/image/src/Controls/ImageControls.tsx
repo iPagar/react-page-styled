@@ -2,7 +2,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { ImageUpload, useUiTranslator } from '@react-page/editor';
+import { ImageUpload, useUiTranslator } from '@react-page-styled/editor';
 import React from 'react';
 import type { ImageControlType } from '../types/controls';
 

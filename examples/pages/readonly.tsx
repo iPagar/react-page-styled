@@ -1,4 +1,4 @@
-import Editor from '@react-page/editor';
+import Editor from '@react-page-styled/editor';
 import React from 'react';
 import PageLayout from '../components/PageLayout';
 import { cellPlugins } from '../plugins/cellPlugins';

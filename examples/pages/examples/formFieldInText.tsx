@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 // The editor core
-import type { Value } from '@react-page/editor';
-import { createValue } from '@react-page/editor';
+import type { Value } from '@react-page-styled/editor';
+import { createValue } from '@react-page-styled/editor';
 import { Button } from '@material-ui/core';
-import Editor from '@react-page/editor';
+import Editor from '@react-page-styled/editor';
 
-import slate from '@react-page/plugins-slate';
+import slate from '@react-page-styled/plugins-slate';
 
-import { pluginFactories } from '@react-page/plugins-slate';
+import { pluginFactories } from '@react-page-styled/plugins-slate';
 import PageLayout from '../../components/PageLayout';
 
 const formFieldPlugin = pluginFactories.createComponentPlugin<{

@@ -1,4 +1,4 @@
-import type { CellPlugin } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
 import dynamic from 'next/dynamic';
 import React from 'react';
 

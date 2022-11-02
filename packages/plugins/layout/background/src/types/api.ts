@@ -1,32 +1,32 @@
-import type { ModeEnum } from './ModeEnum'
+import type { ModeEnum } from './ModeEnum';
 
-import type { ImageLoaded, RGBColor } from '@react-page/editor'
+import type { ImageLoaded, RGBColor } from '@react-page-styled/editor';
 
 export interface BackgroundApi {
-  handleChangeDarken: () => void
-  handleChangeDarkenPreview: (darken: number) => void
-  handleChangeLighten: () => void
-  handleChangeLightenPreview: (lighten: number) => void
-  handleChangeHasPadding: () => void
+  handleChangeDarken: () => void;
+  handleChangeDarkenPreview: (darken: number) => void;
+  handleChangeLighten: () => void;
+  handleChangeLightenPreview: (lighten: number) => void;
+  handleChangeHasPadding: () => void;
   handleChangeModeSwitch: (
     mode: ModeEnum | undefined,
     modeFlag: ModeEnum | undefined
-  ) => () => void
-  handleChangeBackgroundColorPreview: (color?: RGBColor) => void
+  ) => () => void;
+  handleChangeBackgroundColorPreview: (color?: RGBColor) => void;
   handleChangeGradientDegPreview: (
     gradientDegPreview: number | undefined,
     gradientDegPreviewIndex?: number
-  ) => void
+  ) => void;
   handleChangeGradientOpacityPreview: (
     gradientOpacityPreview: number | undefined,
     gradientOpacityPreviewIndex?: number
-  ) => void
+  ) => void;
   handleChangeGradientColorPreview: (
     gradientColorPreview: RGBColor | undefined,
     gradientColorPreviewIndex?: number,
     gradientColorPreviewColorIndex?: number
-  ) => void
-  handleImageLoaded: (imagePreview: ImageLoaded) => void
-  handleImageUploaded: () => void
-  onChangeBorderColorPreview: (color?: RGBColor) => void
+  ) => void;
+  handleImageLoaded: (imagePreview: ImageLoaded) => void;
+  handleImageUploaded: () => void;
+  onChangeBorderColorPreview: (color?: RGBColor) => void;
 }

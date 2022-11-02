@@ -1,7 +1,6 @@
-// @ts-nocheck
 import type { Translations } from './translations';
 import type { Node, Editor } from 'slate';
-import type { JsonSchema } from '@react-page/editor';
+import type { DataTType, JsonSchema } from '@react-page-styled/editor';
 import type { Data } from '../types';
 
 export interface PluginButtonProps {
@@ -40,7 +39,7 @@ export type AutoformControlsDef<DataT> = {
   /**
    * a JSONSchema. this will auto-generate a form for the plugin
    */
-  schema?: DataT extends Data ? JsonSchema<DataT> : unknown;
+  schema?: DataT extends DataTType ? JsonSchema<DataT> : unknown;
 
   /**
    * autoform type automatically generates a form for you.

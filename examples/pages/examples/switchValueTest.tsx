@@ -1,5 +1,5 @@
-import type { Options, Value } from '@react-page/editor';
-import Editor from '@react-page/editor';
+import type { Options, Value } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
 import React, { useState } from 'react';
 import { cellPlugins } from '../../plugins/cellPlugins';
 import PageLayout from '../../components/PageLayout';

@@ -1,6 +1,5 @@
-// @ts-nocheck
-import type { CellPlugin } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 import React, { useState } from 'react';
 import ReadOnlySlate from './components/ReadOnlySlate';
 
@@ -147,7 +146,6 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
         plugins={plugins}
         translations={settings.translations}
         defaultPluginType={settings.defaultPluginType}
-        fallback={<>{props.children}</>}
       />
     ),
     // we no longer require the provider in read only mode thanks to the static renderer:

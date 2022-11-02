@@ -2,7 +2,7 @@ import {
   lazyLoad,
   useAllFocusedNodeIds,
   useUiTranslator,
-} from '@react-page/editor';
+} from '@react-page-styled/editor';
 import React from 'react';
 import { Editable, useFocused, useSelected } from 'slate-react';
 import type { SlateProps } from '../types/component';

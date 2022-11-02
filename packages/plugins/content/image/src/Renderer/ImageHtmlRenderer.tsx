@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { iconStyle } from './../common/styles';
-import type { CellPluginComponentProps } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
+import type { CellPluginComponentProps } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 import type { ImageState } from '../types/state';
 
 const ImageIcon = lazyLoad(() => import('@material-ui/icons/Landscape'));

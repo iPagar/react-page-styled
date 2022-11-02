@@ -1,4 +1,4 @@
-import { Migration } from '@react-page/editor';
+import { Migration } from '@react-page-styled/editor';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const removeLeaves = (nodes: Array<any>) => {

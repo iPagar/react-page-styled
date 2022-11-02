@@ -1,6 +1,6 @@
-// @ts-nocheck
-import { deepEquals } from '@react-page/editor';
+import { deepEquals } from '@react-page-styled/editor';
 import debounce from 'lodash.debounce';
+import type { PropsWithChildren } from 'react';
 import React, {
   useCallback,
   useEffect,
@@ -16,7 +16,7 @@ import withPaste from '../slateEnhancer/withPaste';
 import type { SlateProps } from '../types/component';
 import DialogVisibleProvider from './DialogVisibleProvider';
 
-const SlateProvider: React.FC<SlateProps> = (props) => {
+const SlateProvider: React.FC<PropsWithChildren<SlateProps>> = (props) => {
   const { data, plugins, children, defaultPluginType } = props;
   const [value, setValue] = useState<Node[]>(data?.slate);
   const valueRef = useRef(value);

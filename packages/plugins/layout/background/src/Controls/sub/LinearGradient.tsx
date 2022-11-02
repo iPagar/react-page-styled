@@ -4,9 +4,9 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button, Card, Text } from '@nextui-org/react';
-import type { RGBColor } from '@react-page/editor';
+import type { RGBColor } from '@react-page-styled/editor';
 import React from 'react';
-import { ColorPicker } from '@react-page/editor';
+import { ColorPicker } from '@react-page-styled/editor';
 import type { BackgroundProps } from '../../types/component';
 
 export interface LinearGradientComponentProps {

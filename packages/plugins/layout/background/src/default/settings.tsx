@@ -1,11 +1,11 @@
-import React from 'react'
-import type { BackgroundSettings } from '../types/settings'
+import React from 'react';
+import type { BackgroundSettings } from '../types/settings';
 import {
   IMAGE_MODE_FLAG,
   COLOR_MODE_FLAG,
   GRADIENT_MODE_FLAG,
-} from './../const/mode'
-// import { defaultTranslations as defaultImageUploadTranslations } from '@react-page/editor/lib/ui/ImageUpload/defaultTranslations';
+} from './../const/mode';
+// import { defaultTranslations as defaultImageUploadTranslations } from '@react-page-styled/editor/lib/ui/ImageUpload/defaultTranslations';
 
 export const defaultTranslations = {
   // Strings used in ImageUpload module
@@ -40,7 +40,7 @@ export const defaultTranslations = {
   backgroundSize: 'Background size, %',
   zIndex: 'Z-index',
   marginTop: 'Margin top',
-}
+};
 
 export const defaultSettings: Partial<BackgroundSettings> = {
   defaultBackgroundSize: 100,
@@ -62,4 +62,4 @@ export const defaultSettings: Partial<BackgroundSettings> = {
   },
   defaultZIndex: 0,
   defaultMarginTop: '0',
-}
+};
