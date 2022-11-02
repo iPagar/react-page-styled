@@ -1,6 +1,7 @@
-import { useTheme } from '@mui/material';
-import type { DrawerProps } from '@mui/material';
-import { Divider, Drawer, Portal } from '@mui/material';
+import type { DrawerProps } from '@material-ui/core';
+import { Divider, Drawer, Portal } from '@material-ui/core';
+import { Card } from '@nextui-org/react';
+import type { PropsWithChildren } from 'react';
 import React, { Fragment } from 'react';
 import { useIsSmallScreen } from '../../core/components/hooks';
 
@@ -15,16 +16,12 @@ export type BottomToolbarDrawerProps = {
   anchor?: DrawerProps['anchor'];
   dark?: boolean;
   scale?: number;
+  bottom: React.ReactNode;
 };
 
-export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
-  className,
-  anchor,
-  open,
-  scale = 1,
-  children,
-  style = {},
-}) => {
+export const BottomToolbarDrawer: React.FC<
+  PropsWithChildren<BottomToolbarDrawerProps>
+> = ({ className, anchor, open, scale = 1, children, style = {}, bottom }) => {
   const divider = (
     <Divider
       style={{
@@ -38,8 +35,6 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
 
   const theChildren = React.Children.toArray(children).filter(Boolean);
   const isSmall = useIsSmallScreen();
-  const theme = useTheme();
-  const dark = theme.palette.mode === 'dark';
   return (
     <Portal>
       <Drawer
@@ -64,10 +59,8 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
         <div
           style={{
             pointerEvents: 'all',
-            border: `${dark ? darkBlack : brightBorder} 1px solid`,
-            borderRadius: '4px 4px 0 0',
-            backgroundColor: dark ? darkBlack : bright,
             padding: '12px 24px',
+            marginBottom: 12,
 
             ...(isSmall
               ? {
@@ -80,7 +73,6 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
                   minWidth: '50vw',
                   maxWidth: 'min(1280px, calc(100vw - 250px))',
                 }),
-            boxShadow: '0px 1px 8px -1px rgba(0,0,0,0.4)',
             position: 'relative',
 
             transformOrigin: 'bottom',
@@ -89,12 +81,19 @@ export const BottomToolbarDrawer: React.FC<BottomToolbarDrawerProps> = ({
             ...style,
           }}
         >
-          {theChildren.map((child, index) => (
-            <Fragment key={index}>
-              {child}
-              {index < theChildren.length - 1 ? divider : null}
-            </Fragment>
-          ))}
+          <Card>
+            {theChildren.length > 0 && (
+              <>
+                <Card.Body>
+                  {theChildren.map((child, index) => (
+                    <Fragment key={index}>{child}</Fragment>
+                  ))}
+                </Card.Body>
+                <Card.Divider />
+              </>
+            )}
+            <Card.Footer>{bottom}</Card.Footer>
+          </Card>
         </div>
       </Drawer>
     </Portal>

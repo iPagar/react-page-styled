@@ -1,23 +1,20 @@
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Slider from '@mui/material/Slider';
-import Switch from '@mui/material/Switch';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
-import ColorIcon from '@mui/icons-material/ColorLens';
-import GradientIcon from '@mui/icons-material/Gradient';
-import ImageIcon from '@mui/icons-material/Landscape';
+import Slider from '@material-ui/core/Slider'
+import Typography from '@material-ui/core/Typography'
+import ColorIcon from '@material-ui/icons/ColorLens'
+import GradientIcon from '@material-ui/icons/Gradient'
+import ImageIcon from '@material-ui/icons/Landscape'
+import { Button, Grid, Switch, Text, Card } from '@nextui-org/react'
 
-import React from 'react';
-import type { BackgroundApi } from '../types/api';
-import type { BackgroundControlsProps } from '../types/controls';
-import { ModeEnum } from '../types/ModeEnum';
-import ColorComponent from './sub/Color';
-import ImageComponent from './sub/Image';
-import LinearGradientComponent from './sub/LinearGradient';
+import React from 'react'
+import type { BackgroundApi } from '../types/api'
+import type { BackgroundControlsProps } from '../types/controls'
+import { ModeEnum } from '../types/ModeEnum'
+import ColorComponent from './sub/Color'
+import ImageComponent from './sub/Image'
+import LinearGradientComponent from './sub/LinearGradient'
 
 interface BackgroundDefaultControlsState {
-  mode?: ModeEnum;
+  mode?: ModeEnum
 }
 
 class Inner extends React.Component<
@@ -25,12 +22,11 @@ class Inner extends React.Component<
   BackgroundDefaultControlsState
 > {
   constructor(props: BackgroundControlsProps & BackgroundApi) {
-    super(props);
+    super(props)
     this.state = {
       mode: props.defaultMode,
-    };
+    }
   }
-
   public render() {
     const {
       data: {
@@ -39,95 +35,133 @@ class Inner extends React.Component<
         darken = this.props.defaultDarken,
         lighten = this.props.defaultLighten,
       },
-    } = this.props;
+    } = this.props
     const darkenFinal =
       this.props.darkenPreview !== undefined
         ? this.props.darkenPreview
-        : darken ?? 0;
+        : darken ?? 0
     const lightenFinal =
       this.props.lightenPreview !== undefined
         ? this.props.lightenPreview
-        : lighten ?? 0;
+        : lighten ?? 0
 
-    const tabs = this.props.enabledModes
-      ? [
-          ...((this.props.enabledModes & ModeEnum.IMAGE_MODE_FLAG) > 0
-            ? [
-                <Tab
-                  icon={
-                    <ImageIcon
-                      color={
-                        modeFlag && (modeFlag & ModeEnum.IMAGE_MODE_FLAG) > 0
-                          ? 'secondary'
-                          : undefined
-                      }
-                    />
-                  }
-                  label={this.props.translations?.imageMode}
-                  value={ModeEnum.IMAGE_MODE_FLAG}
-                  key={ModeEnum.IMAGE_MODE_FLAG}
-                />,
-              ]
-            : []),
-          ...((this.props.enabledModes & ModeEnum.COLOR_MODE_FLAG) > 0
-            ? [
-                <Tab
-                  icon={
-                    <ColorIcon
-                      color={
-                        modeFlag && (modeFlag & ModeEnum.COLOR_MODE_FLAG) > 0
-                          ? 'secondary'
-                          : undefined
-                      }
-                    />
-                  }
-                  label={this.props.translations?.colorMode}
-                  value={ModeEnum.COLOR_MODE_FLAG}
-                  key={ModeEnum.COLOR_MODE_FLAG}
-                />,
-              ]
-            : []),
-          (this.props.enabledModes & ModeEnum.GRADIENT_MODE_FLAG) > 0
-            ? [
-                <Tab
-                  icon={
-                    <GradientIcon
-                      color={
-                        modeFlag && (modeFlag & ModeEnum.GRADIENT_MODE_FLAG) > 0
-                          ? 'secondary'
-                          : undefined
-                      }
-                    />
-                  }
-                  label={this.props.translations?.gradientMode}
-                  value={ModeEnum.GRADIENT_MODE_FLAG}
-                  key={ModeEnum.GRADIENT_MODE_FLAG}
-                />,
-              ]
-            : [],
-        ]
-      : [];
     return (
-      <div>
-        {this.props.enabledModes ? (
-          <Tabs
-            style={{ marginBottom: 16 }}
-            value={this.state.mode}
-            onChange={this.handleChangeMode}
-            centered={true}
-          >
-            {tabs}
-          </Tabs>
-        ) : null}
-
+      <Grid.Container direction="column">
+        <Grid.Container justify="center" gap={1}>
+          {(this.props.enabledModes & ModeEnum.IMAGE_MODE_FLAG) > 0 && (
+            <Grid>
+              <Card
+                variant={
+                  this.state.mode === ModeEnum.IMAGE_MODE_FLAG
+                    ? 'bordered'
+                    : 'flat'
+                }
+                isHoverable
+                isPressable
+                onPress={() => {
+                  this.handleChangeMode(ModeEnum.IMAGE_MODE_FLAG)
+                }}>
+                <Card.Body
+                  css={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}>
+                  <ImageIcon
+                    color={
+                      modeFlag && (modeFlag & ModeEnum.IMAGE_MODE_FLAG) > 0
+                        ? 'secondary'
+                        : undefined
+                    }
+                  />
+                  <Text
+                    css={{
+                      marginLeft: 10,
+                    }}>
+                    {this.props.translations?.imageMode}
+                  </Text>
+                </Card.Body>
+              </Card>
+            </Grid>
+          )}
+          {(this.props.enabledModes & ModeEnum.COLOR_MODE_FLAG) > 0 && (
+            <Grid>
+              <Card
+                variant={
+                  this.state.mode === ModeEnum.COLOR_MODE_FLAG
+                    ? 'bordered'
+                    : 'flat'
+                }
+                isHoverable
+                isPressable
+                onPress={() => {
+                  this.handleChangeMode(ModeEnum.COLOR_MODE_FLAG)
+                }}>
+                <Card.Body
+                  css={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}>
+                  <ColorIcon
+                    color={
+                      modeFlag && (modeFlag & ModeEnum.COLOR_MODE_FLAG) > 0
+                        ? 'secondary'
+                        : undefined
+                    }
+                  />
+                  <Text
+                    css={{
+                      marginLeft: 10,
+                    }}>
+                    {this.props.translations?.colorMode}
+                  </Text>
+                </Card.Body>
+              </Card>
+            </Grid>
+          )}
+          {(this.props.enabledModes & ModeEnum.GRADIENT_MODE_FLAG) > 0 && (
+            <Grid>
+              <Card
+                variant={
+                  this.state.mode === ModeEnum.GRADIENT_MODE_FLAG
+                    ? 'bordered'
+                    : 'flat'
+                }
+                isHoverable
+                isPressable
+                onPress={() => {
+                  this.handleChangeMode(ModeEnum.GRADIENT_MODE_FLAG)
+                }}>
+                <Card.Body
+                  css={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}>
+                  <GradientIcon
+                    color={
+                      modeFlag && (modeFlag & ModeEnum.GRADIENT_MODE_FLAG) > 0
+                        ? 'secondary'
+                        : undefined
+                    }
+                  />
+                  <Text
+                    css={{
+                      marginLeft: 10,
+                    }}>
+                    {this.props.translations?.gradientMode}
+                  </Text>
+                </Card.Body>
+              </Card>
+            </Grid>
+          )}
+        </Grid.Container>
         {/* Render one of the panels here - image / mono color / gradient */}
-        {this.renderUI()}
+        <Grid>{this.renderUI()}</Grid>
 
         <br />
 
         {/* Render the common UI here for each tab - darken / lighten / padding */}
-        <div style={{ display: 'flex' }}>
-          <div style={{ flex: 1 }}>
+        <Grid>
+          <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
             <Typography variant="body1" id="linear-gradient-darken-label">
               {this.props.translations?.darken} (
               {(darkenFinal * 100).toFixed(0)}
@@ -148,7 +182,7 @@ class Inner extends React.Component<
             />
           </div>
 
-          <div style={{ flex: 1, marginLeft: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
             <Typography variant="body1" id="linear-gradient-lighten-label">
               {this.props.translations?.lighten} (
               {(lightenFinal * 100).toFixed(0)}
@@ -169,45 +203,50 @@ class Inner extends React.Component<
             />
           </div>
 
-          <div style={{ flex: 1, marginLeft: 16 }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  onChange={this.props.handleChangeHasPadding}
-                  checked={hasPadding}
-                />
-              }
-              label={this.props.translations?.usePadding}
-            />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Switch
+              onChange={this.props.handleChangeHasPadding}
+              checked={hasPadding}></Switch>
+            <Text
+              css={{
+                marginLeft: 10,
+              }}>
+              {this.props.translations?.usePadding}
+            </Text>
           </div>
-        </div>
-      </div>
-    );
+        </Grid>
+      </Grid.Container>
+    )
   }
 
   renderModeSwitch = () => {
     const {
       data: { modeFlag = this.props.defaultModeFlag },
-    } = this.props;
-    return (
-      <FormControlLabel
-        style={{ marginBottom: 16 }}
-        control={
-          <Switch
-            onChange={this.props.handleChangeModeSwitch(
-              this.state.mode,
-              modeFlag
-            )}
-            checked={Boolean(
-              modeFlag && this.state.mode && modeFlag & this.state.mode
-            )}
-          />
-        }
-        label={this.props.translations?.onOff}
-      />
-    );
-  };
+    } = this.props
 
+    return (
+      <div
+        style={{
+          display: 'flex',
+          marginBottom: 10,
+        }}>
+        <Switch
+          onChange={this.props.handleChangeModeSwitch(
+            this.state.mode,
+            modeFlag
+          )}
+          checked={Boolean(
+            modeFlag && this.state.mode && modeFlag & this.state.mode
+          )}></Switch>
+        <Text
+          css={{
+            marginLeft: 10,
+          }}>
+          {this.props.translations?.onOff}
+        </Text>
+      </div>
+    )
+  }
   renderUI = () => {
     switch (this.state.mode) {
       case ModeEnum.COLOR_MODE_FLAG:
@@ -226,7 +265,7 @@ class Inner extends React.Component<
               backgroundColorPreview={this.props.backgroundColorPreview}
             />
           </>
-        );
+        )
 
       case ModeEnum.GRADIENT_MODE_FLAG:
         return (
@@ -260,7 +299,7 @@ class Inner extends React.Component<
               }
             />
           </React.Fragment>
-        );
+        )
 
       case ModeEnum.IMAGE_MODE_FLAG:
       default:
@@ -275,25 +314,25 @@ class Inner extends React.Component<
               onImageLoaded={this.props.handleImageLoaded}
               onImageUploaded={this.props.handleImageUploaded}
               ensureModeOn={this.ensureModeOn(ModeEnum.IMAGE_MODE_FLAG)}
+              onChangeBorderColorPreview={this.props.onChangeBorderColorPreview}
+              borderRadiusColorPreview={this.props.borderRadiusColorPreview}
             />
           </React.Fragment>
-        );
+        )
     }
-  };
+  }
 
   ensureModeOn = (mode: ModeEnum) => () => {
     const {
       data: { modeFlag = this.props.defaultModeFlag },
-    } = this.props;
+    } = this.props
     if (modeFlag && (modeFlag & mode) === 0) {
-      this.props.handleChangeModeSwitch(mode, modeFlag)();
+      this.props.handleChangeModeSwitch(mode, modeFlag)()
     }
-  };
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleChangeMode = (e: React.ChangeEvent<any>, mode: number) => {
-    this.setState({ mode });
-  };
+  handleChangeMode = (mode: number) => this.setState({ mode })
 }
 
-export default Inner;
+export default Inner

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoField } from '../uniform-mui';
+import { AutoField } from './Autoforms';
 
 const AutofieldContextProvider: React.FC = ({ children }) => (
   <AutoField.componentDetectorContext.Provider

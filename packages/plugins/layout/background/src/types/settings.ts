@@ -1,4 +1,8 @@
-import type { CellPlugin, ImageUploadType, RGBColor } from '@react-page/editor';
+import type {
+  CellPlugin,
+  ImageUploadType,
+  RGBColor,
+} from '@react-page-styled/editor';
 
 import type { BackgroundControlsProps } from './controls';
 import type { ModeEnum } from './ModeEnum';
@@ -20,7 +24,12 @@ export type BackgroundSettings = {
   defaultLighten?: number;
   defaultHasPadding?: boolean;
   defaultIsParallax?: boolean;
+  defaultIsBorderRadius?: boolean;
+  defaultBorderRadiusColor?: RGBColor;
+  defaultBackgroundSize?: number;
   imageUpload?: ImageUploadType;
   translations?: Translations;
   cellStyle?: CellPlugin<BackgroundState>['cellStyle'];
+  defaultZIndex?: number;
+  defaultMarginTop?: string;
 };

@@ -4,8 +4,8 @@ import type { BackgroundSettings } from './types/settings';
 import type { BackgroundState } from './types/state';
 
 import { defaultSettings } from './default/settings';
-import type { CellPlugin } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 
 const Icon = lazyLoad(() => import('@mui/icons-material/CropLandscape'));
 

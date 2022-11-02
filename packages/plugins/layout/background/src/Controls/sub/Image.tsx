@@ -1,34 +1,54 @@
 import React from 'react';
-import Switch from '@mui/material/Switch';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import type { ImageLoaded, ImageUploaded } from '@react-page/editor';
-import { ImageUpload } from '@react-page/editor';
-import Typography from '@mui/material/Typography';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import type {
+  ImageLoaded,
+  ImageUploaded,
+  RGBColor,
+} from '@react-page-styled/editor';
+import { Button, Grid, Input, Switch, Text } from '@nextui-org/react';
 
 import type { BackgroundProps } from '../../types/component';
+import { ColorPicker, ImageUpload } from '@react-page-styled/editor';
+import { Card } from '@material-ui/core';
 
 export interface ImageComponentProps {
   ensureModeOn: () => void;
   onImageLoaded: (image: ImageLoaded) => void;
   onImageUploaded: () => void;
+  borderRadiusColorPreview?: RGBColor;
+  onChangeBorderColorPreview: (color?: RGBColor) => void;
 }
 
 class ImageComponent extends React.Component<
   BackgroundProps & ImageComponentProps
 > {
+  handleChangeBackgroundSize = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.onChange({ backgroundSize: Number(e.target.value) });
+  };
+
   handleChangeBackground = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.props.ensureModeOn();
     this.props.onChange({ background: e.target.value });
   };
 
-  handleChangeIsParallax = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChangeIsParallax = () => {
     this.props.ensureModeOn();
     this.props.onChange({
       isParallax:
         this.props.data.isParallax === undefined
           ? false
           : !this.props.data.isParallax,
+    });
+  };
+
+  handleChangeIsBorderRadius = () => {
+    this.props.ensureModeOn();
+    this.props.onChange({
+      isBorderRadius:
+        this.props.data.isBorderRadius === undefined
+          ? false
+          : !this.props.data.isBorderRadius,
     });
   };
 
@@ -42,53 +62,145 @@ class ImageComponent extends React.Component<
     this.props.onChange({ background: resp.url });
   };
 
+  handleChangeBorderRadiusColor = (e?: RGBColor) =>
+    this.props.onChangeBorderColorPreview &&
+    this.props.onChangeBorderColorPreview(e);
+
+  handleChangeBorderRadiusColorComplete = (e?: RGBColor) => {
+    if (this.props.onChangeBorderColorPreview) {
+      this.props.onChangeBorderColorPreview(undefined);
+    }
+    this.props.onChange({ isBorderRadius: true, borderRadiusColor: e });
+  };
+
+  handleChangeZIndex = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.onChange({ zIndex: Number(e.target.value) });
+  };
+
+  handleMarginTop = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.onChange({ marginTop: e.target.value });
+  };
+
   render() {
     const {
-      data: { isParallax = true, background = '' },
+      data: {
+        isParallax = true,
+        background = '',
+        isBorderRadius = false,
+        borderRadiusColor = this.props.defaultBorderRadiusColor,
+        backgroundSize = this.props.data.backgroundSize ||
+          this.props.defaultBackgroundSize,
+        zIndex = this.props.data.zIndex || this.props.defaultZIndex,
+        marginTop = this.props.data.marginTop || this.props.defaultMarginTop,
+      },
     } = this.props;
     return (
-      <div>
-        <div style={{ display: 'flex' }}>
-          {this.props.imageUpload && (
-            <React.Fragment>
-              <ImageUpload
-                translations={this.props.translations}
-                imageUpload={this.props.imageUpload}
-                imageLoaded={this.handleImageLoaded}
-                imageUploaded={this.handleImageUploaded}
-              />
-              <Typography
-                variant="body1"
-                style={{ margin: '20px 16px 0 16px' }}
+      <Grid.Container>
+        <Grid.Container direction="row" alignItems="center">
+          <Grid>
+            {this.props.imageUpload && (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
               >
-                {this.props.translations?.or}
-              </Typography>
-            </React.Fragment>
-          )}
-
-          <TextField
-            placeholder={this.props.translations?.srcPlaceholder}
-            label={
-              this.props.imageUpload
-                ? this.props.translations?.haveUrl
-                : this.props.translations?.imageUrl
-            }
-            style={{ width: '256px' }}
-            value={background}
-            onChange={this.handleChangeBackground}
+                <ImageUpload
+                  translations={this.props.translations}
+                  imageUpload={this.props.imageUpload}
+                  imageLoaded={this.handleImageLoaded}
+                  imageUploaded={this.handleImageUploaded}
+                  allowedExtensions={['jpg', 'jpeg', 'png', 'gif', 'svg']}
+                />
+                <Text css={{ margin: '0 16px 0 16px' }}>
+                  {this.props.translations?.or}
+                </Text>
+              </div>
+            )}
+          </Grid>
+          <Grid>
+            <Input
+              placeholder={this.props.translations?.srcPlaceholder}
+              style={{ width: '256px' }}
+              value={background}
+              onChange={this.handleChangeBackground}
+            />
+          </Grid>
+          <Grid
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Switch
+              onChange={this.handleChangeIsParallax}
+              checked={isParallax}
+            />
+            <Text
+              css={{
+                marginLeft: 10,
+              }}
+            >
+              {this.props.translations?.isParallax}
+            </Text>
+          </Grid>
+        </Grid.Container>
+        <Grid.Container>
+          <Grid
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Switch
+              onChange={this.handleChangeIsBorderRadius}
+              checked={isBorderRadius}
+            />
+            <Text
+              css={{
+                marginLeft: 10,
+              }}
+            >
+              {this.props.translations?.isBorderRadius}
+            </Text>
+          </Grid>
+          <ColorPicker
+            color={this.props.borderRadiusColorPreview ?? borderRadiusColor}
+            onChange={this.handleChangeBorderRadiusColor}
+            onDialogOpen={this.props.ensureModeOn}
+            onChangeComplete={this.handleChangeBorderRadiusColorComplete}
+            style={{ margin: 'auto' }}
           />
-
-          <FormControlLabel
-            control={
-              <Switch
-                onChange={this.handleChangeIsParallax}
-                checked={isParallax}
+          <Grid.Container gap={1}>
+            <Grid>
+              <Input
+                placeholder={this.props.translations?.backgroundSize}
+                label={this.props.translations?.backgroundSize}
+                type="number"
+                value={backgroundSize}
+                onChange={this.handleChangeBackgroundSize}
               />
-            }
-            label={this.props.translations?.isParallax}
-          />
-        </div>
-      </div>
+            </Grid>
+            <Grid>
+              <Input
+                placeholder={this.props.translations?.zIndex}
+                label={this.props.translations?.zIndex}
+                type="number"
+                value={zIndex}
+                onChange={this.handleChangeZIndex}
+              />
+            </Grid>
+            <Grid>
+              <Input
+                placeholder={this.props.translations?.marginTop}
+                label={this.props.translations?.marginTop}
+                value={marginTop}
+                onChange={this.handleMarginTop}
+              />
+            </Grid>
+          </Grid.Container>
+        </Grid.Container>
+      </Grid.Container>
     );
   }
 }

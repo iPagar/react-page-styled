@@ -1,4 +1,4 @@
-import { useUiTranslator } from '@react-page/editor';
+import { useUiTranslator } from '@react-page-styled/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import { Range } from 'slate';
 import useAddPlugin from '../hooks/useAddPlugin';
@@ -14,12 +14,11 @@ import PluginControls from './PluginControls';
 import ToolbarButton from './ToolbarButton';
 
 type Props = {
-  plugin: SlatePluginDefinition;
-  dark?: boolean;
+  plugin: SlatePluginDefinition<unknown>;
 } & PluginButtonProps;
 
 function PluginButton(props: Props) {
-  const { plugin, dark } = props;
+  const { plugin } = props;
   const { t } = useUiTranslator();
   const hasControls = Boolean(plugin.controls);
 
@@ -61,14 +60,11 @@ function PluginButton(props: Props) {
         onClick={onClick}
         disabled={isDisabled}
         isActive={isActive}
-        dark={dark}
         icon={
-          plugin.icon ??
-          (plugin.pluginType === 'component'
-            ? plugin.deserialize?.tagName ?? ''
-            : '')
+          plugin.icon ||
+          (plugin.pluginType === 'component' && plugin.deserialize?.tagName)
         }
-        toolTip={t(plugin.label) ?? ''}
+        toolTip={t(plugin.label)}
       />
 
       {(hasControls || shouldInsertWithText) && showControls ? (

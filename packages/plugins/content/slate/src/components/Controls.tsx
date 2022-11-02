@@ -9,7 +9,11 @@ const Controls = (props: Pick<SlateProps, 'translations' | 'plugins'>) => {
   const dark = theme.palette.mode === 'dark';
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+      }}
+    >
       {plugins &&
         plugins.map((plugin, i: number) =>
           plugin.addToolbarButton ? (

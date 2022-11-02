@@ -1,5 +1,5 @@
-import type { CellPlugin } from '@react-page/editor';
-import { lazyLoad, ImageUploadType } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
+import { lazyLoad, ImageUploadType } from '@react-page-styled/editor';
 import createPlugin from './createPlugin';
 import ImageHtmlRenderer from './Renderer/ImageHtmlRenderer';
 import type { ImageSettings } from './types/settings';

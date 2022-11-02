@@ -1,3 +1,4 @@
+import { Grid } from '@nextui-org/react';
 import React from 'react';
 import { useOption, useUiTranslator } from '../../core/components/hooks';
 import ToggleEdit from './ToggleEdit/index';
@@ -97,31 +98,16 @@ export const Sidebar: React.SFC<{
         ...getStickyNessstyle(stickyNess),
       }}
     >
-      <div
+      <Grid.Container
+        gap={1}
         ref={stickyNess?.stickyElRef}
-        style={{
-          padding: 16,
-          position: 'relative',
-
-          flexFlow: 'column wrap',
-          direction: 'rtl',
-
-          display: 'flex',
-        }}
+        direction="column"
+        alignItems="center"
       >
         {actions.map(({ action }, index) => (
-          <div
-            key={index}
-            className="react-page-controls-mode-toggle-control"
-            style={{
-              animationDelay: (actions.length - index) * 150 + 'ms',
-            }}
-          >
-            {action}
-            <div className="react-page-controls-mode-toggle-clearfix" />
-          </div>
+          <Grid>{action}</Grid>
         ))}
-      </div>
+      </Grid.Container>
     </div>
   );
 };

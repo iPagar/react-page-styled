@@ -1,10 +1,11 @@
-import { IconButton, Dialog } from '@mui/material';
-import Translate from '@mui/icons-material/Translate';
+import { Dialog } from '@material-ui/core';
+import Translate from '@material-ui/icons/Translate';
 
 import React, { useState } from 'react';
 import SelectLang from './SelectLang';
 import I18nDialog from './I18nDialog';
 import { useOption } from '../../core/components/hooks';
+import { Button } from '@nextui-org/react';
 
 export const I18nTools: React.FC<{
   nodeId: string;
@@ -25,13 +26,13 @@ export const I18nTools: React.FC<{
       </Dialog>
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <IconButton
+        <Button
+          flat
           onClick={() => setShowI18nDialog(true)}
           aria-label="i18n"
           color="secondary"
-        >
-          <Translate />
-        </IconButton>
+          icon={<Translate />}
+        />
 
         <SelectLang />
       </div>

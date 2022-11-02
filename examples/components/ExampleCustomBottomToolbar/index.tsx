@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
-import type { BottomToolbarProps } from '@react-page/editor';
-import { BottomToolbar, usePluginOfCell } from '@react-page/editor';
+import { Typography } from '@material-ui/core';
+import type { BottomToolbarProps } from '@react-page-styled/editor';
+import { BottomToolbar, usePluginOfCell } from '@react-page-styled/editor';
 import React from 'react';
 import CollapseButton from './CollapseButton';
 

@@ -1,5 +1,5 @@
-import { ColorPickerField } from '@react-page/editor';
-import { pluginFactories } from '@react-page/plugins-slate';
+import { ColorPickerField } from '@react-page-styled/editor';
+import { pluginFactories } from '@react-page-styled/plugins-slate';
 import React from 'react';
 
 export default pluginFactories.createComponentPlugin<{

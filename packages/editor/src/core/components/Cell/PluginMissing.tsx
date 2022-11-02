@@ -1,27 +1,58 @@
 import React from 'react';
+import { Button, Card, Grid, Modal, Text, useModal } from '@nextui-org/react';
 
 import type { CellPluginMissingProps } from '../../types/plugins';
 
 const PluginMissing: React.FC<CellPluginMissingProps> = ({
   children,
   ...props
-}) => (
-  <div>
-    <div
-      style={{
-        backgroundColor: 'red',
-        padding: '8px',
-        border: '1px solid black',
-        margin: '2px',
-        overflowX: 'scroll',
-      }}
-    >
-      The requested plugin `{props.pluginId}` could not be found.
-      <button onClick={props.remove}>Delete Plugin</button>
-      <pre>{JSON.stringify(props, null, 2)}</pre>
+}) => {
+  const { setVisible, bindings } = useModal();
+
+  return (
+    <div>
+      <Card>
+        <Card.Header
+          css={{
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text>
+            The requested plugin `{props.pluginId}` could not be found.
+          </Text>
+        </Card.Header>
+        <Card.Footer>
+          <Grid.Container gap={1}>
+            <Grid>
+              <Button auto color="error" onClick={props.remove}>
+                Delete Plugin
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                onClick={() => {
+                  setVisible(true);
+                }}
+              >
+                Open logs
+              </Button>
+            </Grid>
+          </Grid.Container>
+        </Card.Footer>
+      </Card>
+      {children}
+      <Modal
+        width="fit-content"
+        scroll
+        closeButton
+        open={bindings.open}
+        onClose={bindings.onClose}
+      >
+        <pre>{JSON.stringify(props, null, 2)}</pre>
+      </Modal>
     </div>
-    {children}
-  </div>
-);
+  );
+};
 
 export default PluginMissing;

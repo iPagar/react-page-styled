@@ -6,12 +6,12 @@ declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor &
       ReactEditor & {
-        type: string | null;
-        data?: Data | null;
+        type: string;
+        data?: Data;
       };
     Element: {
-      type?: string | null;
-      data?: Data | null;
+      type: string;
+      data?: Data;
       children: Descendant[];
     };
     Text: CustomText;

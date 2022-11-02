@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Editor } from 'slate';
 
 const getCurrentData = (editor: Editor): Record<string, unknown> => {

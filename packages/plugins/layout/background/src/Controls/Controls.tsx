@@ -2,12 +2,13 @@ import React from 'react';
 
 import type { BackgroundProps } from '../types/component';
 
-import type { ImageLoaded, RGBColor } from '@react-page/editor';
+import type { ImageLoaded, RGBColor } from '@react-page-styled/editor';
 import type { ModeEnum } from '../types/ModeEnum';
 
 import Inner from './Inner';
 
 export type BackgroundState = {
+  borderRadiusColorPreview?: RGBColor;
   backgroundColorPreview?: RGBColor;
   gradientDegPreview?: number;
   gradientDegPreviewIndex?: number;
@@ -92,13 +93,17 @@ class BackgroundDefaultControls extends React.Component<
         modeFlag ^= mode;
         this.props.onChange({ modeFlag });
       } else {
-        this.props.onChange({ modeFlag });
+        this.props.onChange({ modeFlag: mode });
       }
     };
+
+  onChangeBorderColorPreview = (e?: RGBColor) =>
+    this.setState({ borderRadiusColorPreview: e });
 
   render() {
     return (
       <Inner
+        onChangeBorderColorPreview={this.onChangeBorderColorPreview}
         {...this.props}
         handleChangeDarken={this.handleChangeDarken}
         handleChangeDarkenPreview={this.handleChangeDarkenPreview}

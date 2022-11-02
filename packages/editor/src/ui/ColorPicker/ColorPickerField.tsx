@@ -12,7 +12,9 @@ const ColorPickerField = connectField<{
   const { t } = useUiTranslator();
   return (
     <ColorPicker
-      style={{ marginBottom: 8 }}
+      style={{
+        marginTop: 8,
+      }}
       color={stringToColor(props.value)}
       buttonContent={t(props.label) ?? ''}
       onChange={(v) => {

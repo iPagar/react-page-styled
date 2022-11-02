@@ -1,4 +1,4 @@
-import { objIsNode } from '@react-page/editor';
+import { objIsNode } from '@react-page-styled/editor';
 import type { Editor } from 'slate';
 import { Transforms } from 'slate';
 
@@ -52,7 +52,7 @@ const withPaste =
             Transforms.insertNodes(editor, {
               type: defaultPluginType,
               children: [{ text: thisLineText }],
-            });
+            } as any);
             nextWillbeParagraph = false;
           } else {
             Transforms.insertText(editor, thisLineText);

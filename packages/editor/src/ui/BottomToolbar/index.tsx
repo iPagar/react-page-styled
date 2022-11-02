@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import { BottomToolbarDrawer } from './Drawer';
 import { BottomToolbarMainBar } from './NodeTools';
@@ -12,7 +13,7 @@ export const BottomToolbar: React.FC<BottomToolbarProps> = React.memo(
   ({
     open = false,
     className,
-
+    theme,
     anchor = 'bottom',
     pluginControls,
     nodeId,
@@ -21,25 +22,32 @@ export const BottomToolbar: React.FC<BottomToolbarProps> = React.memo(
     children,
   }) => {
     const [scale, setScale] = React.useState(1);
-
     return (
-      <BottomToolbarDrawer
-        className={className}
-        open={open}
-        anchor={anchor}
-        scale={scale}
-        style={style}
-      >
-        {children}
-        {pluginControls}
-        <BottomToolbarMainBar
-          nodeId={nodeId}
-          actionsLeft={[
-            <ScaleButton key="scalebutton" scale={scale} setScale={setScale} />,
-            ...React.Children.toArray(actionsLeft),
-          ]}
-        />
-      </BottomToolbarDrawer>
+      <ThemeProvider theme={theme ? theme : null}>
+        <BottomToolbarDrawer
+          className={className}
+          open={open}
+          anchor={anchor}
+          scale={scale}
+          style={style}
+          bottom={
+            <BottomToolbarMainBar
+              nodeId={nodeId}
+              actionsLeft={[
+                <ScaleButton
+                  key="scalebutton"
+                  scale={scale}
+                  setScale={setScale}
+                />,
+                ...React.Children.toArray(actionsLeft),
+              ]}
+            />
+          }
+        >
+          {children}
+          {pluginControls}
+        </BottomToolbarDrawer>
+      </ThemeProvider>
     );
   }
 );

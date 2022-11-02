@@ -1,4 +1,7 @@
-import type { CellPluginRenderer, ImageUploadType } from '@react-page/editor';
+import type {
+  CellPluginRenderer,
+  ImageUploadType,
+} from '@react-page-styled/editor';
 import type { ImageControlType } from './controls';
 import type { ImageState } from './state';
 

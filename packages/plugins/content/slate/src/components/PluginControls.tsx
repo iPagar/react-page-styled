@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { DataTType, JsonSchema } from '@react-page/editor';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import type { BaseRange } from 'slate';
 import { Range, Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 import useAddPlugin from '../hooks/useAddPlugin';
@@ -12,13 +9,12 @@ import UniformsControls from '../pluginFactories/components/UniformsControls';
 
 import type {
   PluginButtonProps,
-  SlatePluginControls,
   SlatePluginDefinition,
 } from '../types/slatePluginDefinitions';
 import { useSetDialogIsVisible } from './DialogVisibleProvider';
 
 type Props = {
-  plugin: SlatePluginDefinition;
+  plugin: SlatePluginDefinition<unknown>;
 } & PluginButtonProps;
 
 function PluginControls(
@@ -32,7 +28,7 @@ function PluginControls(
   const storedPropsRef = useRef<{
     selection: Range;
     isActive: boolean;
-    data: DataTType;
+    data: unknown;
   }>();
 
   const isVoid =
@@ -54,31 +50,26 @@ function PluginControls(
 
   useEffect(() => {
     // this is to indicate that any dialog is visible
-    setIsVisible?.(props.open);
+    setIsVisible(props.open);
     _setOpen(props.open);
     if (props.open) {
       // we need to store the current state, when the dialog will open (but before it actually does)
       // this is also why we have a "delayed" _setOpen
       storedPropsRef.current = {
-        selection: editor.selection as BaseRange,
+        selection: editor.selection,
         isActive,
         data: getCurrentNodeDataWithPlugin(editor, plugin),
       };
     }
     return () => {
-      setIsVisible?.(false);
+      setIsVisible(false);
     };
   }, [props.open, setIsVisible, _setOpen]);
 
   const { controls } = plugin;
   const Controls = controls
     ? controls.type === 'autoform'
-      ? (props: SlatePluginControls<any>) => (
-          <UniformsControls
-            {...props}
-            schema={controls?.schema as JsonSchema<any>}
-          />
-        )
+      ? (props) => <UniformsControls {...props} schema={controls?.schema} />
       : controls.Component
     : UniformsControls;
 
@@ -106,9 +97,11 @@ function PluginControls(
   return props.open ? (
     <Controls
       pluginConfig={plugin}
+      close={close}
+      open={true}
       add={add}
       remove={remove}
-      isActive={storedPropsRef?.current?.isActive ?? false}
+      isActive={storedPropsRef?.current?.isActive}
       shouldInsertWithText={shouldInsertWithText}
       data={storedPropsRef?.current?.data}
       {...props}

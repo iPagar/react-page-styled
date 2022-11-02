@@ -9,6 +9,7 @@ import {
   useZoomOut,
 } from '../../../core/components/hooks';
 import Button from '../Button/index';
+import { Button as DefaultButton } from '@nextui-org/react';
 
 type Props = {
   labelZoomIn: string;
@@ -25,63 +26,36 @@ const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
   const isSmall = useIsSmallScreen();
 
   return (
-    <div
-      style={{
-        height: isSmall ? 56 : 80,
-        float: 'right',
-        display: 'flex',
-        direction: 'ltr',
-        transform: 'scale(1.2)',
+    <DefaultButton.Group
+      css={{
+        margin: 0,
       }}
     >
-      <div
+      <Button
+        placement="top"
+        disabled={!canZoomIn}
+        icon={<IconZoomIn />}
+        description={labelZoomIn}
+        onClick={zoomIn}
+        activeColor="default"
         style={{
-          width: isSmall ? 29 : 36,
-          overflow: 'hidden',
-          marginRight: isSmall ? 1 : 2,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
         }}
-      >
-        <Button
-          active
-          disabled={!canZoomIn}
-          style={{
-            transform: `translateX(${isSmall ? 27 : 35}px)`,
-          }}
-          icon={
-            <IconZoomIn
-              style={{ transform: `translateX(-${isSmall ? 6 : 12}px)` }}
-            />
-          }
-          description={labelZoomIn}
-          onClick={zoomIn}
-          activeColor="default"
-        />
-      </div>
-      <div
+      />
+      <Button
+        placement="top"
+        disabled={!canZoomOut}
+        icon={<IconZoomOut />}
+        description={labelZoomOut}
+        onClick={zoomOut}
+        activeColor="default"
         style={{
-          width: isSmall ? 28 : 36,
-          overflow: 'hidden',
-          marginLeft: 1,
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0,
         }}
-      >
-        <Button
-          style={{
-            position: 'relative',
-            transform: 'translateX(1px)',
-          }}
-          active
-          disabled={!canZoomOut}
-          icon={
-            <IconZoomOut
-              style={{ transform: `translateX(${isSmall ? 6 : 12}px)` }}
-            />
-          }
-          description={labelZoomOut}
-          onClick={zoomOut}
-          activeColor="default"
-        />
-      </div>
-    </div>
+      />
+    </DefaultButton.Group>
   );
 };
 

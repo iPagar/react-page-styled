@@ -1,7 +1,7 @@
 {
   "private": true,
   "author": "ORY GmbH",
-  "name": "react-page",
+  "name": "react-page-styled",
   "license": "MIT",
   "workspaces": [
     "packages/editor",
@@ -70,7 +70,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "bootstrap": "lerna bootstrap",
     "build": "cross-env NODE_ENV=production lerna run build --stream",
-    "build:lib": "cross-env NODE_ENV=production lerna run build --ignore @react-page/examples --stream",
+    "build:lib": "cross-env NODE_ENV=production lerna run build --ignore @react-page-styled/examples --stream",
     "build:examples": "yarn --cwd examples build",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "clean": "lerna run clean",
@@ -125,7 +125,7 @@
   "version": "0.0.0-development",
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-page/react-page.git"
+    "url": "https://github.com/iPagar/react-page-styled.git"
   },
   "release": {
     "plugins": [
@@ -175,7 +175,7 @@
         "@semantic-release/exec",
         {
           "prepareCmd": "yarn replace-in-file '###VERSION###' ${nextRelease.version} packages/*/lib*/*.js examples/build/**/*.js",
-          "publishCmd": "RELEASE_CHANNEL=${nextRelease.channel} yarn build:examples && (yarn gh-pages -t true -r https://$GH_TOKEN@github.com/react-page/${nextRelease.channel || 'react-page.github.io'}.git -d examples/build -b main || true ) && yarn lerna publish --no-git-tag-version --no-git-reset --no-push --yes --dist-tag=${nextRelease.channel} --force-publish=* ${nextRelease.version}",
+          "publishCmd": "RELEASE_CHANNEL=${nextRelease.channel} yarn build:examples && (yarn gh-pages -t true -r https://$GH_TOKEN@github.com/ipagar/${nextRelease.channel || 'https://ipagar.github.io/react-page-styled/'}.git -d examples/build -b main || true ) && yarn lerna publish --no-git-tag-version --no-git-reset --no-push --yes --dist-tag=${nextRelease.channel} --force-publish=* ${nextRelease.version}",
           "addChannel": "npm dist-tag add ${nextRelease.version}@${nextRelease.channel}"
         }
       ],

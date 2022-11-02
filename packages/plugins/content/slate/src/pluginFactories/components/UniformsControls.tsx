@@ -1,12 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoneIcon from '@mui/icons-material/Done';
-import type { JsonSchema } from '@react-page/editor';
-import { makeUniformsSchema, AutoForm, AutoFields } from '@react-page/editor';
+import type { JsonSchema } from '@react-page-styled/editor';
+import {
+  makeUniformsSchema,
+  AutoForm,
+  AutoFields,
+} from '@react-page-styled/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import type { Data } from '../../types';
+import { Button, Modal, Input, Tooltip } from '@nextui-org/react';
 
 import type { SlatePluginControls } from '../../types/slatePluginDefinitions';
 
@@ -61,59 +66,60 @@ function Controls<T extends Data>(
   };
 
   return (
-    <Dialog
-      disableEnforceFocus={true}
-      PaperProps={{
-        style: { minWidth: 300 },
-      }}
-      open={props.open}
-    >
-      <DialogContent>
+    <Modal open={props.open}>
+      <Modal.Body>
         {!props.shouldInsertWithText ? null : (
-          <div>
-            <TextField
-              autoFocus={true}
-              placeholder={'Text'}
-              onChange={(e) => setText(e.target.value)}
-              value={text}
-            />
-          </div>
+          <Input
+            auto
+            label="Text"
+            autoFocus={true}
+            placeholder={'Text'}
+            onChange={(e) => setText(e.target.value)}
+            value={text}
+          />
         )}
 
         {hasSchema && uniformsSchema ? (
           <AutoForm
             ref={formRef}
-            model={props.data as any}
+            model={props.data}
             schema={uniformsSchema}
             onSubmit={saveAndCloseWithData}
           >
             <AutoFields />
           </AutoForm>
         ) : null}
-      </DialogContent>
+      </Modal.Body>
       {hasSchema ? (
-        <DialogActions>
+        <Modal.Footer>
           <Button
-            variant="text"
+            auto
+            flat
+            color="secondary"
             onClick={onCancel}
             style={{ marginRight: 'auto' }}
           >
             {props.cancelLabel || 'Cancel'}
           </Button>
           {props.isActive ? (
-            <Button variant="contained" color="secondary" onClick={onRemove}>
-              {props.removeLabel || 'Remove'}
-              <DeleteIcon style={{ marginLeft: 10 }} />
-            </Button>
+            <Tooltip content={props.removeLabel || 'Remove'}>
+              <Button
+                flat
+                auto
+                color="error"
+                onClick={onRemove}
+                icon={<DeleteIcon />}
+              />
+            </Tooltip>
           ) : null}
 
-          <Button variant="contained" color="primary" onClick={onOkClick}>
+          <Button auto color="primary" onClick={onOkClick}>
             {props.submitLabel || 'Ok'}
             <DoneIcon style={{ marginLeft: 10 }} />
           </Button>
-        </DialogActions>
+        </Modal.Footer>
       ) : null}
-    </Dialog>
+    </Modal>
   );
 }
 

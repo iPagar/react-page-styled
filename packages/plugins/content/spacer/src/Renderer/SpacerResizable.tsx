@@ -1,4 +1,4 @@
-import type { CellPluginComponentProps } from '@react-page/editor';
+import type { CellPluginComponentProps } from '@react-page-styled/editor';
 
 import React from 'react';
 import { useEffect, useState } from 'react';

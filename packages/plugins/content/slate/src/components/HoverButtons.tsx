@@ -1,3 +1,4 @@
+import { Card, Grid } from '@nextui-org/react';
 import React, { useEffect, useRef } from 'react';
 import { Portal } from 'react-portal';
 import { useSlate } from 'slate-react';
@@ -10,19 +11,19 @@ const HoverButtons = ({
   translations,
 }: Pick<SlateProps, 'plugins' | 'translations'>) => {
   const showHoverToolbar = useTextIsSelected();
-  const toolbarRef = useRef<HTMLDivElement>(null);
+  const toolbarRef = useRef<HTMLDivElement>();
   const editor = useSlate();
   useEffect(() => {
     const toolbar = toolbarRef.current;
 
-    if (!showHoverToolbar || !toolbar) {
+    if (!showHoverToolbar) {
       return;
     }
 
     const s = window.getSelection();
     try {
-      const oRange = s?.getRangeAt(0); // get the text range
-      const oRect = oRange?.getBoundingClientRect();
+      const oRange = s.getRangeAt(0); // get the text range
+      const oRect = oRange.getBoundingClientRect();
       if (oRect) {
         const { left, top, width } = oRect;
 
@@ -49,17 +50,22 @@ const HoverButtons = ({
         style={{ padding: 0 }}
         ref={toolbarRef}
       >
-        {plugins &&
-          plugins.map((plugin, i: number) =>
-            plugin.addHoverButton ? (
-              <PluginButton
-                dark
-                translations={translations}
-                key={i}
-                plugin={plugin}
-              />
-            ) : null
-          )}
+        <Card>
+          <Grid.Container>
+            {plugins &&
+              plugins.map((plugin, i: number) =>
+                plugin.addHoverButton ? (
+                  <Grid>
+                    <PluginButton
+                      translations={translations}
+                      key={i}
+                      plugin={plugin}
+                    />
+                  </Grid>
+                ) : null
+              )}
+          </Grid.Container>
+        </Card>
       </div>
     </Portal>
   );

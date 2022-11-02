@@ -70,10 +70,16 @@ const Navigation: React.FC = () => {
       </List>
       <Divider />
       <List>
-        <ListItem component="a" href={'https://react-page.github.io/'}>
+        <ListItem
+          component="a"
+          href={'https://ipagar.github.io/react-page-styled/'}
+        >
           <ListItemText primary={'Latest version'} />
         </ListItem>
-        <ListItem component="a" href={'https://react-page.github.io/beta'}>
+        <ListItem
+          component="a"
+          href={'https://ipagar.github.io/react-page-styled/beta'}
+        >
           <ListItemText primary={'beta version'} />
         </ListItem>
       </List>

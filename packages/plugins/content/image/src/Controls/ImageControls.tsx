@@ -1,19 +1,29 @@
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { ImageUpload, useUiTranslator } from '@react-page/editor';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { ImageUpload, useUiTranslator } from '@react-page-styled/editor';
 import React from 'react';
 import type { ImageControlType } from '../types/controls';
+import { Textarea, Input, Checkbox } from '@nextui-org/react';
+import { Typography } from '@mui/material';
 
 const ImageControls: ImageControlType = (props) => {
   const { t } = useUiTranslator();
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       {/* Button and existing image text box */}
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'end', gap: 8 }}>
         {props.imageUpload && (
-          <>
+          <div
+            style={{
+              display: 'flex',
+              gap: 4,
+              alignItems: 'center',
+            }}
+          >
             <ImageUpload
               translations={props.translations}
               imageUpload={props.imageUpload}
@@ -23,12 +33,10 @@ const ImageControls: ImageControlType = (props) => {
                 })
               }
             />
-            <Typography variant="body1" style={{ margin: '20px 16px 0 16px' }}>
-              {t(props.translations?.or)}
-            </Typography>
-          </>
+            <Typography variant="body1">{t(props.translations?.or)}</Typography>
+          </div>
         )}
-        <TextField
+        <Input
           placeholder={t(props.translations?.srcPlaceholder) ?? ''}
           label={t(
             props.imageUpload
@@ -36,7 +44,7 @@ const ImageControls: ImageControlType = (props) => {
               : props.translations?.imageUrl
           )}
           name="src"
-          // style={{ flex: 1 }}
+          fullWidth
           value={props.data.src ?? ''}
           onChange={(e) =>
             props.onChange({
@@ -48,8 +56,21 @@ const ImageControls: ImageControlType = (props) => {
 
       <br />
 
+      <Checkbox
+        size="sm"
+        isSelected={props.data.openInNewWindow ?? false}
+        onChange={(isSelected) =>
+          props.onChange({
+            openInNewWindow: isSelected,
+          })
+        }
+      >
+        {t(props.translations?.openNewWindow)}
+      </Checkbox>
+
+      <br />
       {/* Image link textbox and checkbox */}
-      <TextField
+      <Input
         placeholder={t(props.translations?.hrefPlaceholder) ?? ''}
         label={t(props.translations?.hrefLabel) ?? ''}
         name="href"
@@ -62,23 +83,9 @@ const ImageControls: ImageControlType = (props) => {
         }
       />
 
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={props.data.openInNewWindow ?? false}
-            onChange={(e) =>
-              props.onChange({
-                openInNewWindow: e.target.checked,
-              })
-            }
-          />
-        }
-        label={t(props.translations?.openNewWindow)}
-      />
-
       <br />
       {/* Image's meta like alt... */}
-      <TextField
+      <Textarea
         placeholder={t(props.translations?.altPlaceholder) ?? ''}
         label={t(props.translations?.altLabel) ?? ''}
         name="alt"
@@ -90,7 +97,7 @@ const ImageControls: ImageControlType = (props) => {
           })
         }
       />
-    </>
+    </div>
   );
 };
 

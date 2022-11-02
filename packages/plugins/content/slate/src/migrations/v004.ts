@@ -1,4 +1,4 @@
-import { Migration } from '@react-page/editor';
+import { Migration } from '@react-page-styled/editor';
 import isEmpty from 'lodash.isempty';
 import type { Element, Node, Text } from 'slate';
 // this is for slate 0.50.0
@@ -45,8 +45,7 @@ const migrateElementNode = (node: OldElementNode): Element => {
     data: node.data ?? {},
     type: node.type,
     children: node.nodes?.map(migrateNode) ?? [],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any;
+  };
 };
 const migrateNode = (oldNode: OldNode): Node => {
   if (oldNode.object === 'text') {

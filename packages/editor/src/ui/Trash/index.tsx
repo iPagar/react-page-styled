@@ -1,5 +1,6 @@
-import Fab from '@mui/material/Fab';
-import Delete from '@mui/icons-material/Delete';
+import Fab from '@material-ui/core/Fab';
+import Delete from '@material-ui/icons/Delete';
+import { Button } from '@nextui-org/react';
 import classNames from 'classnames';
 import React from 'react';
 import { useIsLayoutMode, useTrashDrop } from '../../core/components/hooks';
@@ -14,9 +15,13 @@ export const Trash: React.FC = React.memo(() => {
         'react-page-controls-trash-active': isLayoutMode,
       })}
     >
-      <Fab color="secondary" disabled={!isHovering}>
-        <Delete />
-      </Fab>
+      <Button
+        flat
+        auto
+        color="error"
+        disabled={!isHovering}
+        icon={<Delete />}
+      />
     </div>
   );
 });

@@ -1,9 +1,9 @@
-import type { Value, Options } from '@react-page/editor';
+import type { Value, Options } from '@react-page-styled/editor';
 import Editor, {
   useInsertNew,
   useSetPreviewMode,
   useSetEditMode,
-} from '@react-page/editor';
+} from '@react-page-styled/editor';
 
 import React, { useState } from 'react';
 import PageLayout from '../../components/PageLayout';

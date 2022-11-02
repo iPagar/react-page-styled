@@ -1,8 +1,5 @@
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListSubheader from '@mui/material/ListSubheader';
-import TextField from '@mui/material/TextField';
+import { Drawer, List, ListItem, ListSubheader } from '@mui/material';
+import { Input, Text } from '@nextui-org/react';
 import React from 'react';
 import { Portal } from 'react-portal';
 import {
@@ -98,12 +95,14 @@ export const PluginDrawer: React.FC = React.memo(() => {
       >
         <List
           subheader={
-            <ListSubheader>{t(defaultLabels.insertPlugin)}</ListSubheader>
+            <ListSubheader>
+              <Text>{t(defaultLabels.insertPlugin)}</Text>
+            </ListSubheader>
           }
         >
           <ListItem>
-            <TextField
-              inputRef={inputRef}
+            <Input
+              ref={inputRef}
               placeholder={t(defaultLabels.searchPlaceholder) ?? ''}
               fullWidth={true}
               onChange={onSearch}

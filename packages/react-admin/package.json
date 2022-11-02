@@ -1,5 +1,5 @@
 {
-  "name": "@react-page/react-admin",
+  "name": "@react-page-styled/react-admin",
   "version": "0.0.0",
   "main": "./lib/index.js",
   "module": "./lib-es/index.js",
@@ -23,8 +23,7 @@
     "uniforms": "*"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.8.0",
-    "@react-page/editor": "0.0.0"
+    "@react-page-styled/editor": "0.0.0"
   },
   "devDependencies": {
     "react-admin": "^3.12.2",

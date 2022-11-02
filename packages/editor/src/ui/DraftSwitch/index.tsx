@@ -1,6 +1,7 @@
-import { FormControlLabel, Switch, Tooltip } from '@mui/material';
-import VisibleIcon from '@mui/icons-material/Visibility';
-import NonVisibleIcon from '@mui/icons-material/VisibilityOff';
+import VisibleIcon from '@material-ui/icons/Visibility';
+import NonVisibleIcon from '@material-ui/icons/VisibilityOff';
+import { FormControlLabel } from '@mui/material';
+import { Switch, Tooltip } from '@nextui-org/react';
 import React from 'react';
 import {
   useCellProps,
@@ -25,7 +26,7 @@ const DraftSwitch = ({ nodeId, lang }: { nodeId: string; lang?: string }) => {
   const isDraft = cell?.isDraftI18n?.[theLang] ?? cell?.isDraft; // fallback to legacy
   const title = t(isDraft ? 'Content is hidden' : 'Content is visible');
   return cell ? (
-    <Tooltip title={title + (hasI18n ? ' in ' + theLang : '')}>
+    <Tooltip content={title + (hasI18n ? ' in ' + theLang : '')}>
       <FormControlLabel
         style={{ marginRight: 5 }}
         labelPlacement="start"
@@ -33,17 +34,21 @@ const DraftSwitch = ({ nodeId, lang }: { nodeId: string; lang?: string }) => {
           <Switch
             color="primary"
             checked={!isDraft}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={(e) => {
               setDraft(!e.target.checked, theLang);
             }}
           />
         }
         label={
-          isDraft ? (
-            <NonVisibleIcon style={{ marginTop: 5 }} />
-          ) : (
-            <VisibleIcon style={{ marginTop: 5 }} />
-          )
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginRight: 5,
+            }}
+          >
+            {isDraft ? <NonVisibleIcon /> : <VisibleIcon />}
+          </div>
         }
       />
     </Tooltip>

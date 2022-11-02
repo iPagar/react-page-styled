@@ -1,6 +1,5 @@
-import Button from '@mui/material/Button';
-import Popover from '@mui/material/Popover';
-import ColorizeIcon from '@mui/icons-material/Colorize';
+import ColorizeIcon from '@material-ui/icons/Colorize';
+import { Button, Popover } from '@nextui-org/react';
 import React from 'react';
 import type { ColorChangeHandler } from 'react-color';
 import { ChromePicker } from 'react-color';
@@ -18,7 +17,7 @@ class ColorPicker extends React.Component<ColorPickerProps> {
     isColorPickerVisible: false,
   };
 
-  handleClickShowColorPicker = (e: React.MouseEvent<HTMLElement>) => {
+  handleClickShowColorPicker = () => {
     if (this.props?.onDialogOpen) {
       this.props.onDialogOpen();
     }
@@ -33,48 +32,36 @@ class ColorPicker extends React.Component<ColorPickerProps> {
 
   render() {
     return (
-      <React.Fragment>
-        <Button
-          ref={(node) => {
-            this.anchorEl = node;
-          }}
-          variant="contained"
-          onClick={this.handleClickShowColorPicker}
-          style={
-            {
+      <Popover
+        onClose={() => {
+          this.handleClickShowColorPicker();
+        }}
+      >
+        <Popover.Trigger>
+          <Button
+            ref={(node) => {
+              this.anchorEl = node;
+            }}
+            onClick={this.handleClickShowColorPicker}
+            style={{
               ...this.props.style,
               borderColor: colorToString(this.props.color),
               borderStyle: 'solid',
               borderWidth: '2px',
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any
-          }
-        >
-          {this.props.buttonContent}
-          {this.props.icon}
-        </Button>
-        <Popover
-          open={this.state.isColorPickerVisible}
-          anchorEl={this.anchorEl}
-          onClose={this.handleClickShowColorPicker}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-        >
-          <div>
-            <ChromePicker
-              color={this.props.color ?? undefined}
-              onChange={this.onChange}
-              onChangeComplete={this.handleChangeComplete}
-            />
-          </div>
-        </Popover>
-      </React.Fragment>
+            }}
+          >
+            {this.props.buttonContent}
+            {this.props.icon}
+          </Button>
+        </Popover.Trigger>
+        <Popover.Content>
+          <ChromePicker
+            color={this.props.color ?? undefined}
+            onChange={this.onChange}
+            onChangeComplete={this.handleChangeComplete}
+          />
+        </Popover.Content>
+      </Popover>
     );
   }
 }

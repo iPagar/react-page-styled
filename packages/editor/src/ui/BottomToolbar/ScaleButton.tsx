@@ -1,5 +1,5 @@
-import { IconButton, Tooltip } from '@mui/material';
-import ScaleIcon from '@mui/icons-material/AspectRatio';
+import ScaleIcon from '@material-ui/icons/AspectRatio';
+import { Button, Tooltip } from '@nextui-org/react';
 import React from 'react';
 import { useUiTranslator } from '../../core/components/hooks';
 const SCALING_FACTORS = [1, 0.8, 0.6, 1.2];
@@ -21,14 +21,15 @@ export const ScaleButton: React.FC<{
     lastScale = newScalingFactor;
   }, [scale, lastScale, setScale]);
   return (
-    <Tooltip title={t('Change size of this window') ?? ''}>
-      <IconButton
+    <Tooltip content={t('Change size of this window') ?? ''}>
+      <Button
+        flat
+        auto
         onClick={toggleScale}
         aria-label="Change size of this window"
         color="primary"
-      >
-        <ScaleIcon />
-      </IconButton>
+        icon={<ScaleIcon />}
+      ></Button>
     </Tooltip>
   );
 };

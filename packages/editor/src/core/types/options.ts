@@ -3,7 +3,7 @@ import type { BackendFactory } from 'dnd-core';
 import type { Middleware, Store } from 'redux';
 import type { DisplayModes } from '../actions/display';
 import type { Languages } from '../EditorStore';
-import type { RootState } from '../types';
+import type { RootState } from '.';
 import type { Components } from './components';
 import type { ChildConstraints } from './constraints';
 

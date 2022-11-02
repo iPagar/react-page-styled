@@ -1,4 +1,3 @@
-import { Fab } from '@mui/material';
 import type { CSSProperties } from 'react';
 import React from 'react';
 
@@ -12,24 +11,23 @@ import {
   useMoveNodeLeft,
   useMoveNodeRight,
 } from '../../core/components/hooks';
+import { Button } from '@nextui-org/react';
 
 const Base: React.FC<{
   onClick: null | (() => void);
   icon: NonNullable<React.ReactNode>;
   style?: CSSProperties;
 }> = ({ onClick, icon, style }) => {
-  // don't show at all
-
   return (
-    <Fab
+    <Button
+      flat
       disabled={!onClick}
-      style={{ margin: 10, pointerEvents: 'all', ...style }}
-      size="small"
+      style={{ pointerEvents: 'all', ...style }}
+      auto
       onClick={onClick ?? undefined}
       color="default"
-    >
-      {icon}
-    </Fab>
+      icon={icon}
+    />
   );
 };
 

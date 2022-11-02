@@ -1,6 +1,7 @@
-import Avatar from '@mui/material/Avatar';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { Card, Text } from '@nextui-org/react';
 
 import React from 'react';
 import type { PluginDrawerLabels } from '..';
@@ -39,16 +40,28 @@ const Item: React.FC<ItemProps> = ({ plugin, insert }) => {
         title={
           t('Click to add or drag and drop it somewhere on your page!') ?? ''
         }
-        className="react-page-plugin-drawer-item"
         onClick={insertIt}
       >
-        <Avatar
-          children={plugin.icon || title?.[0]}
-          style={{
-            marginRight: 16,
+        <Card
+          isHoverable
+          css={{
+            cursor: 'pointer',
           }}
-        />
-        <ListItemText primary={t(title)} secondary={t(plugin.description)} />
+        >
+          <Card.Header>
+            <Avatar
+              children={plugin.icon || title?.[0]}
+              style={{
+                marginRight: 16,
+              }}
+            />
+            <Text b>{t(title)}</Text>
+          </Card.Header>
+          <Card.Divider />
+          <Card.Body>
+            <Text>{t(plugin.description) ?? 'No description'}</Text>
+          </Card.Body>
+        </Card>
       </ListItem>
     </Draggable>
   );

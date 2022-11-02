@@ -2,7 +2,7 @@
 
 [![Build Status](https://app.travis-ci.com/react-page/react-page.svg?branch=master)](https://app.travis-ci.com/react-page/react-page)
 [![Coverage Status](https://coveralls.io/repos/github/ory-am/editor/badge.svg?branch=master)](https://coveralls.io/github/ory/editor?branch=master)
-[![Docs](https://img.shields.io/badge/docs-guide-blue.svg)](https://react-page.github.io/docs)
+[![Docs](https://img.shields.io/badge/docs-guide-blue.svg)](https://ipagar.github.io/react-page-styled/docs)
 
 ReactPage is a smart, extensible and modern editor ("WYSIWYG") for the web written in React. If you are fed up with the limitations of `contenteditable`, you are in the right place.
 
@@ -10,31 +10,31 @@ ReactPage is a smart, extensible and modern editor ("WYSIWYG") for the web writt
 
 ## Install
 
-`yarn add @react-page/editor`
+`yarn add @react-page-styled/editor`
 
 or
 
-`npm install --save @react-page/editor`
+`npm install --save @react-page-styled/editor`
 
 There is also a `beta` release channel, which might contain unstable features:
 
-`yarn add @react-page/editor@beta`
+`yarn add @react-page-styled/editor@beta`
 
 or
 
-`npm install --save @react-page/editor@beta`
+`npm install --save @react-page-styled/editor@beta`
 
 ## Demo
 
-A demo can be found on [Demo](https://react-page.github.io/) which reflects the `stable` release channel on npm.
+A demo can be found on [Demo](https://ipagar.github.io/react-page-styled/) which reflects the `stable` release channel on npm.
 
-the current `beta` version is also available as a demo: [beta Demo](https://react-page.github.io/beta)
+the current `beta` version is also available as a demo: [beta Demo](https://ipagar.github.io/react-page-styled/beta)
 
 ## Documentation
 
-The documentation is available at [docs](https://react-page.github.io/docs)
+The documentation is available at [docs](https://ipagar.github.io/react-page-styled/docs)
 
-Documentation for the current beta is at [beta docs](https://react-page.github.io/beta/docs)
+Documentation for the current beta is at [beta docs](https://ipagar.github.io/react-page-styled/beta/docs)
 
 ## Contributors
 

@@ -2,7 +2,7 @@ import isHotkey from 'is-hotkey';
 import type React from 'react';
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useMemo } from 'react';
-import { objIsNode } from '../../../core/utils/objIsNode';
+import { objIsNode } from '../../utils/objIsNode';
 import type { PluginHandler } from '../../types';
 import type { Cell } from '../../types/node';
 import { isRow } from '../../types/node';

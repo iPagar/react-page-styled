@@ -1,7 +1,8 @@
-import type { CellPlugin } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
-import React from 'react';
+import type { CellPlugin } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
+import React, { useState } from 'react';
 import ReadOnlySlate from './components/ReadOnlySlate';
+
 import { defaultTranslations } from './default/settings';
 import { HtmlToSlate } from './htmlToSlate';
 import v002 from './migrations/v002';
@@ -15,7 +16,6 @@ import type { SlateState } from './types/state';
 import { getTextContents } from './utils/getTextContent';
 import makeSlatePluginsFromDef from './utils/makeSlatePluginsFromDef';
 import transformInitialSlateState from './utils/transformInitialSlateState';
-import { useSafeSetState } from './utils/useSafeSetState';
 
 const slatePlugins = defaultPlugins;
 
@@ -72,9 +72,10 @@ const defaultConfig: DefaultSlateDefinition = {
 type CreateSlateData<TPlugins> = (
   custom?: CreateDataCustomizer<TPlugins>
 ) => SlateState;
-export type SlateCellPlugin<
-  TPlugins extends SlatePluginCollection = DefaultPlugins
-> = CellPlugin<SlateState, Omit<SlateState, 'selection'>> & {
+export type SlateCellPlugin<TPlugins> = CellPlugin<
+  SlateState,
+  Omit<SlateState, 'selection'>
+> & {
   createData: CreateSlateData<TPlugins>;
   createDataFromHtml: (html: string) => Promise<SlateState>;
   /**
@@ -82,7 +83,6 @@ export type SlateCellPlugin<
    */
   createInitialSlateState: CreateSlateData<TPlugins>;
 };
-
 export type SlateCustomizeFunction<TPlugins extends SlatePluginCollection> = (
   def: DefaultSlateDefinition
 ) => SlateDefinition<TPlugins>;
@@ -94,10 +94,7 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
     customize ? customize(defaultConfig) : defaultConfig
   ) as SlateDefinition<TPlugins>;
 
-  const createData = (customizer?: CreateDataCustomizer<TPlugins>) => {
-    if (!customizer) {
-      return { slate: [] };
-    }
+  const createData = (customizer: CreateDataCustomizer<TPlugins>) => {
     return transformInitialSlateState(
       customizer({ plugins: settings.plugins })
     );
@@ -130,7 +127,7 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
       /* we need a small fix to avoid flashing when SSR in edit mode:
       we code split the Provider AND the editor version, but we have to make sure to not render the editor without the provider:
       */
-      const [providerLoaded, setProviderLoaded] = useSafeSetState(false);
+      const [providerLoaded, setProviderLoaded] = useState(false);
       if (!props.readOnly) {
         SlateProvider.load().then((l) => setProviderLoaded(true));
       }
@@ -149,7 +146,6 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
         plugins={plugins}
         translations={settings.translations}
         defaultPluginType={settings.defaultPluginType}
-        fallback={<>{props.children}</>}
       />
     ),
     // we no longer require the provider in read only mode thanks to the static renderer:

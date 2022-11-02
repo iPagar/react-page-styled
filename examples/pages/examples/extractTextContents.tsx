@@ -1,4 +1,4 @@
-import Editor, { getTextContents } from '@react-page/editor';
+import Editor, { getTextContents } from '@react-page-styled/editor';
 import React, { useEffect, useState } from 'react';
 import PageLayout from '../../components/PageLayout';
 import { cellPlugins } from '../../plugins/cellPlugins';

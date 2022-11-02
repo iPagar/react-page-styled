@@ -1,4 +1,5 @@
-import { Avatar, Grid, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
+import { Card, Grid, User } from '@nextui-org/react';
 import React from 'react';
 import {
   useFocusCell,
@@ -20,39 +21,41 @@ export const BottomToolbarMainBar: React.FC<BottomToolbarMainBarProps> =
     const focus = useFocusCell(nodeId);
     const showMoveButtons = useOption('showMoveButtonsInBottomToolbar');
     return (
-      <div>
-        <Grid container={true} direction="row" alignItems="center">
-          {icon || title ? (
-            <Grid item={true}>
-              <Avatar
-                onClick={() => focus(true)}
-                children={icon || (title ? title[0] : '')}
-                style={{
-                  cursor: 'pointer',
-                  marginRight: 16,
-                }}
-              />
-            </Grid>
-          ) : null}
-          <Grid item={true}>
-            <Typography variant="subtitle1">{t(title)}</Typography>
+      <Grid.Container direction="row" alignItems="center" gap={1}>
+        {icon || title ? (
+          <Grid>
+            <Avatar
+              onClick={() => focus(true)}
+              children={icon || (title ? title[0] : '')}
+              style={{
+                cursor: 'pointer',
+              }}
+            />
           </Grid>
-          {actionsLeft &&
-            React.Children.map(actionsLeft, (action, index) => (
-              <Grid item={true} key={index}>
-                {action}
-              </Grid>
-            ))}
-          {showMoveButtons ? (
-            <Grid item={true} style={{ marginLeft: 'auto' }}>
-              <MoveActions nodeId={nodeId} />
-            </Grid>
-          ) : null}
+        ) : null}
+        {
+          <Grid
+            css={{
+              marginRight: 8,
+            }}
+          >
+            {title}
+          </Grid>
+        }
 
-          <Grid item={true} style={{ marginLeft: 'auto' }}>
-            <BottomToolbarTools nodeId={nodeId} />
+        {actionsLeft &&
+          React.Children.map(actionsLeft, (action, index) => (
+            <Grid key={index}>{action}</Grid>
+          ))}
+        {showMoveButtons ? (
+          <Grid style={{ marginLeft: 'auto' }}>
+            <MoveActions nodeId={nodeId} />
           </Grid>
+        ) : null}
+
+        <Grid style={{ marginLeft: 'auto' }}>
+          <BottomToolbarTools nodeId={nodeId} />
         </Grid>
-      </div>
+      </Grid.Container>
     );
   });

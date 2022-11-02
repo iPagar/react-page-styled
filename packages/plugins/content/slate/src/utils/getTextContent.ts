@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Node, Text } from 'slate';
 import type { SlatePlugin } from '../types/SlatePlugin';
 
@@ -8,7 +9,7 @@ export const getTextContents = (
   nodes: Node[],
   options: { slatePlugins: SlatePlugin[] }
 ): string[] => {
-  return nodes.reduce<string[]>((acc, node) => {
+  return nodes.reduce((acc, node) => {
     if (isText(node)) {
       return [...acc, node.text];
     } else if (node.children) {

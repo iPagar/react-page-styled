@@ -1,5 +1,4 @@
-import Create from '@mui/icons-material/Create';
-
+import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
 import { useIsEditMode, useSetEditMode } from '../../../core/components/hooks';
 import Button from '../Button/index';
@@ -13,7 +12,7 @@ const ToggleEdit: React.FC<Props> = ({ label }) => {
   const setEditMode = useSetEditMode();
   return (
     <Button
-      icon={<Create />}
+      icon={<EditIcon />}
       description={label}
       active={isEditMode}
       onClick={setEditMode}

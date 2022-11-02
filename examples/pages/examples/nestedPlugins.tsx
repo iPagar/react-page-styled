@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 // The editor core
-import type { CellPlugin, Value } from '@react-page/editor';
-import Editor from '@react-page/editor';
+import type { CellPlugin, Value } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
 
 // The rich text area plugin
-import slate from '@react-page/plugins-slate';
+import slate from '@react-page-styled/plugins-slate';
 // image
-import image from '@react-page/plugins-image';
+import image from '@react-page-styled/plugins-image';
 import PageLayout from '../../components/PageLayout';
 import { Button } from '@mui/material';
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import ErrorIcon from '@mui/icons-material/Error';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import ErrorIcon from '@material-ui/icons/Error';
 import type { ImageLoaded, ImageUploadProps, ImageUploadState } from './types';
 import { defaultTranslations } from './defaultTranslations';
 import type { TranslatorFunction } from '../../core/components/hooks';
 import { useUiTranslator } from '../../core/components/hooks';
+import type { FormElement } from '@nextui-org/react';
+import { Button, Input, Loading } from '@nextui-org/react';
 
 const NO_FILE_ERROR_CODE = 1;
 const BAD_EXTENSION_ERROR_CODE = 2;
@@ -28,7 +28,7 @@ class ImageUpload extends React.Component<
     maxFileSize: 5242880,
     translations: defaultTranslations,
   };
-  fileInput?: HTMLInputElement | null;
+  fileInput?: FormElement | null;
 
   state: ImageUploadState = {
     isUploading: false,
@@ -128,7 +128,7 @@ class ImageUpload extends React.Component<
 
   renderChildren = () => {
     if (this.state.isUploading) {
-      return <CircularProgress value={this.state.progress} size={19} />;
+      return <Loading size="sm" />;
     }
     if (this.state.hasError) {
       return (
@@ -151,16 +151,14 @@ class ImageUpload extends React.Component<
       <React.Fragment>
         <Button
           disabled={this.state.isUploading}
-          variant="contained"
           color={this.state.hasError ? 'secondary' : 'primary'}
           onClick={this.handleFileUploadClick}
           style={this.props.style}
-          size="small"
         >
           {this.renderChildren()}
         </Button>
         {!this.state.isUploading && (
-          <input
+          <Input
             style={{ display: 'none' }}
             ref={(fileInput) => (this.fileInput = fileInput)}
             type="file"

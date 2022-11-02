@@ -1,3 +1,4 @@
+import { Card, Grid } from '@nextui-org/react';
 import React, { Fragment, useEffect, useMemo } from 'react';
 import type JSONSchemaBridge from 'uniforms-bridge-json-schema';
 import { useIsSmallScreen } from '../../core/components/hooks';
@@ -63,8 +64,8 @@ export function AutoformControls<T extends DataTType>({
         <div
           style={{
             columnCount: isSmall ? 1 : columnCount,
-            columnRule: '1px solid #E0E0E0',
             columnGap: 48,
+            columnRule: '1px solid #E0E0E0',
           }}
         >
           <AutoFields element={Fragment} />

@@ -1,8 +1,10 @@
 import React from 'react';
-import Fab from '@mui/material/Fab';
 
 import type { PropTypes } from '@mui/material';
 import { useIsSmallScreen } from '../../../core/components/hooks';
+import type { ButtonProps, TooltipProps } from '@nextui-org/react';
+import { Button, Tooltip } from '@nextui-org/react';
+import { createPortal } from 'react-dom';
 
 const DisplayModeToggle = ({
   description,
@@ -12,34 +14,48 @@ const DisplayModeToggle = ({
   disabled,
   activeColor = 'secondary',
   style,
+  placement,
+  tooltipStyle,
   ...rest
 }: {
   description: string;
   icon: JSX.Element;
   active?: boolean;
   disabled?: boolean;
-  activeColor?: PropTypes.Color;
+  activeColor?: ButtonProps['color'];
   onClick: React.MouseEventHandler<HTMLElement>;
   style?: React.CSSProperties;
+  placement?: TooltipProps['placement'];
+  tooltipStyle?: React.CSSProperties;
 } & unknown) => {
   const isSmall = useIsSmallScreen();
   return (
-    <div className="react-page-controls-mode-toggle-button" style={style}>
-      <div className="react-page-controls-mode-toggle-button-inner">
-        <Fab
-          color={active ? activeColor : 'default'}
-          size={isSmall ? 'small' : 'large'}
+    <Button.Group
+      color={active ? activeColor : 'primary'}
+      css={{
+        margin: 0,
+      }}
+    >
+      <Tooltip
+        placement={placement ?? 'left'}
+        content={description}
+        css={{
+          width: 'fit-content',
+          whiteSpace: 'nowrap',
+          ...tooltipStyle,
+        }}
+      >
+        <Button
+          auto
+          size={isSmall ? 'sm' : 'md'}
           onClick={onClick}
           disabled={disabled}
+          icon={icon}
+          style={style}
           {...rest}
-        >
-          {icon}
-        </Fab>
-      </div>
-      <div className="react-page-controls-mode-toggle-button-description">
-        {description}
-      </div>
-    </div>
+        />
+      </Tooltip>
+    </Button.Group>
   );
 };
 

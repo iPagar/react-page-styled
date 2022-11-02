@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useCallback, useState } from 'react';
 
 import type { Element } from 'slate';
@@ -6,10 +7,10 @@ import { ReactEditor, useSlateStatic } from 'slate-react';
 import type { SlatePluginDefinition } from '../types/slatePluginDefinitions';
 import PluginControls from './PluginControls';
 
-import { useSelected } from 'slate-react';
+import { Editable, useFocused, useSelected } from 'slate-react';
 
-const VoidEditableElement: React.FC<{
-  plugin: SlatePluginDefinition;
+const VoidElement: React.FC<{
+  plugin: SlatePluginDefinition<unknown>;
   element: Element;
   component: React.ReactNode;
 }> = ({ plugin, element, children, component }) => {
@@ -55,4 +56,4 @@ const VoidEditableElement: React.FC<{
   );
 };
 
-export default VoidEditableElement;
+export default VoidElement;

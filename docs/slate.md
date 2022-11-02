@@ -5,15 +5,15 @@ An advanced rich text editor (RTE) based on [slate](http://slatejs.org) is used 
 It has to be installed separately:
 
 ```bash
-$ yarn add @react-page/plugins-slate
+$ yarn add @react-page-styled/plugins-slate
 # OR
-$ npm i --save @react-page/plugins-slate
+$ npm i --save @react-page-styled/plugins-slate
 ```
 
 You additionally need to import the css file:
 
 ```typescript
-import '@react-page/plugins-slate/lib/index.css';
+import '@react-page-styled/plugins-slate/lib/index.css';
 ```
 
 <p>
@@ -51,9 +51,9 @@ To customize the **slate CellPlugin**, call it with a function that changes its 
 In this example, only some of the inbuilt Slate plugins are being enabled:
 
 ```tsx
-import Editor from '@react-page/editor';
-import slate from '@react-page/plugins-slate';
-import '@react-page/plugins-slate/lib/index.css';
+import Editor from '@react-page-styled/editor';
+import slate from '@react-page-styled/plugins-slate';
+import '@react-page-styled/plugins-slate/lib/index.css';
 
 const myCustomSlatePlugin = slate(def => ({
   ...def, // this is the default configuration
@@ -82,7 +82,7 @@ one can now do:
 const cellPlugins = [myCustomSlatePlugin(), image];
 ```
 
-Note: the default export of `@react-page/plugins-slate` is a function that returns a `CellPlugin`. When called without any argument, it will use the default configuration. if you pass a callback function, it will use the configuration you return from that function. This callback function will receive the default configuration. This way you can return the default configuration and alter it as in the example above (using object spread).
+Note: the default export of `@react-page-styled/plugins-slate` is a function that returns a `CellPlugin`. When called without any argument, it will use the default configuration. if you pass a callback function, it will use the configuration you return from that function. This callback function will receive the default configuration. This way you can return the default configuration and alter it as in the example above (using object spread).
 
 ### Example 2: Customize the inbuilt slate plugins
 
@@ -125,7 +125,7 @@ Enhancing the inbuilt slate plugins may not be enough in some cases. Eg:
 Add a custom plugin as follows:
 
 ```tsx
-import slate from '@react-page/plugins-slate';
+import slate from '@react-page-styled/plugins-slate';
 
 const slatePlugin = slate(def => ({
   ...def,
@@ -151,7 +151,7 @@ Use the factory functions:
   you can import these with:
 
 ```tsx
-import { pluginFactories } from '@react-page/plugins-slate';
+import { pluginFactories } from '@react-page-styled/plugins-slate';
 ```
 
 ### component plugins

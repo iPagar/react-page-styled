@@ -1,5 +1,6 @@
-import IconButton from '@mui/material/IconButton';
-import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
+import IconButton from '@material-ui/core/IconButton';
+import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop';
+import { Button, Tooltip } from '@nextui-org/react';
 
 import React from 'react';
 import {
@@ -16,13 +17,14 @@ export const SelectParentButton: React.FC<{
   const focusParent = useFocusCell(parentCellId);
 
   return parentCellId ? (
-    <IconButton
-      className="bottomToolbar__selectParentButton"
-      onClick={() => focusParent()}
-      color="default"
-      title={t('Select parent') ?? ''}
-    >
-      <VerticalAlignTopIcon />
-    </IconButton>
+    <Tooltip content={t('Select parent') ?? ''}>
+      <Button
+        flat
+        auto
+        onClick={() => focusParent()}
+        color="default"
+        icon={<VerticalAlignTopIcon />}
+      />
+    </Tooltip>
   ) : null;
 });

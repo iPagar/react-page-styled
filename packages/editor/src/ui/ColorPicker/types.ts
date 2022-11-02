@@ -1,4 +1,4 @@
-import { RGBColor } from 'react-color';
+import type { RGBColor } from 'react-color';
 
 export interface ColorPickerProps {
   onChange: (color: RGBColor) => void;
@@ -14,4 +14,4 @@ export type ColorPickerState = {
   isColorPickerVisible: boolean;
 };
 
-export { RGBColor };
+export type { RGBColor };
