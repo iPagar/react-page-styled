@@ -56,24 +56,24 @@ const fakeImageUploadService: (url: string) => ImageUploadType =
 
 export const cellPlugins: CellPlugin[] = [
   defaultSlate,
-  // customizedSlate,
-  // spacer,
-  // imagePlugin({ imageUpload: fakeImageUploadService('/images/react.png') }),
-  // video,
-  // divider,
-  // html5video,
-  // customContentPlugin,
-  // customContentPluginWithListField,
-  // customContentPluginTwitter,
-  // codeSnippet,
-  // contactForm,
-  // background({
-  //   imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),
-  //   enabledModes:
-  //     ModeEnum.COLOR_MODE_FLAG |
-  //     ModeEnum.IMAGE_MODE_FLAG |
-  //     ModeEnum.GRADIENT_MODE_FLAG,
-  // }),
-  // customLayoutPlugin,
-  // customLayoutPluginWithInitialState,
+  customizedSlate,
+  spacer,
+  imagePlugin({ imageUpload: fakeImageUploadService('/images/react.png') }),
+  video,
+  divider,
+  html5video,
+  customContentPlugin,
+  customContentPluginWithListField,
+  customContentPluginTwitter,
+  codeSnippet,
+  contactForm,
+  background({
+    imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),
+    enabledModes:
+      ModeEnum.COLOR_MODE_FLAG |
+      ModeEnum.IMAGE_MODE_FLAG |
+      ModeEnum.GRADIENT_MODE_FLAG,
+  }),
+  customLayoutPlugin,
+  customLayoutPluginWithInitialState,
 ];

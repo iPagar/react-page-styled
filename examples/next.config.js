@@ -20,4 +20,7 @@ module.exports = withBundleAnalyzer({
     // ssr and displayName are configured by default
     styledComponents: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });
