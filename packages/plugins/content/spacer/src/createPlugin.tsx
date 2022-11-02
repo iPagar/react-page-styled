@@ -1,5 +1,5 @@
-import type { CellPlugin } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
+import type { CellPlugin } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 import React from 'react';
 import { defaultSettings } from './default/settings';
 

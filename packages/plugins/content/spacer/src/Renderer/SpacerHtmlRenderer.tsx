@@ -1,5 +1,5 @@
-import type { CellPluginComponentProps } from '@react-page/editor';
-import { lazyLoad } from '@react-page/editor';
+import type { CellPluginComponentProps } from '@react-page-styled/editor';
+import { lazyLoad } from '@react-page-styled/editor';
 
 import React from 'react';
 import type { SpacerState } from '../types/state';
