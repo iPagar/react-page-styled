@@ -1,11 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import type { ImageLoaded, ImageUploaded, RGBColor } from '@react-page/editor';
+import type { ImageLoaded, ImageUploaded, RGBColor } from '@react-page-styled/editor';
 import { Button, Grid, Input, Switch, Text } from '@nextui-org/react';
 
 import type { BackgroundProps } from '../../types/component';
-import { ColorPicker, ImageUpload } from '@react-page/editor';
+import { ColorPicker, ImageUpload } from '@react-page-styled/editor';
 import { Card } from '@material-ui/core';
 
 export interface ImageComponentProps {

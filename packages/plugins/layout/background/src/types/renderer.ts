@@ -1,5 +1,5 @@
 import type { BackgroundProps } from './component'
-import type { ImageLoaded, RGBColor } from '@react-page/editor'
+import type { ImageLoaded, RGBColor } from '@react-page-styled/editor'
 
 export interface BackgroundRendererExtraProps {
   backgroundColorPreview?: RGBColor
