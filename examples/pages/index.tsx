@@ -1,10 +1,10 @@
-import type { Options, Value } from '@react-page/editor';
-import Editor from '@react-page/editor';
 import { demo } from '../sampleContents/demo';
 import React, { useState } from 'react';
 import { cellPlugins } from '../plugins/cellPlugins';
 import PageLayout from '../components/PageLayout';
 import { Button } from '@material-ui/core';
+import type { Value } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
 const LANGUAGES = [
   {
     lang: 'en',

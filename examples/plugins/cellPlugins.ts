@@ -32,6 +32,7 @@ import { defaultSlate, customizedSlate } from './slate';
 import customContentPluginTwitter from './customContentPluginTwitter';
 import codeSnippet from './codeSnippet';
 import contactForm from './contactForm';
+import type { CellPlugin } from '@react-page-styled/editor';
 
 const fakeImageUploadService: (url: string) => ImageUploadType =
   (defaultUrl) => (file, reportProgress) => {
@@ -53,27 +54,26 @@ const fakeImageUploadService: (url: string) => ImageUploadType =
 
 // Define which plugins we want to use.
 
-export const cellPlugins = [
+export const cellPlugins: CellPlugin[] = [
   defaultSlate,
-  customizedSlate,
-  spacer,
-  imagePlugin({ imageUpload: fakeImageUploadService('/images/react.png') }),
-  video,
-  divider,
-  html5video,
-  customContentPlugin,
-  customContentPluginWithListField,
-  customContentPluginTwitter,
-  codeSnippet,
-  contactForm,
-
-  background({
-    imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),
-    enabledModes:
-      ModeEnum.COLOR_MODE_FLAG |
-      ModeEnum.IMAGE_MODE_FLAG |
-      ModeEnum.GRADIENT_MODE_FLAG,
-  }),
-  customLayoutPlugin,
-  customLayoutPluginWithInitialState,
+  // customizedSlate,
+  // spacer,
+  // imagePlugin({ imageUpload: fakeImageUploadService('/images/react.png') }),
+  // video,
+  // divider,
+  // html5video,
+  // customContentPlugin,
+  // customContentPluginWithListField,
+  // customContentPluginTwitter,
+  // codeSnippet,
+  // contactForm,
+  // background({
+  //   imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),
+  //   enabledModes:
+  //     ModeEnum.COLOR_MODE_FLAG |
+  //     ModeEnum.IMAGE_MODE_FLAG |
+  //     ModeEnum.GRADIENT_MODE_FLAG,
+  // }),
+  // customLayoutPlugin,
+  // customLayoutPluginWithInitialState,
 ];
