@@ -4,6 +4,6 @@ This is ReactPage's main Component.
 
 Read the full readme here https://github.com/react-page/react-page
 
-Docs: https://react-page.github.io/docs
+Docs: https://ipagar.github.io/react-page-styled/docs
 
-Demo: https://react-page.github.io/
+Demo: https://ipagar.github.io/react-page-styled/
