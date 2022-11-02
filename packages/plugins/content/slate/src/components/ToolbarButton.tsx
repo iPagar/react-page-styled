@@ -1,5 +1,6 @@
 import { Button, Tooltip, useTheme } from '@nextui-org/react';
 import { lazyLoad } from '@react-page-styled/editor';
+import type { MouseEventHandler } from 'react';
 import React from 'react';
 import { ConditionalWrapper } from './ConditionalWrapper';
 
@@ -7,7 +8,7 @@ const ToolbarButton: React.SFC<{
   icon: JSX.Element | string;
   isActive: boolean;
   disabled?: boolean;
-  onClick: React.MouseEventHandler;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   toolTip?: string;
 }> = ({ icon, isActive, onClick, disabled = false, toolTip = '' }) => {
   const { theme } = useTheme();

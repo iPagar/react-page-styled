@@ -1,5 +1,6 @@
 import { useUiTranslator } from '@react-page-styled/editor';
-import React, { useCallback, useRef, useState } from 'react';
+import type { MouseEventHandler } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Range } from 'slate';
 import useAddPlugin from '../hooks/useAddPlugin';
 import usePluginIsActive from '../hooks/usePluginIsActive';
@@ -36,9 +37,8 @@ function PluginButton(props: Props) {
   const add = useAddPlugin(plugin);
   const remove = useRemovePlugin(plugin);
   const close = useCallback(() => setShowControls(false), [setShowControls]);
-  const onClick = React.useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
+  const onClick: MouseEventHandler<HTMLButtonElement> = React.useCallback(
+    (e) => {
       if (hasControls || shouldInsertWithText) {
         setShowControls(!showControls);
       } else {
