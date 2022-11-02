@@ -1,3 +1,4 @@
+import { Text } from '@nextui-org/react';
 import React from 'react';
 import type { HTMLFieldProps } from 'uniforms';
 import { connectField, filterDOMProps } from 'uniforms';
@@ -19,7 +20,7 @@ function Nest({
 }: NestFieldProps) {
   return (
     <div {...filterDOMProps(props)}>
-      {label && <label>{label}</label>}
+      {label && <Text small>{label}</Text>}
       {children ||
         fields.map((field) => (
           <AutoField key={field} name={field} {...itemProps} />

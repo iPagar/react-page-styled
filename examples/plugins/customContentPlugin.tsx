@@ -103,8 +103,10 @@ const customContentPlugin: CellPlugin<{
                       default: 'white',
                       uniforms: {
                         component: ColorPickerField,
-                        showIf: (data) =>
-                          data.style?.pallete?.variant === 'custom',
+                        showIf: (data) => {
+                          console.log(data);
+                          return data.style?.pallete?.variant === 'custom';
+                        },
                       },
                     },
                     customTextColor: {

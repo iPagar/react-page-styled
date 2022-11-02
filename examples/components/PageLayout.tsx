@@ -1,20 +1,28 @@
-import AppBar from '@material-ui/core/AppBar';
-import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import GitHubForkRibbon from 'react-github-fork-ribbon';
 import type { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import { VERSION } from '@react-page-styled/editor';
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import Navigation from './Navigation';
-import { Divider, Box, CssBaseline, IconButton } from '@material-ui/core';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import {
+  Divider,
+  Box,
+  CssBaseline,
+  IconButton,
+  AppBar,
+  Drawer,
+} from '@mui/material';
 
 const drawerWidth = 240;
 
-const PageLayout: FC = ({ children }) => {
+const PageLayout: FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {

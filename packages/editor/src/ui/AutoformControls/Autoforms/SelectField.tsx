@@ -1,5 +1,7 @@
+import { Hidden } from '@mui/material';
+import { Avatar, Dropdown, Text } from '@nextui-org/react';
 import xor from 'lodash/xor';
-import type { Ref } from 'react';
+import type { Ref, RefObject } from 'react';
 import React from 'react';
 import type { HTMLFieldProps } from 'uniforms';
 import { connectField, filterDOMProps } from 'uniforms';
@@ -17,7 +19,7 @@ export type SelectFieldProps = HTMLFieldProps<
     allowedValues?: string[];
     checkboxes?: boolean;
     disableItem?: (value: string) => boolean;
-    inputRef?: Ref<HTMLSelectElement>;
+    inputRef?: RefObject<HTMLElement>;
     transform?: (value: string) => string;
   }
 >;
@@ -43,7 +45,7 @@ function Select({
   const multiple = fieldType === Array;
   return (
     <div {...filterDOMProps(props)}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && <Text small>{label}</Text>}
       {checkboxes ? (
         allowedValues!.map((item) => (
           <div key={item}>
@@ -68,37 +70,43 @@ function Select({
           </div>
         ))
       ) : (
-        <select
-          disabled={disabled}
-          id={id}
-          multiple={multiple}
-          name={name}
-          onChange={(event) => {
-            if (!readOnly) {
-              const item = event.target.value;
-              if (multiple) {
-                const clear = event.target.selectedIndex === -1;
-                onChange(clear ? [] : xor([item], value));
-              } else {
-                onChange(item !== '' ? item : undefined);
+        <Dropdown isDisabled={true} ref={inputRef}>
+          <Dropdown.Button flat disabled={disabled}>
+            {value ? (Array.isArray(value) ? value.join(', ') : value) : label}
+          </Dropdown.Button>
+          <Dropdown.Menu
+            disabledKeys={[
+              ...(disableItem ? allowedValues?.filter(disableItem) : []),
+              (placeholder || label) && '',
+            ]}
+            id={id}
+            selectedKeys={Array.isArray(value) ? value : [value]}
+            selectionMode={multiple ? 'multiple' : 'single'}
+            onSelectionChange={(selection) => {
+              const selected = Array.from(selection);
+              if (!readOnly) {
+                const item = selected as string[];
+                if (multiple) {
+                  onChange(xor(item, value));
+                } else {
+                  onChange(item[0]);
+                }
               }
-            }
-          }}
-          ref={inputRef}
-          value={value ?? ''}
-        >
-          {(!!placeholder || !required || value === undefined) && !multiple && (
-            <option value="" disabled={required} hidden={required}>
-              {placeholder || label}
-            </option>
-          )}
-
-          {allowedValues?.map((value) => (
-            <option disabled={disableItem?.(value)} key={value} value={value}>
-              {transform ? transform(value) : value}
-            </option>
-          ))}
-        </select>
+            }}
+          >
+            {[
+              (!!placeholder || !required || value === undefined) &&
+                !multiple && (
+                  <Dropdown.Item key="">{placeholder || label}</Dropdown.Item>
+                ),
+              ...allowedValues?.map((value) => (
+                <Dropdown.Item key={value}>
+                  {transform ? transform(value) : value}
+                </Dropdown.Item>
+              )),
+            ]}
+          </Dropdown.Menu>
+        </Dropdown>
       )}
     </div>
   );

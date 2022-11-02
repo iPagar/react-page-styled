@@ -1,4 +1,4 @@
-import { Grid, Spacer, Table } from '@nextui-org/react';
+import { Grid, Spacer, Table, Text } from '@nextui-org/react';
 import React, { Children, cloneElement, isValidElement } from 'react';
 import type { HTMLFieldProps } from 'uniforms';
 import { connectField, filterDOMProps } from 'uniforms';
@@ -21,7 +21,12 @@ function List({
   ...props
 }: ListFieldProps) {
   return (
-    <ul {...filterDOMProps(props)}>
+    <ul
+      {...filterDOMProps(props)}
+      style={{
+        paddingLeft: 0,
+      }}
+    >
       {label && (
         <div
           style={{
@@ -30,7 +35,7 @@ function List({
             alignItems: 'center',
           }}
         >
-          {label}
+          <Text small>{label}</Text>
           <Spacer x={1} />
           <ListAddField initialCount={initialCount} name="$" />
         </div>

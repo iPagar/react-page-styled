@@ -14,6 +14,7 @@ const ColorPickerField = connectField<{
     <ColorPicker
       style={{
         marginTop: 8,
+        width: '100%',
       }}
       color={stringToColor(props.value)}
       buttonContent={t(props.label) ?? ''}

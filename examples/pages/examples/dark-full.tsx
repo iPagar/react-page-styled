@@ -1,6 +1,6 @@
-import type { Value } from '@react-page/editor';
-import { defaultThemeOptions } from '@react-page/editor';
-import Editor from '@react-page/editor';
+import type { Value } from '@react-page-styled/editor';
+import { defaultThemeOptions } from '@react-page-styled/editor';
+import Editor from '@react-page-styled/editor';
 import { demo } from '../../sampleContents/demo';
 import React, { useState } from 'react';
 import { cellPlugins } from '../../plugins/cellPlugins';

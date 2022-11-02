@@ -13,9 +13,9 @@
     "react-dom": ">= 16.14"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.2",
+    "@emotion/server": "^11.10.0",
+    "@mui/material": "^5.8.1",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/styles": "^4.11.2",
     "@react-page-styled/editor": "0.0.0",
     "@react-page-styled/plugins-background": "0.0.0",
     "@react-page-styled/plugins-divider": "0.0.0",

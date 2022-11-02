@@ -1,3 +1,4 @@
+import { Textarea } from '@nextui-org/react';
 import type { Ref } from 'react';
 import React from 'react';
 import type { HTMLFieldProps } from 'uniforms';
@@ -25,7 +26,7 @@ function LongText({
     <div {...filterDOMProps(props)}>
       {label && <label htmlFor={id}>{label}</label>}
 
-      <textarea
+      <Textarea
         disabled={disabled}
         id={id}
         name={name}

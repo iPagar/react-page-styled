@@ -105,7 +105,7 @@ export const Sidebar: React.SFC<{
         alignItems="center"
       >
         {actions.map(({ action }, index) => (
-          <Grid>{action}</Grid>
+          <Grid key={index}>{action}</Grid>
         ))}
       </Grid.Container>
     </div>

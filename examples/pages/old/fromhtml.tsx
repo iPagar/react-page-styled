@@ -30,7 +30,7 @@ its just an async function instead of a sync function, because it lazy loads stu
 const transformCell = async (cell: Cell): Promise<Cell> => {
   const plugin = cellPlugins.find(
     (c) => c.id === cell.plugin?.id
-  ) as SlateCellPlugin;
+  ) as SlateCellPlugin<Cell>;
 
   const transformedData = Object.fromEntries(
     await Promise.all(

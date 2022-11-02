@@ -23,6 +23,7 @@ export { Migration };
 export { makeUniformsSchema };
 export { createValue, getTextContents };
 export { migrateValue };
+export { ThemeProvider } from './ui/ThemeProvider';
 
 export { deepEquals };
 export default Editor;

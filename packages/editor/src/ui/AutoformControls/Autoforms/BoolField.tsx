@@ -30,7 +30,7 @@ function Bool({
         name={name}
         onChange={() => !disabled && !readOnly && onChange(!value)}
       >
-        {label && <Text>{label}</Text>}
+        {label && <Text small>{label}</Text>}
       </Checkbox>
     </div>
   );

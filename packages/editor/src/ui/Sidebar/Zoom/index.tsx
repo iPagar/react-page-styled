@@ -32,7 +32,7 @@ const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
       }}
     >
       <Button
-        placement="top"
+        placement="left"
         disabled={!canZoomIn}
         icon={<IconZoomIn />}
         description={labelZoomIn}
@@ -44,12 +44,16 @@ const Zoom: React.FC<Props> = ({ labelZoomIn, labelZoomOut }) => {
         }}
       />
       <Button
-        placement="top"
+        placement="left"
         disabled={!canZoomOut}
         icon={<IconZoomOut />}
         description={labelZoomOut}
         onClick={zoomOut}
         activeColor="default"
+        tooltipStyle={{
+          right: '16px',
+          left: 'auto',
+        }}
         style={{
           borderTopLeftRadius: 0,
           borderBottomLeftRadius: 0,

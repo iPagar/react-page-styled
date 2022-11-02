@@ -17,12 +17,7 @@ const Controls = (props: Pick<SlateProps, 'translations' | 'plugins'>) => {
       {plugins &&
         plugins.map((plugin, i: number) =>
           plugin.addToolbarButton ? (
-            <PluginButton
-              key={i}
-              translations={translations}
-              plugin={plugin}
-              dark={dark}
-            />
+            <PluginButton key={i} translations={translations} plugin={plugin} />
           ) : null
         )}
     </div>

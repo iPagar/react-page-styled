@@ -38,6 +38,7 @@ const ControlsList: React.FC<{
       >
         {controls.map((t, index) => (
           <Tab
+            disableRipple
             sx={{
               alignItems: 'flex-start',
             }}
