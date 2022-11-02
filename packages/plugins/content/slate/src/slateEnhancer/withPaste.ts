@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { objIsNode } from '@react-page/editor';
+import { objIsNode } from '@react-page-styled/editor';
 import type { Editor } from 'slate';
 import { Transforms } from 'slate';
 

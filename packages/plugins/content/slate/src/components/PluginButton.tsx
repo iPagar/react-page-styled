@@ -1,4 +1,4 @@
-import { useUiTranslator } from '@react-page/editor';
+import { useUiTranslator } from '@react-page-styled/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import { Range } from 'slate';
 import useAddPlugin from '../hooks/useAddPlugin';

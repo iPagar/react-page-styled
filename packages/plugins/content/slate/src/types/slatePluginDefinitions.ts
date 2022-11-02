@@ -1,7 +1,7 @@
 // @ts-nocheck
 import type { Translations } from './translations';
 import type { Node, Editor } from 'slate';
-import type { JsonSchema } from '@react-page/editor';
+import type { JsonSchema } from '@react-page-styled/editor';
 import type { Data } from '../types';
 
 export interface PluginButtonProps {
