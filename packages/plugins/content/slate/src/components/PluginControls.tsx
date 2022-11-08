@@ -94,11 +94,11 @@ function PluginControls(
     }, 100);
   }, [removePlugin]);
 
-  return props.open ? (
+  return (
     <Controls
       pluginConfig={plugin}
       close={close}
-      open={true}
+      open={props.open}
       add={add}
       remove={remove}
       isActive={storedPropsRef?.current?.isActive}
@@ -106,7 +106,7 @@ function PluginControls(
       data={storedPropsRef?.current?.data}
       {...props}
     />
-  ) : null;
+  );
 }
 
 export default React.memo(PluginControls);

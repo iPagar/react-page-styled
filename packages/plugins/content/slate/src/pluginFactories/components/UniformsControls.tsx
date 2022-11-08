@@ -11,7 +11,7 @@ import {
 } from '@react-page-styled/editor';
 import React, { useCallback, useRef, useState } from 'react';
 import type { Data } from '../../types';
-import { Button, Modal, Input, Tooltip } from '@nextui-org/react';
+import { Button, Modal, Input, Tooltip, css } from '@nextui-org/react';
 
 import type { SlatePluginControls } from '../../types/slatePluginDefinitions';
 
@@ -91,32 +91,38 @@ function Controls<T extends Data>(
         ) : null}
       </Modal.Body>
       {hasSchema ? (
-        <Modal.Footer>
-          <Button
-            auto
-            flat
-            color="secondary"
-            onClick={onCancel}
-            style={{ marginRight: 'auto' }}
-          >
+        <Modal.Footer
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button auto flat color="secondary" onClick={onCancel}>
             {props.cancelLabel || 'Cancel'}
           </Button>
-          {props.isActive ? (
-            <Tooltip content={props.removeLabel || 'Remove'}>
-              <Button
-                flat
-                auto
-                color="error"
-                onClick={onRemove}
-                icon={<DeleteIcon />}
-              />
-            </Tooltip>
-          ) : null}
+          <div
+            style={{
+              display: 'flex',
+              gap: 4,
+            }}
+          >
+            {props.isActive ? (
+              <Tooltip content={props.removeLabel || 'Remove'}>
+                <Button
+                  flat
+                  auto
+                  color="error"
+                  onClick={onRemove}
+                  icon={<DeleteIcon />}
+                />
+              </Tooltip>
+            ) : null}
 
-          <Button auto color="primary" onClick={onOkClick}>
-            {props.submitLabel || 'Ok'}
-            <DoneIcon style={{ marginLeft: 10 }} />
-          </Button>
+            <Button auto color="primary" onClick={onOkClick}>
+              {props.submitLabel || 'Ok'}
+              <DoneIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </div>
         </Modal.Footer>
       ) : null}
     </Modal>
