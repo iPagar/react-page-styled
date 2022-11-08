@@ -25,12 +25,12 @@
     "react-dom": ">= 16.14",
     "@types/react": "*",
     "@material-ui/core": "*",
-    "@material-ui/icons": "*"
+    "@material-ui/icons": "*",
+    "@react-page-styled/editor": "0.0.0"
   },
   "dependencies": {
     "@mui/icons-material": "^5.8.0",
     "@emotion/is-prop-valid": "^0.8.8",
-    "@react-page-styled/editor": "0.0.0",
     "cssstyle": "^2.3.0",
     "deep-rename-keys": "^0.2.1",
     "is-hotkey": "^0.1.6",
