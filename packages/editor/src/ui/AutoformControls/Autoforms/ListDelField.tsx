@@ -2,10 +2,12 @@ import { Button } from '@nextui-org/react';
 import React from 'react';
 import type { HTMLFieldProps } from 'uniforms';
 import { connectField, filterDOMProps, joinName, useField } from 'uniforms';
+import { useUiTranslator } from '../../../core/components/hooks';
 
 export type ListDelFieldProps = HTMLFieldProps<unknown, HTMLSpanElement>;
 
 function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
+  const { t } = useUiTranslator();
   const nameParts = joinName(null, name);
   const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
@@ -44,7 +46,7 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
         role="button"
         tabIndex={0}
       >
-        Удалить
+        {t('Remove')}
       </Button>
     </span>
   );

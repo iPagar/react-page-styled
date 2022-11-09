@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import type { HTMLFieldProps } from 'uniforms';
 import { connectField, filterDOMProps, joinName, useField } from 'uniforms';
+import { useUiTranslator } from '../../../core/components/hooks';
 
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
@@ -18,6 +19,7 @@ function ListAdd({
   value,
   ...props
 }: ListAddFieldProps) {
+  const { t } = useUiTranslator();
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<
@@ -48,7 +50,7 @@ function ListAdd({
         role="button"
         tabIndex={0}
       >
-        Добавить
+        {t('Add')}
       </Button>
     </span>
   );

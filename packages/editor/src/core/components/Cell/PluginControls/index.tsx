@@ -78,7 +78,7 @@ const Controls: React.FC<{
   } else if (controls?.type === 'autoform') {
     pluginControls = <AutoformControls {...componentProps} {...controls} />;
   }
-  return <div style={{ overflow: 'auto', flex: 1 }}>{pluginControls}</div>;
+  return <div style={{ flex: 1 }}>{pluginControls}</div>;
 });
 
 const PluginControls: React.FC<{
