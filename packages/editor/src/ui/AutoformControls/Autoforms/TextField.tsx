@@ -31,6 +31,7 @@ function Text({
     <div {...filterDOMProps(props)}>
       {!multiline ? (
         <Input
+          bordered={!!props.error}
           color={props.error ? 'error' : 'default'}
           fullWidth
           label={(label as string) ?? ''}
@@ -47,6 +48,7 @@ function Text({
         />
       ) : (
         <Textarea
+          bordered={!!props.error}
           color={props.error ? 'error' : 'default'}
           fullWidth
           label={(label as string) ?? ''}
