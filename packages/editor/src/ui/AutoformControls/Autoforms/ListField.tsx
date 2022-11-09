@@ -130,6 +130,7 @@ const SortableItem = SortableElement(
         }}
       >
         <Card
+          variant="bordered"
           style={{
             padding: 8,
             zIndex: 9999,
