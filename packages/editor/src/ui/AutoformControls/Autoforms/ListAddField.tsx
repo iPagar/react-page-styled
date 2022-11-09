@@ -42,6 +42,7 @@ function ListAdd({
     <span {...filterDOMProps(props)}>
       <Button
         auto
+        disabled={!limitNotReached}
         onClick={onAction}
         onKeyDown={onAction}
         role="button"

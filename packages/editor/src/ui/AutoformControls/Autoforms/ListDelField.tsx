@@ -37,6 +37,7 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   return (
     <span {...filterDOMProps(props)}>
       <Button
+        disabled={!limitNotReached}
         color="error"
         onClick={onAction}
         onKeyDown={onAction}
