@@ -29,6 +29,7 @@ function Num({
   return (
     <div {...filterDOMProps(props)}>
       <Input
+        color={props.error ? 'error' : 'default'}
         fullWidth
         label={(label as string) ?? ''}
         disabled={disabled}

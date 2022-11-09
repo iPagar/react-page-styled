@@ -24,6 +24,7 @@ function Bool({
   return (
     <div {...filterDOMProps(props)}>
       <Checkbox
+        color={props.error ? 'error' : 'default'}
         isSelected={value || false}
         isDisabled={disabled}
         id={id}
