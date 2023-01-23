@@ -1,9 +1,16 @@
 import type { DrawerProps } from '@material-ui/core';
 import { Divider, Drawer, Portal } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Card } from '@nextui-org/react';
 import type { PropsWithChildren } from 'react';
 import React, { Fragment } from 'react';
-import { useIsSmallScreen } from '../../core/components/hooks';
+import { CloseSquare } from 'react-iconly';
+import {
+  useBlurAllCells,
+  useIsEditMode,
+  useIsSmallScreen,
+  useOption,
+} from '../../core/components/hooks';
 
 const darkBlack = 'rgba(0, 0, 0, 0.87)';
 const bright = 'rgba(255,255,255, 0.98)';
@@ -32,6 +39,10 @@ export const BottomToolbarDrawer: React.FC<
       }}
     />
   );
+
+  const blur = useBlurAllCells();
+  const options = useOption('options');
+  const isEditMode = useIsEditMode();
 
   const theChildren = React.Children.toArray(children).filter(Boolean);
   const isSmall = useIsSmallScreen();
@@ -82,6 +93,29 @@ export const BottomToolbarDrawer: React.FC<
           }}
         >
           <Card>
+            {isEditMode && options.haveCloseButton && (
+              <Box
+                style={{
+                  position: 'absolute',
+                  top: 8,
+                  right: 8,
+                  zIndex: 1,
+                }}
+                onClick={() => {
+                  blur();
+                }}
+                sx={{
+                  cursor: 'pointer',
+                  '&:active': {
+                    '& path': {
+                      opacity: 0.8,
+                    },
+                  },
+                }}
+              >
+                <CloseSquare set="curved" primaryColor="blueviolet" />
+              </Box>
+            )}
             {theChildren.length > 0 && (
               <>
                 <Card.Body>

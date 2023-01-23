@@ -136,4 +136,7 @@ export type Options = {
    * pass a custom theme to the ui (mui)
    */
   uiTheme?: Theme;
+  options?: {
+    haveCloseButton?: boolean;
+  };
 };

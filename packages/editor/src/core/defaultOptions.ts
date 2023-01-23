@@ -33,6 +33,10 @@ export const DEFAULT_OPTIONS: Required<Options> = {
 
   customOptions: [],
   uiTheme: defaultTheme,
+
+  options: {
+    haveCloseButton: false,
+  },
 };
 
 export const DEFAULT_RENDER_OPTIONS: Required<RenderOptions> = {
