@@ -63,9 +63,9 @@ export function AutoformControls<T extends DataTType>({
       ) : (
         <div
           style={{
-            columnCount: isSmall ? 1 : columnCount,
-            columnGap: 48,
-            columnRule: '1px solid #E0E0E0',
+            display: 'grid',
+            gridTemplateColumns: `repeat(${isSmall ? 1 : columnCount}, 1fr)`,
+            gridGap: 8,
           }}
         >
           <AutoFields element={Fragment} />

@@ -72,7 +72,6 @@ export const BottomToolbarDrawer: React.FC<
             pointerEvents: 'all',
             padding: '12px 24px',
             marginBottom: 12,
-
             ...(isSmall
               ? {
                   marginLeft: 20,
