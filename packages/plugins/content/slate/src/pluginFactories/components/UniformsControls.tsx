@@ -90,41 +90,39 @@ function Controls<T extends Data>(
           </AutoForm>
         ) : null}
       </Modal.Body>
-      {hasSchema ? (
-        <Modal.Footer
+      <Modal.Footer
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Button auto flat color="secondary" onClick={onCancel}>
+          {props.cancelLabel || 'Cancel'}
+        </Button>
+        <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            gap: 4,
           }}
         >
-          <Button auto flat color="secondary" onClick={onCancel}>
-            {props.cancelLabel || 'Cancel'}
-          </Button>
-          <div
-            style={{
-              display: 'flex',
-              gap: 4,
-            }}
-          >
-            {props.isActive ? (
-              <Tooltip content={props.removeLabel || 'Remove'}>
-                <Button
-                  flat
-                  auto
-                  color="error"
-                  onClick={onRemove}
-                  icon={<DeleteIcon />}
-                />
-              </Tooltip>
-            ) : null}
+          {props.isActive ? (
+            <Tooltip content={props.removeLabel || 'Remove'}>
+              <Button
+                flat
+                auto
+                color="error"
+                onClick={onRemove}
+                icon={<DeleteIcon />}
+              />
+            </Tooltip>
+          ) : null}
 
-            <Button auto color="primary" onClick={onOkClick}>
-              {props.submitLabel || 'Ok'}
-              <DoneIcon style={{ marginLeft: 10 }} />
-            </Button>
-          </div>
-        </Modal.Footer>
-      ) : null}
+          <Button auto color="primary" onClick={onOkClick}>
+            {props.submitLabel || 'Ok'}
+            <DoneIcon style={{ marginLeft: 10 }} />
+          </Button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 }
