@@ -111,8 +111,9 @@ export const BottomToolbarDrawer: React.FC<
                     },
                   },
                 }}
+                className="styled-editor-close-button"
               >
-                <CloseSquare set="curved" primaryColor="blueviolet" />
+                <CloseSquare set="curved" />
               </Box>
             )}
             {theChildren.length > 0 && (

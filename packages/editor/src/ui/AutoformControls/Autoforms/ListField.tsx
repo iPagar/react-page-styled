@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Portal } from '@mui/material';
 import { Card, Grid, Spacer, Table, Text } from '@nextui-org/react';
 import React, {
   Children,
@@ -124,16 +124,11 @@ const SortableItem = SortableElement(
     sortIndex: number;
   }) => {
     return (
-      <div
-        style={{
-          zIndex: 9999,
-        }}
-      >
+      <div className="editor-sortable-item">
         <Card
           variant="bordered"
           style={{
             padding: 8,
-            zIndex: 9999,
           }}
         >
           <p
