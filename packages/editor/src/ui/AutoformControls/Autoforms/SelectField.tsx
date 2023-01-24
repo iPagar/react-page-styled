@@ -71,7 +71,7 @@ function Select({
           </div>
         ))
       ) : (
-        <Dropdown isDisabled={true} ref={inputRef}>
+        <Dropdown ref={inputRef}>
           <Dropdown.Button flat disabled={disabled}>
             {value ? (Array.isArray(value) ? value.join(', ') : value) : label}
           </Dropdown.Button>
