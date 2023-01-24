@@ -43,15 +43,16 @@ function Select({
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
+
   return (
     <div {...filterDOMProps(props)}>
       {label && <Text small>{label}</Text>}
       {checkboxes ? (
-        allowedValues!.map((item) => (
+        allowedValues.map((item) => (
           <div key={item}>
             <input
               checked={
-                fieldType === Array ? value!.includes(item) : value === item
+                fieldType === Array ? value.includes(item) : value === item
               }
               disabled={disableItem?.(item) ?? disabled}
               id={`${id}-${escape(item)}`}
@@ -78,6 +79,7 @@ function Select({
             disabledKeys={[
               ...(disableItem ? allowedValues?.filter(disableItem) : []),
               (placeholder || label) && '',
+              ...(typeof value === 'string' ? [value] : value),
             ]}
             id={id}
             selectedKeys={Array.isArray(value) ? value : [value]}
@@ -95,12 +97,22 @@ function Select({
             }}
           >
             {[
-              (!!placeholder || !required || value === undefined) &&
-                !multiple && (
-                  <Dropdown.Item key="">{placeholder || label}</Dropdown.Item>
-                ),
+              (placeholder || label) && !multiple && (
+                <Dropdown.Item key="">{placeholder || label}</Dropdown.Item>
+              ),
               ...allowedValues?.map((value) => (
-                <Dropdown.Item key={value}>
+                <Dropdown.Item
+                  key={value}
+                  css={{
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    '& span': {
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                    },
+                  }}
+                >
                   {transform ? transform(value) : value}
                 </Dropdown.Item>
               )),
